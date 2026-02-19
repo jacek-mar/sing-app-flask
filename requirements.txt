@@ -1,0 +1,12 @@
+# Flask Sing App - Python Dependencies
+
+Flask>=3.0.0
+Flask-SQLAlchemy>=3.1.0
+python-dotenv>=1.0.0
+Flask-Assets>=2.1.0
+libsass>=0.23.0
+
+# Optional dependencies
+Flask-WTF>=1.2.0
+Flask-Migrate>=4.0.0
+Flask-Login>=0.6.0
