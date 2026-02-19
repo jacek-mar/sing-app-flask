@@ -4,11 +4,18 @@ Flask Sing App - Examples Blueprint Routes
 This file contains routes for 50+ demo pages from the Sing App HTML5 template.
 Routes are organized by category.
 """
-from flask import render_template, current_app
+from flask import render_template, current_app, redirect, url_for
 from app.examples import examples_bp
 
 
 # =============================================================================
+# Examples Landing Page
+# =============================================================================
+
+@examples_bp.route('/')
+def examples_index():
+    """Examples landing page - redirects to first example."""
+    return redirect(url_for('examples.dashboard_visits'))
 # Dashboard Examples
 # =============================================================================
 
