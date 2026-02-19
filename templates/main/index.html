@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">YOU ARE HERE</li>
+        <li class="breadcrumb-item active">Analytics</li>
+    </ol>
+    
+    <!-- Page Title -->
+    <h1 class="page-title">
+        {{ page_title }}
+        <small>
+            <small>{{ page_subtitle }}</small>
+        </small>
+    </h1>
+    
+    <!-- Dashboard Content -->
+    <div class="row">
+        <!-- Stats Cards -->
+        <div class="col-xl-3 col-md-6">
+            <div class="widget">
+                <div class="widget-body">
+                    <h2>4,332</h2>
+                    <p class="text-muted mb-0">Visits Today</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="widget">
+                <div class="widget-body">
+                    <h2>$12,450</h2>
+                    <p class="text-muted mb-0">Revenue</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="widget">
+                <div class="widget-body">
+                    <h2>892</h2>
+                    <p class="text-muted mb-0">New Users</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="widget">
+                <div class="widget-body">
+                    <h2>98%</h2>
+                    <p class="text-muted mb-0">Uptime</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Chart Section -->
+    <div class="row">
+        <div class="col-12">
+            <div class="widget">
+                <header>
+                    <h5>Daily Performance</h5>
+                </header>
+                <div class="widget-body">
+                    <p>Chart placeholder - SCSS compilation coming in Phase 6</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Additional Stats -->
+    <div class="row">
+        <div class="col-sm-12 col-lg-6 col-xl-4">
+            <div class="widget">
+                <header>
+                    <h4>Statistics <span class="fw-normal">Light Blue</span></h4>
+                </header>
+                <div class="widget-body">
+                    <h4 class="fw-semi-bold">4,232</h4>
+                    <p class="text-muted">Total Users</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-6 col-xl-4">
+            <div class="widget">
+                <header>
+                    <h4>Statistics <span class="fw-normal">Sing App</span></h4>
+                </header>
+                <div class="widget-body">
+                    <h4 class="fw-semi-bold">754</h4>
+                    <p class="text-muted">Active Sessions</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-6 col-xl-4">
+            <div class="widget">
+                <header>
+                    <h4>Statistics <span class="fw-normal">RNS</span></h4>
+                </header>
+                <div class="widget-body">
+                    <h4 class="fw-semi-bold">1,025</h4>
+                    <p class="text-muted">Orders Today</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    console.log('Dashboard loaded');
+</script>
+{% endblock %}
