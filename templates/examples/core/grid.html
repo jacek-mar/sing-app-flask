@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Grid - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="page-content">
+        <div class="page-title">
+            <h3>Grid System</h3>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="widget">
+                    <header>
+                        <h4>Grid Options</h4>
+                    </header>
+                    <div class="widget-body">
+                        <p>Bootstrap's grid system allows up to 12 columns across the page.</p>
+                        
+                        <div class="row text-center mb-2">
+                            <div class="col-4 bg-primary text-white p-2">col-4</div>
+                            <div class="col-4 bg-secondary text-white p-2">col-4</div>
+                            <div class="col-4 bg-success text-white p-2">col-4</div>
+                        </div>
+                        <div class="row text-center mb-2">
+                            <div class="col-6 bg-warning text-dark p-2">col-6</div>
+                            <div class="col-6 bg-danger text-white p-2">col-6</div>
+                        </div>
+                        <div class="row text-center mb-2">
+                            <div class="col-12 bg-info text-white p-2">col-12</div>
+                        </div>
+                        
+                        <hr>
+                        
+                        <h5>Stacked to Horizontal</h5>
+                        <div class="row">
+                            <div class="col-sm-8 bg-light p-2">col-sm-8</div>
+                            <div class="col-sm-4 bg-light p-2">col-sm-4</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 bg-light p-2">col-sm-4</div>
+                            <div class="col-sm-4 bg-light p-2">col-sm-4</div>
+                            <div class="col-sm-4 bg-light p-2">col-sm-4</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

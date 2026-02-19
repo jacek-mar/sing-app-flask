@@ -25,16 +25,31 @@
             box-shadow: 1px 0 5px rgba(0,0,0,0.1);
             background-color: #22262e;
             width: 240px;
+            overflow-y: auto;
         }
         .sidebar a {
             color: #aab2bd;
-            padding: 12px 24px;
+            padding: 10px 20px;
             display: block;
+            font-size: 14px;
         }
         .sidebar a:hover, .sidebar a.active {
             background-color: #2c3139;
             color: #fff;
             text-decoration: none;
+        }
+        .sidebar .nav-header {
+            color: #6c757d;
+            font-size: 11px;
+            text-transform: uppercase;
+            padding: 15px 20px 5px;
+            font-weight: 600;
+        }
+        .sidebar .nav-item {
+            margin-bottom: 0;
+        }
+        .sidebar .nav-item a {
+            padding-left: 30px;
         }
         .main-content {
             margin-left: 240px;
@@ -56,6 +71,14 @@
         }
         .widget-body {
             padding: 20px;
+        }
+        .page-title {
+            margin-bottom: 20px;
+        }
+        .page-title h3 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 500;
         }
     </style>
     
@@ -88,11 +111,64 @@
                     <i class="fa fa-dashboard mr-2"></i> Dashboard
                 </a>
             </li>
+            {% if config.get('ENABLE_EXAMPLES', True) %}
+            <li class="nav-header">Components</li>
             <li class="nav-item">
-                <a class="nav-link" href="/examples">
-                    <i class="fa fa-tv mr-2"></i> Examples
-                </a>
+                <a class="nav-link {% if active_page == 'components_alerts' %}active{% endif %}" href="/examples/components/alerts">Alerts</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {% if active_page == 'components_badges' %}active{% endif %}" href="/examples/components/badges">Badges</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if active_page == 'components_buttons' %}active{% endif %}" href="/examples/components/buttons">Buttons</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if active_page == 'components_card' %}active{% endif %}" href="/examples/components/card">Card</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if active_page == 'components_modal' %}active{% endif %}" href="/examples/components/modal">Modal</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if active_page == 'components_tabs' %}active{% endif %}" href="/examples/components/tabs">Tabs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if active_page == 'components_progress' %}active{% endif %}" href="/examples/components/progress">Progress</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if active_page == 'components_icons' %}active{% endif %}" href="/examples/components/icons">Icons</a>
+            </li>
+            
+            <li class="nav-header">Core</li>
+            <li class="nav-item">
+                <a class="nav-link {% if active_page == 'core_typography' %}active{% endif %}" href="/examples/core/typography">Typography</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if active_page == 'core_colors' %}active{% endif %}" href="/examples/core/colors">Colors</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if active_page == 'core_grid' %}active{% endif %}" href="/examples/core/grid">Grid</a>
+            </li>
+            
+            <li class="nav-header">Charts</li>
+            <li class="nav-item">
+                <a class="nav-link {% if active_page == 'charts_overview' %}active{% endif %}" href="/examples/charts">Overview</a>
+            </li>
+            
+            <li class="nav-header">Forms</li>
+            <li class="nav-item">
+                <a class="nav-link {% if active_page == 'form_elements' %}active{% endif %}" href="/examples/forms/elements">Elements</a>
+            </li>
+            
+            <li class="nav-header">Tables</li>
+            <li class="nav-item">
+                <a class="nav-link {% if active_page == 'tables_basic' %}active{% endif %}" href="/examples/tables/basic">Basic</a>
+            </li>
+            
+            <li class="nav-header">Examples</li>
+            <li class="nav-item">
+                <a class="nav-link {% if active_page == 'dashboard_visits' %}active{% endif %}" href="/examples/dashboard/visits">Dashboard Visits</a>
+            </li>
+            {% endif %}
         </ul>
     </nav>
 

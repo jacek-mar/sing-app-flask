@@ -8,6 +8,73 @@ from flask import render_template, current_app, redirect, url_for
 from app.examples import examples_bp
 
 
+# UI Components
+# =============================================================================
+
+@examples_bp.route('/components/alerts')
+def components_alerts():
+    """Alerts page"""
+    return render_template('examples/components/alerts.html',
+        title='Alerts',
+        active_page='components_alerts')
+
+
+@examples_bp.route('/components/badges')
+def components_badges():
+    """Badges page"""
+    return render_template('examples/components/badges.html',
+        title='Badges',
+        active_page='components_badges')
+
+
+@examples_bp.route('/components/buttons')
+def components_buttons():
+    """Buttons page"""
+    return render_template('examples/components/buttons.html',
+        title='Buttons',
+        active_page='components_buttons')
+
+
+@examples_bp.route('/components/card')
+def components_card():
+    """Card page"""
+    return render_template('examples/components/card.html',
+        title='Card',
+        active_page='components_card')
+
+
+@examples_bp.route('/components/modal')
+def components_modal():
+    """Modal page"""
+    return render_template('examples/components/modal.html',
+        title='Modal',
+        active_page='components_modal')
+
+
+@examples_bp.route('/components/tabs')
+def components_tabs():
+    """Tabs page"""
+    return render_template('examples/components/tabs.html',
+        title='Tabs & Accordion',
+        active_page='components_tabs')
+
+
+@examples_bp.route('/components/progress')
+def components_progress():
+    """Progress page"""
+    return render_template('examples/components/progress.html',
+        title='Progress',
+        active_page='components_progress')
+
+
+@examples_bp.route('/components/icons')
+def components_icons():
+    """Icons page"""
+    return render_template('examples/components/icons.html',
+        title='Icons',
+        active_page='components_icons')
+
+
 # =============================================================================
 # Examples Landing Page
 # =============================================================================

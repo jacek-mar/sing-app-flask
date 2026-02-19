@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Charts Overview - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="page-content">
+        <!-- Page Title -->
+        <div class="page-title">
+            <h3>Charts</h3>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Charts Overview -->
+                <div class="widget">
+                    <header>
+                        <h4>Chart Libraries Available</h4>
+                    </header>
+                    <div class="widget-body">
+                        <p>This application includes multiple charting libraries for data visualization. Each library has its own strengths and use cases.</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Flot Charts</h5>
+                                        <p class="card-text">Attractive JavaScript plotting for jQuery</p>
+                                        <a href="/examples/charts/flot" class="btn btn-primary">View Examples</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Morris Charts</h5>
+                                        <p class="card-text">Good-looking charts for time-series data</p>
+                                        <a href="/examples/charts/morris" class="btn btn-primary">View Examples</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Rickshaw</h5>
+                                        <p class="card-text">JavaScript toolkit for creating interactive time-series graphs</p>
+                                        <a href="/examples/charts/rickshaw" class="btn btn-primary">View Examples</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Sparkline</h5>
+                                        <p class="card-text">Inline charts that fit in your text</p>
+                                        <a href="/examples/charts/sparkline" class="btn btn-primary">View Examples</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Easy Pie</h5>
+                                        <p class="card-text">Lightweight circular progress charts</p>
+                                        <a href="/examples/charts/easy-pie" class="btn btn-primary">View Examples</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">D3 Charts</h5>
+                                        <p class="card-text">Data-Driven Documents for custom visualizations</p>
+                                        <a href="/examples/charts/d3" class="btn btn-primary">View Examples</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

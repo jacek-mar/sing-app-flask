@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Cards - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="page-content">
+        <!-- Page Title -->
+        <div class="page-title">
+            <h3>Cards</h3>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Basic Card -->
+                <div class="widget">
+                    <header>
+                        <h4>Basic Card</h4>
+                    </header>
+                    <div class="widget-body">
+                        <div class="card">
+                            <div class="card-body">
+                                This is some text within a card body.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card with Header and Footer -->
+                <div class="widget">
+                    <header>
+                        <h4>Card with Header and Footer</h4>
+                    </header>
+                    <div class="widget-body">
+                        <div class="card">
+                            <div class="card-header">Featured</div>
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                2 days ago
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card with Image -->
+                <div class="widget">
+                    <header>
+                        <h4>Card with Image</h4>
+                    </header>
+                    <div class="widget-body">
+                        <div class="card" style="width: 100%;">
+                            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Card image">
+                            <div class="card-body">
+                                <h5 class="card-title">Card Title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <!-- Card Titles -->
+                <div class="widget">
+                    <header>
+                        <h4>Card Titles</h4>
+                    </header>
+                    <div class="widget-body">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Card Title</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Card Subtitle</h6>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="card-link">Card link</a>
+                                <a href="#" class="card-link">Another link</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Image Overlays -->
+                <div class="widget">
+                    <header>
+                        <h4>Card Image Overlays</h4>
+                    </header>
+                    <div class="widget-body">
+                        <div class="card bg-dark text-white" style="width: 100%;">
+                            <img src="https://via.placeholder.com/300x200" class="card-img" alt="Card image">
+                            <div class="card-img-overlay">
+                                <h5 class="card-title">Card Title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text">Last updated 3 mins ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Groups -->
+                <div class="widget">
+                    <header>
+                        <h4>Card Groups</h4>
+                    </header>
+                    <div class="widget-body">
+                        <div class="card-group">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card Title</h5>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card Title</h5>
+                                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card Title</h5>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

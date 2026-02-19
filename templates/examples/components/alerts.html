@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Alerts - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="page-content">
+        <!-- Page Title -->
+        <div class="page-title">
+            <h3>Alerts</h3>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Default Alerts -->
+                <div class="widget">
+                    <header>
+                        <h4>Default Alerts</h4>
+                    </header>
+                    <div class="widget-body">
+                        <p>Alerts are available in four contextual colors.</p>
+                        
+                        <div class="alert alert-primary" role="alert">
+                            This is a primary alert—check it out!
+                        </div>
+                        <div class="alert alert-secondary" role="alert">
+                            This is a secondary alert—check it out!
+                        </div>
+                        <div class="alert alert-success" role="alert">
+                            This is a success alert—check it out!
+                        </div>
+                        <div class="alert alert-danger" role="alert">
+                            This is a danger alert—check it out!
+                        </div>
+                        <div class="alert alert-warning" role="alert">
+                            This is a warning alert—check it out!
+                        </div>
+                        <div class="alert alert-info" role="alert">
+                            This is an info alert—check it out!
+                        </div>
+                        <div class="alert alert-light" role="alert">
+                            This is a light alert—check it out!
+                        </div>
+                        <div class="alert alert-dark" role="alert">
+                            This is a dark alert—check it out!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alerts with Links -->
+                <div class="widget">
+                    <header>
+                        <h4>Alerts with Links</h4>
+                    </header>
+                    <div class="widget-body">
+                        <div class="alert alert-primary" role="alert">
+                            This is a primary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+                        </div>
+                        <div class="alert alert-success" role="alert">
+                            This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+                        </div>
+                        <div class="alert alert-danger" role="alert">
+                            This is a danger alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dismissible Alerts -->
+                <div class="widget">
+                    <header>
+                        <h4>Dismissible Alerts</h4>
+                    </header>
+                    <div class="widget-body">
+                        <p>Add the <code>.alert-dismissible</code> class and a close button.</p>
+                        
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Warning!</strong> Better check yourself, you're not looking too good.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Success!</strong> You have successfully completed the task.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error!</strong> Something went wrong. Please try again.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Content -->
+                <div class="widget">
+                    <header>
+                        <h4>Additional Content in Alerts</h4>
+                    </header>
+                    <div class="widget-body">
+                        <div class="alert alert-success" role="alert">
+                            <h4 class="alert-heading">Well done!</h4>
+                            <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+                            <hr>
+                            <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
