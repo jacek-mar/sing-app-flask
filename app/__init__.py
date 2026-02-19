@@ -37,6 +37,10 @@ def create_app(config_name='development'):
     from app.extensions import init_extensions
     init_extensions(app)
     
+    # Initialize Flask-Assets (SCSS compilation)
+    from app.assets import init_assets
+    init_assets(app)
+    
     # Register blueprints
     _register_blueprints(app)
     
@@ -121,3 +125,23 @@ def _register_cli(app):
             print('Sample user created: admin / admin')
         else:
             print('Database already has users — skipping seed.')
+    
+    @app.cli.command('compile-assets')
+    def compile_assets():
+        """Compile SCSS to CSS using Flask-Assets."""
+        from app.assets import init_assets
+        assets = init_assets(app)
+        
+        print('Compiling SCSS assets...')
+        try:
+            # Build main CSS
+            assets['main_css'].build()
+            print('  Created: static/css/application.css')
+            
+            # Build dark CSS
+            assets['dark_css'].build()
+            print('  Created: static/css/application-dark.css')
+            
+            print('SCSS compilation complete!')
+        except Exception as e:
+            print(f'Error compiling assets: {e}')
