@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Visual - <span class="fw-semi-bold">Rickshaw Charts</span></h3>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Rickshaw <span class="fw-semi-bold">Area Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Rickshaw is a JavaScript toolkit for creating interactive time series graphs.
+                </p>
+                <div id="rickshaw1" style="height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Rickshaw <span class="fw-semi-bold">Line Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Rickshaw provides the building blocks for creating interactive graphs.
+                </p>
+                <div id="rickshaw2" style="height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Rickshaw <span class="fw-semi-bold">Stacked Area Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <div id="rickshaw3" style="height: 300px;"></div>
+                <p class="fs-mini text-muted mt-3">
+                    Stacked area charts show how multiple data series add up over time.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Rickshaw <span class="fw-semi-bold">Bar Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <div id="rickshaw4" style="height: 250px;"></div>
+                <p class="fs-mini text-muted mt-3">
+                    Rickshaw bar charts for categorical data.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Rickshaw <span class="fw-semi-bold">Scatter Plot</span></h5>
+            </header>
+            <div class="widget-body">
+                <div id="rickshaw5" style="height: 250px;"></div>
+                <p class="fs-mini text-muted mt-3">
+                    Scatter plots for showing correlation between variables.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+console.log('Rickshaw: Document ready');
+$(document).ready(function() {
+    console.log('Rickshaw: jQuery ready, Rickshaw available:', typeof Rickshaw);
+    
+    // Sample data generator
+    var seriesData = function(count) {
+        var data = [];
+        var now = new Date();
+        for (var i = 0; i < count; i++) {
+            data.push({
+                x: now.getTime() / 1000 + (i * 3600),
+                y: Math.floor(Math.random() * 100) + 20
+            });
+        }
+        return data;
+    };
+
+    // Rickshaw Area Chart
+    var graph1 = new Rickshaw.Graph({
+        element: document.querySelector('#rickshaw1'),
+        renderer: 'area',
+        stroke: true,
+        series: [
+            {
+                data: seriesData(20),
+                color: 'rgba(0, 123, 255, 0.5)',
+                stroke: '#007bff'
+            }
+        ]
+    });
+    new Rickshaw.Graph.Axis.Time({ graph: graph1 }).render();
+    new Rickshaw.Graph.Axis.Y({ graph: graph1 }).render();
+    graph1.render();
+
+    // Rickshaw Line Chart
+    var graph2 = new Rickshaw.Graph({
+        element: document.querySelector('#rickshaw2'),
+        renderer: 'line',
+        stroke: true,
+        series: [
+            {
+                data: seriesData(20),
+                color: '#28a745'
+            }
+        ]
+    });
+    new Rickshaw.Graph.Axis.Time({ graph: graph2 }).render();
+    new Rickshaw.Graph.Axis.Y({ graph: graph2 }).render();
+    graph2.render();
+
+    // Rickshaw Stacked Area Chart
+    var graph3 = new Rickshaw.Graph({
+        element: document.querySelector('#rickshaw3'),
+        renderer: 'area',
+        stroke: true,
+        series: [
+            {
+                data: seriesData(15),
+                color: 'rgba(0, 123, 255, 0.5)',
+                name: 'Series A'
+            },
+            {
+                data: seriesData(15),
+                color: 'rgba(40, 167, 69, 0.5)',
+                name: 'Series B'
+            },
+            {
+                data: seriesData(15),
+                color: 'rgba(255, 193, 7, 0.5)',
+                name: 'Series C'
+            }
+        ]
+    });
+    var legend3 = new Rickshaw.Graph.Legend({
+        graph: graph3,
+        element: document.querySelector('#rickshaw3')
+    });
+    new Rickshaw.Graph.Axis.Time({ graph: graph3 }).render();
+    new Rickshaw.Graph.Axis.Y({ graph: graph3 }).render();
+    graph3.render();
+
+    // Rickshaw Bar Chart
+    var graph4 = new Rickshaw.Graph({
+        element: document.querySelector('#rickshaw4'),
+        renderer: 'bar',
+        series: [
+            {
+                data: [
+                    { x: 0, y: 25 },
+                    { x: 1, y: 40 },
+                    { x: 2, y: 35 },
+                    { x: 3, y: 50 },
+                    { x: 4, y: 30 },
+                    { x: 5, y: 45 },
+                    { x: 6, y: 55 }
+                ],
+                color: '#007bff'
+            }
+        ]
+    });
+    new Rickshaw.Graph.Axis.X({ graph: graph4 }).render();
+    new Rickshaw.Graph.Axis.Y({ graph: graph4 }).render();
+    graph4.render();
+
+    // Rickshaw Scatter Plot
+    var graph5 = new Rickshaw.Graph({
+        element: document.querySelector('#rickshaw5'),
+        renderer: 'scatterplot',
+        series: [
+            {
+                data: [
+                    { x: 10, y: 25 },
+                    { x: 15, y: 30 },
+                    { x: 20, y: 45 },
+                    { x: 25, y: 50 },
+                    { x: 30, y: 40 },
+                    { x: 35, y: 55 },
+                    { x: 40, y: 60 },
+                    { x: 45, y: 65 },
+                    { x: 50, y: 55 }
+                ],
+                color: '#17a2b8'
+            }
+        ]
+    });
+    new Rickshaw.Graph.Axis.X({ graph: graph5 }).render();
+    new Rickshaw.Graph.Axis.Y({ graph: graph5 }).render();
+    graph5.render();
+    console.log('Rickshaw: All charts initialized successfully');
+});
+</script>
+{% endblock %}

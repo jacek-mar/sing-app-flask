@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Form - <span class="fw-semi-bold">Wizards</span></h3>
+</div>
+
+<div class="row">
+    <div class="col-lg-10">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>
+                    Wizard
+                    <small>Tunable widget</small>
+                </h5>
+            </header>
+            <div class="widget-body">
+                <div class="row">
+                    <div class="col-lg-8 mb-4">
+                        <h5>Inpage <strong>Wizard</strong></h5>
+                        <p>An example of complete wizard form in widget.</p>
+
+                        <!-- Wizard Tabs -->
+                        <ul class="nav nav-justified nav-pills mb-3">
+                            <li class="nav-item"><a class="nav-link active" href="#tab1" data-toggle="tab">
+                                    <small>1.</small>
+                                    Your Details</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#tab2" data-toggle="tab">
+                                    <small>2.</small>
+                                    Shipping</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#tab3" data-toggle="tab">
+                                    <small>3.</small>
+                                    Pay</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#tab4" data-toggle="tab">
+                                    <small>4.</small>
+                                    Thank you!</a></li>
+                        </ul>
+                        
+                        <!-- Progress Bar -->
+                        <div class="bg-light progress" style="height: 4px;">
+                            <div id="bar" class="progress-bar bg-primary" style="width: 25%;"></div>
+                        </div>
+                        
+                        <!-- Tab Content -->
+                        <div class="tab-content mt-4">
+                            <!-- Tab 1: Your Details -->
+                            <div class="tab-pane bg-light p-4 active" id="tab1">
+                                <form>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label for="username">Username</label>
+                                            <input type="text" id="username" name="username" placeholder="" class="form-control" required>
+                                            <span class="help-block text-muted">Username can contain any letters or numbers, without spaces</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" id="email" name="email" placeholder="" class="form-control" required>
+                                            <span class="help-block text-muted">Please provide your E-mail</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="address">Address</label>
+                                            <input type="text" id="address" name="address" placeholder="" class="form-control">
+                                            <span class="help-block text-muted">Please provide your address</span>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                            
+                            <!-- Tab 2: Shipping -->
+                            <div class="tab-pane bg-light p-4" id="tab2">
+                                <form>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label for="country-select">Destination Country</label>
+                                            <select id="country-select" class="form-control">
+                                                <option value="">Select a Country...</option>
+                                                <option value="United States">United States</option>
+                                                <option value="United Kingdom">United Kingdom</option>
+                                                <option value="Canada">Canada</option>
+                                                <option value="Australia">Australia</option>
+                                                <option value="Germany">Germany</option>
+                                                <option value="France">France</option>
+                                                <option value="Japan">Japan</option>
+                                                <option value="India">India</option>
+                                            </select>
+                                            <span class="help-block text-muted">Please choose your country destination</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="courier">Choose shipping option</label>
+                                            <select id="courier" class="form-control">
+                                                <option value="">Select shipping...</option>
+                                                <option value="Australia Post">Australia Post</option>
+                                                <option value="DHL US">DHL US</option>
+                                                <option value="FedEx">FedEx</option>
+                                                <option value="UPS">UPS</option>
+                                            </select>
+                                            <span class="help-block text-muted">Please choose your shipping option</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="destination">Destination Zip Code</label>
+                                            <input type="text" id="destination" name="destination" placeholder="" class="form-control" required>
+                                            <span class="help-block text-muted">Please provide your Destination Zip Code</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="dest-address">Destination Address</label>
+                                            <input type="text" id="dest-address" name="address" placeholder="" class="form-control">
+                                            <span class="help-block text-muted">Please provide the destination address</span>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                            
+                            <!-- Tab 3: Pay -->
+                            <div class="tab-pane bg-light p-4" id="tab3">
+                                <form>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label for="name">Name on the Card</label>
+                                            <input type="text" id="name" name="name" placeholder="" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="credit-card-type">Credit Card Type</label>
+                                            <select id="credit-card-type" class="form-control" required>
+                                                <option value="">Please select...</option>
+                                                <option value="Visa">Visa</option>
+                                                <option value="Mastercard">Mastercard</option>
+                                                <option value="American Express">American Express</option>
+                                                <option value="Discover">Discover</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="credit">Credit Card Number</label>
+                                            <input id="credit" type="text" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="expiration-date">Expiration Date</label>
+                                            <input type="text" id="expiration-date" class="form-control" placeholder="MM/YY" required>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                            
+                            <!-- Tab 4: Thank You -->
+                            <div class="tab-pane bg-light p-4 text-center" id="tab4">
+                                <h2 class="text-success mb-3">Thank you!</h2>
+                                <p>Your submission has been received.</p>
+                            </div>
+                            
+                            <!-- Pager -->
+                            <ul class="pager mt-4">
+                                <li class="previous">
+                                    <button class="btn btn-outline-secondary float-left">
+                                        <i class="fa fa-caret-left"></i> &nbsp; Previous
+                                    </button>
+                                </li>
+                                <li class="next">
+                                    <button class="btn btn-primary float-right">
+                                        Next &nbsp; <i class="fa fa-caret-right"></i></button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Side: Modal Wizard -->
+                    <div class="col-lg-4">
+                        <h5>Modal <strong>Application Wizard</strong></h5>
+                        <p>An example of complete wizard form in a modal.</p>
+                        <button class="btn btn-info" type="button" data-toggle="modal" data-target="#wizardModal">
+                            Launch Wizard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Wizard -->
+<div class="modal fade" id="wizardModal" tabindex="-1" role="dialog" aria-labelledby="wizardModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="wizardModalLabel">Create Server</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Simple Wizard in Modal -->
+                <ul class="nav nav-justified nav-pills mb-3">
+                    <li class="nav-item"><a class="nav-link active" href="#modal-tab1" data-toggle="tab">1. Name</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#modal-tab2" data-toggle="tab">2. Group</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#modal-tab3" data-toggle="tab">3. Services</a></li>
+                </ul>
+                
+                <div class="tab-content mt-3">
+                    <div class="tab-pane active" id="modal-tab1">
+                        <div class="form-group">
+                            <label>Server Label</label>
+                            <input type="text" class="form-control" placeholder="Server label">
+                        </div>
+                        <div class="form-group">
+                            <label>FQDN</label>
+                            <input type="text" class="form-control" placeholder="example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>IP Address</label>
+                            <input type="text" class="form-control" placeholder="192.168.1.1">
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="modal-tab2">
+                        <p>Select a server group:</p>
+                        <select class="form-control">
+                            <option>Production Servers</option>
+                            <option>Development Servers</option>
+                            <option>Testing Servers</option>
+                        </select>
+                    </div>
+                    <div class="tab-pane" id="modal-tab3">
+                        <p>Select services to monitor:</p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="service1" checked>
+                            <label class="form-check-label" for="service1">Ping</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="service2" checked>
+                            <label class="form-check-label" for="service2">HTTP</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="service3">
+                            <label class="form-check-label" for="service3">SSH</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="service4">
+                            <label class="form-check-label" for="service4">FTP</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Wizard tab switching
+    $('.nav-pills .nav-link').on('click', function(e) {
+        e.preventDefault();
+        var target = $(this).attr('href');
+        $('.nav-pills .nav-link').removeClass('active');
+        $(this).addClass('active');
+        $('.tab-pane').removeClass('active');
+        $(target).addClass('active');
+        
+        // Update progress bar
+        var currentTab = $('.nav-pills .nav-link').index($(this));
+        var progress = (currentTab + 1) * 25;
+        $('#bar').css('width', progress + '%');
+    });
+    
+    // Next/Previous buttons
+    $('.pager .next button').on('click', function() {
+        var currentLink = $('.nav-pills .nav-link.active');
+        var nextLink = currentLink.parent().next().find('a');
+        if (nextLink.length) {
+            nextLink.trigger('click');
+        }
+    });
+    
+    $('.pager .previous button').on('click', function() {
+        var currentLink = $('.nav-pills .nav-link.active');
+        var prevLink = currentLink.parent().prev().find('a');
+        if (prevLink.length) {
+            prevLink.trigger('click');
+        }
+    });
+});
+</script>
+{% endblock %}

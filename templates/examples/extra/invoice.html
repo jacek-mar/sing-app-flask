@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Invoice</h3>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget">
+            <div class="widget-body">
+                <!-- Invoice Header -->
+                <div class="d-flex justify-content-between align-items-start mb-4">
+                    <div>
+                        <h2 class="mb-0">INVOICE</h2>
+                        <p class="text-muted mb-0">#{{ invoice.number }}</p>
+                    </div>
+                    <div class="text-right">
+                        <h4>Sing App</h4>
+                        <p class="text-muted mb-0">123 Business Street</p>
+                        <p class="text-muted mb-0">New York, NY 10001</p>
+                    </div>
+                </div>
+                
+                <!-- Invoice Details -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5>Bill To:</h5>
+                        <p class="mb-0"><strong>{{ invoice.client_name }}</strong></p>
+                        <p class="text-muted mb-0">456 Client Street</p>
+                        <p class="text-muted mb-0">Los Angeles, CA 90001</p>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <p><strong>Date:</strong> {{ invoice.date }}</p>
+                        <p><strong>Due Date:</strong> February 27, 2026</p>
+                    </div>
+                </div>
+                
+                <!-- Invoice Table -->
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-right">Unit Price</th>
+                                <th class="text-right">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in invoice.line_items %}
+                            <tr>
+                                <td>{{ item.desc }}</td>
+                                <td class="text-center">{{ item.qty }}</td>
+                                <td class="text-right">${{ "%.2f"|format(item.unit) }}</td>
+                                <td class="text-right">${{ "%.2f"|format(item.qty * item.unit) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Invoice Totals -->
+                <div class="row justify-content-end">
+                    <div class="col-md-4">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td class="text-right"><strong>Subtotal:</strong></td>
+                                <td class="text-right">${{ "%.2f"|format(invoice.subtotal) }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right"><strong>Tax (10%):</strong></td>
+                                <td class="text-right">${{ "%.2f"|format(invoice.tax) }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right"><strong>Total:</strong></td>
+                                <td class="text-right"><h4 class="text-primary mb-0">${{ "%.2f"|format(invoice.total) }}</h4></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Invoice Actions -->
+                <div class="text-right mt-4">
+                    <button class="btn btn-primary"><i class="fa fa-print"></i> Print</button>
+                    <button class="btn btn-secondary"><i class="fa fa-download"></i> Download PDF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

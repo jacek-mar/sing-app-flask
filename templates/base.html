@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Morris Charts CSS (MIT) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <!-- Rickshaw CSS (MIT) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rickshaw/1.6.6/rickshaw.min.css">
+    <!-- FullCalendar CSS (MIT) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css">
     
     <style>
         body {
@@ -26,17 +32,18 @@
             background-color: #22262e;
             width: 240px;
             overflow-y: auto;
+            overflow-x: hidden;
         }
         .sidebar a {
             color: #aab2bd;
             padding: 10px 20px;
             display: block;
             font-size: 14px;
+            text-decoration: none;
         }
         .sidebar a:hover, .sidebar a.active {
             background-color: #2c3139;
             color: #fff;
-            text-decoration: none;
         }
         .sidebar .nav-header {
             color: #6c757d;
@@ -50,6 +57,28 @@
         }
         .sidebar .nav-item a {
             padding-left: 30px;
+        }
+        .sidebar .nav-item .nav-item a {
+            padding-left: 45px;
+        }
+        .sidebar .collapse {
+            display: none;
+        }
+        .sidebar .collapse.show {
+            display: block;
+        }
+        .sidebar .nav-item a[data-toggle="collapse"] {
+            position: relative;
+        }
+        .sidebar .nav-item a[data-toggle="collapse"]::after {
+            position: absolute;
+            right: 15px;
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+        }
+        .sidebar .nav-item a[data-toggle="collapse"][aria-expanded="true"]::after {
+            content: '\f106';
         }
         .main-content {
             margin-left: 240px;
@@ -80,6 +109,11 @@
             font-size: 24px;
             font-weight: 500;
         }
+        .sidebar .icon {
+            width: 24px;
+            margin-right: 10px;
+            text-align: center;
+        }
     </style>
     
     {% block extra_css %}{% endblock %}
@@ -104,72 +138,244 @@
     </nav>
 
     <!-- Sidebar -->
-    <nav class="sidebar">
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link {% if active_page == 'dashboard_analytics' %}active{% endif %}" href="{{ url_for('main.index') }}">
-                    <i class="fa fa-dashboard mr-2"></i> Dashboard
-                </a>
-            </li>
-            {% if config.get('ENABLE_EXAMPLES', True) %}
-            <li class="nav-header">Components</li>
-            <li class="nav-item">
-                <a class="nav-link {% if active_page == 'components_alerts' %}active{% endif %}" href="/examples/components/alerts">Alerts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% if active_page == 'components_badges' %}active{% endif %}" href="/examples/components/badges">Badges</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% if active_page == 'components_buttons' %}active{% endif %}" href="/examples/components/buttons">Buttons</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% if active_page == 'components_card' %}active{% endif %}" href="/examples/components/card">Card</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% if active_page == 'components_modal' %}active{% endif %}" href="/examples/components/modal">Modal</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% if active_page == 'components_tabs' %}active{% endif %}" href="/examples/components/tabs">Tabs</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% if active_page == 'components_progress' %}active{% endif %}" href="/examples/components/progress">Progress</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% if active_page == 'components_icons' %}active{% endif %}" href="/examples/components/icons">Icons</a>
-            </li>
-            
-            <li class="nav-header">Core</li>
-            <li class="nav-item">
-                <a class="nav-link {% if active_page == 'core_typography' %}active{% endif %}" href="/examples/core/typography">Typography</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% if active_page == 'core_colors' %}active{% endif %}" href="/examples/core/colors">Colors</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% if active_page == 'core_grid' %}active{% endif %}" href="/examples/core/grid">Grid</a>
-            </li>
-            
-            <li class="nav-header">Charts</li>
-            <li class="nav-item">
-                <a class="nav-link {% if active_page == 'charts_overview' %}active{% endif %}" href="/examples/charts">Overview</a>
-            </li>
-            
-            <li class="nav-header">Forms</li>
-            <li class="nav-item">
-                <a class="nav-link {% if active_page == 'form_elements' %}active{% endif %}" href="/examples/forms/elements">Elements</a>
-            </li>
-            
-            <li class="nav-header">Tables</li>
-            <li class="nav-item">
-                <a class="nav-link {% if active_page == 'tables_basic' %}active{% endif %}" href="/examples/tables/basic">Basic</a>
-            </li>
-            
-            <li class="nav-header">Examples</li>
-            <li class="nav-item">
-                <a class="nav-link {% if active_page == 'dashboard_visits' %}active{% endif %}" href="/examples/dashboard/visits">Dashboard Visits</a>
-            </li>
-            {% endif %}
-        </ul>
+    <nav class="sidebar" id="sidebar">
+        <div class="js-sidebar-content">
+            <ul class="nav flex-column">
+                <!-- Dashboard -->
+                <li class="nav-item {% if active_page in ['dashboard_analytics', 'dashboard_visits', 'dashboard_widgets'] %}active{% endif %}">
+                    <a class="nav-link {% if active_page in ['dashboard_analytics', 'dashboard_visits', 'dashboard_widgets'] %}active{% endif %}" href="#sidebar-dashboard" data-toggle="collapse" aria-expanded="{% if active_page in ['dashboard_analytics', 'dashboard_visits', 'dashboard_widgets'] %}true{% else %}false{% endif %}">
+                        <span class="icon"><i class="fa fa-dashboard"></i></span>
+                        Dashboard
+                    </a>
+                    <ul id="sidebar-dashboard" class="collapse {% if active_page in ['dashboard_analytics', 'dashboard_visits', 'dashboard_widgets'] %}show{% endif %} nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'dashboard_analytics' %}active{% endif %}" href="{{ url_for('main.index') }}">Analytics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'dashboard_visits' %}active{% endif %}" href="/examples/dashboard/visits">Visits</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'dashboard_widgets' %}active{% endif %}" href="/examples/dashboard/widgets">Widgets</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                {% if config.get('ENABLE_EXAMPLES', True) %}
+                <!-- E-commerce -->
+                <li class="nav-item {% if active_page in ['product_detail', 'product_grid'] %}active{% endif %}">
+                    <a class="nav-link {% if active_page in ['product_detail', 'product_grid'] %}active{% endif %}" href="#sidebar-ecommerce" data-toggle="collapse" aria-expanded="{% if active_page in ['product_detail', 'product_grid'] %}true{% else %}false{% endif %}">
+                        <span class="icon"><i class="fa fa-shopping-cart"></i></span>
+                        E-commerce
+                    </a>
+                    <ul id="sidebar-ecommerce" class="collapse {% if active_page in ['product_detail', 'product_grid'] %}show{% endif %} nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'product_detail' %}active{% endif %}" href="/examples/e-commerce/product-detail">Product Detail</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'product_grid' %}active{% endif %}" href="/examples/e-commerce/product-grid">Product Grid</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Template Header -->
+                <li class="nav-header">Template</li>
+                
+                <!-- Core -->
+                <li class="nav-item {% if active_page in ['core_typography', 'core_colors', 'core_grid'] %}active{% endif %}">
+                    <a class="nav-link {% if active_page in ['core_typography', 'core_colors', 'core_grid'] %}active{% endif %}" href="#sidebar-core" data-toggle="collapse" aria-expanded="{% if active_page in ['core_typography', 'core_colors', 'core_grid'] %}true{% else %}false{% endif %}">
+                        <span class="icon"><i class="fa fa-leanpub"></i></span>
+                        Core
+                    </a>
+                    <ul id="sidebar-core" class="collapse {% if active_page in ['core_typography', 'core_colors', 'core_grid'] %}show{% endif %} nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'core_typography' %}active{% endif %}" href="/examples/core/typography">Typography</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'core_colors' %}active{% endif %}" href="/examples/core/colors">Colors</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'core_grid' %}active{% endif %}" href="/examples/core/grid">Grid</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- UI Components -->
+                <li class="nav-item {% if active_page in ['components_alerts', 'components_badges', 'components_buttons', 'components_card', 'components_modal', 'components_tabs', 'components_progress', 'components_icons', 'ui_nav', 'ui_navbar', 'ui_carousel', 'ui_list_groups', 'ui_jumbotron', 'ui_popovers', 'ui_notifications', 'ui_toasts'] %}active{% endif %}">
+                    <a class="nav-link {% if active_page in ['components_alerts', 'components_badges', 'components_buttons', 'components_card', 'components_modal', 'components_tabs', 'components_progress', 'components_icons', 'ui_nav', 'ui_navbar', 'ui_carousel', 'ui_list_groups', 'ui_jumbotron', 'ui_popovers', 'ui_notifications', 'ui_toasts'] %}active{% endif %}" href="#sidebar-ui" data-toggle="collapse" aria-expanded="{% if active_page in ['components_alerts', 'components_badges', 'components_buttons', 'components_card', 'components_modal', 'components_tabs', 'components_progress', 'components_icons', 'ui_nav', 'ui_navbar', 'ui_carousel', 'ui_list_groups', 'ui_jumbotron', 'ui_popovers', 'ui_notifications', 'ui_toasts'] %}true{% else %}false{% endif %}">
+                        <span class="icon"><i class="fa fa-th-large"></i></span>
+                        UI Components
+                    </a>
+                    <ul id="sidebar-ui" class="collapse {% if active_page in ['components_alerts', 'components_badges', 'components_buttons', 'components_card', 'components_modal', 'components_tabs', 'components_progress', 'components_icons', 'ui_nav', 'ui_navbar', 'ui_carousel', 'ui_list_groups', 'ui_jumbotron', 'ui_popovers', 'ui_notifications', 'ui_toasts'] %}show{% endif %} nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'components_alerts' %}active{% endif %}" href="/examples/components/alerts">Alerts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'components_badges' %}active{% endif %}" href="/examples/components/badges">Badges</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'components_buttons' %}active{% endif %}" href="/examples/components/buttons">Buttons</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'components_card' %}active{% endif %}" href="/examples/components/card">Card</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'components_icons' %}active{% endif %}" href="/examples/components/icons">Icons</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'components_modal' %}active{% endif %}" href="/examples/components/modal">Modal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'components_tabs' %}active{% endif %}" href="/examples/components/tabs">Tabs & Accordion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'components_progress' %}active{% endif %}" href="/examples/components/progress">Progress</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Forms -->
+                <li class="nav-item {% if active_page in ['form_elements', 'form_validation', 'form_wizard'] %}active{% endif %}">
+                    <a class="nav-link {% if active_page in ['form_elements', 'form_validation', 'form_wizard'] %}active{% endif %}" href="#sidebar-forms" data-toggle="collapse" aria-expanded="{% if active_page in ['form_elements', 'form_validation', 'form_wizard'] %}true{% else %}false{% endif %}">
+                        <span class="icon"><i class="fa fa-edit"></i></span>
+                        Forms
+                    </a>
+                    <ul id="sidebar-forms" class="collapse {% if active_page in ['form_elements', 'form_validation', 'form_wizard'] %}show{% endif %} nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'form_elements' %}active{% endif %}" href="/examples/forms/elements">Form Elements</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'form_validation' %}active{% endif %}" href="/examples/forms/validation">Form Validation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'form_wizard' %}active{% endif %}" href="/examples/forms/wizard">Form Wizard</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Charts -->
+                <li class="nav-item {% if active_page in ['charts_overview', 'charts_flot', 'charts_morris', 'charts_rickshaw', 'charts_sparkline', 'charts_d3', 'charts_easy_pie'] %}active{% endif %}">
+                    <a class="nav-link {% if active_page in ['charts_overview', 'charts_flot', 'charts_morris', 'charts_rickshaw', 'charts_sparkline', 'charts_d3', 'charts_easy_pie'] %}active{% endif %}" href="#sidebar-charts" data-toggle="collapse" aria-expanded="{% if active_page in ['charts_overview', 'charts_flot', 'charts_morris', 'charts_rickshaw', 'charts_sparkline', 'charts_d3', 'charts_easy_pie'] %}true{% else %}false{% endif %}">
+                        <span class="icon"><i class="fa fa-bar-chart"></i></span>
+                        Charts
+                    </a>
+                    <ul id="sidebar-charts" class="collapse {% if active_page in ['charts_overview', 'charts_flot', 'charts_morris', 'charts_rickshaw', 'charts_sparkline', 'charts_d3', 'charts_easy_pie'] %}show{% endif %} nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'charts_overview' %}active{% endif %}" href="/examples/charts">Overview</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'charts_flot' %}active{% endif %}" href="/examples/charts/flot">Flot</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'charts_morris' %}active{% endif %}" href="/examples/charts/morris">Morris</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'charts_rickshaw' %}active{% endif %}" href="/examples/charts/rickshaw">Rickshaw</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'charts_sparkline' %}active{% endif %}" href="/examples/charts/sparkline">Sparkline</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'charts_easy_pie' %}active{% endif %}" href="/examples/charts/easy-pie">Easy Pie</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'charts_d3' %}active{% endif %}" href="/examples/charts/d3">D3</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Maps -->
+                <li class="nav-item {% if active_page in ['maps_google', 'maps_vector'] %}active{% endif %}">
+                    <a class="nav-link {% if active_page in ['maps_google', 'maps_vector'] %}active{% endif %}" href="#sidebar-maps" data-toggle="collapse" aria-expanded="{% if active_page in ['maps_google', 'maps_vector'] %}true{% else %}false{% endif %}">
+                        <span class="icon"><i class="fa fa-map"></i></span>
+                        Maps
+                    </a>
+                    <ul id="sidebar-maps" class="collapse {% if active_page in ['maps_google', 'maps_vector'] %}show{% endif %} nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'maps_google' %}active{% endif %}" href="/examples/maps/google">Google Maps</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'maps_vector' %}active{% endif %}" href="/examples/maps/vector">Vector Maps</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Tables -->
+                <li class="nav-item {% if active_page in ['tables_basic', 'tables_dynamic'] %}active{% endif %}">
+                    <a class="nav-link {% if active_page in ['tables_basic', 'tables_dynamic'] %}active{% endif %}" href="#sidebar-tables" data-toggle="collapse" aria-expanded="{% if active_page in ['tables_basic', 'tables_dynamic'] %}true{% else %}false{% endif %}">
+                        <span class="icon"><i class="fa fa-table"></i></span>
+                        Tables
+                    </a>
+                    <ul id="sidebar-tables" class="collapse {% if active_page in ['tables_basic', 'tables_dynamic'] %}show{% endif %} nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'tables_basic' %}active{% endif %}" href="/examples/tables/basic">Tables Basic</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'tables_dynamic' %}active{% endif %}" href="/examples/tables/dynamic">Tables Dynamic</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Extra -->
+                <li class="nav-item {% if active_page in ['calendar', 'invoice', 'gallery', 'search', 'time_line', 'login', 'error'] %}active{% endif %}">
+                    <a class="nav-link {% if active_page in ['calendar', 'invoice', 'gallery', 'search', 'time_line', 'login', 'error'] %}active{% endif %}" href="#sidebar-extra" data-toggle="collapse" aria-expanded="{% if active_page in ['calendar', 'invoice', 'gallery', 'search', 'time_line', 'login', 'error'] %}true{% else %}false{% endif %}">
+                        <span class="icon"><i class="fa fa-file"></i></span>
+                        Extra
+                    </a>
+                    <ul id="sidebar-extra" class="collapse {% if active_page in ['calendar', 'invoice', 'gallery', 'search', 'time_line', 'login', 'error'] %}show{% endif %} nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'calendar' %}active{% endif %}" href="/examples/extra/calendar">Calendar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'invoice' %}active{% endif %}" href="/examples/extra/invoice">Invoice</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'gallery' %}active{% endif %}" href="/examples/extra/gallery">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'search' %}active{% endif %}" href="/examples/extra/search">Search</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'time_line' %}active{% endif %}" href="/examples/extra/timeline">Timeline</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'login' %}active{% endif %}" href="/examples/extra/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'error' %}active{% endif %}" href="/examples/extra/error">Error</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Other -->
+                <li class="nav-item {% if active_page in ['chat', 'email', 'grid', 'landing', 'package', 'profile'] %}active{% endif %}">
+                    <a class="nav-link {% if active_page in ['chat', 'email', 'grid', 'landing', 'package', 'profile'] %}active{% endif %}" href="#sidebar-other" data-toggle="collapse" aria-expanded="{% if active_page in ['chat', 'email', 'grid', 'landing', 'package', 'profile'] %}true{% else %}false{% endif %}">
+                        <span class="icon"><i class="fa fa-clone"></i></span>
+                        Other Pages
+                    </a>
+                    <ul id="sidebar-other" class="collapse {% if active_page in ['chat', 'email', 'grid', 'landing', 'package', 'profile'] %}show{% endif %} nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'chat' %}active{% endif %}" href="/examples/other/chat">Chat</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'email' %}active{% endif %}" href="/examples/other/inbox">Inbox</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'profile' %}active{% endif %}" href="/examples/other/profile">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'grid' %}active{% endif %}" href="/examples/other/grid">Grid</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'landing' %}active{% endif %}" href="/examples/other/landing">Landing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'package' %}active{% endif %}" href="/examples/other/package">Package</a>
+                        </li>
+                    </ul>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
     </nav>
 
     <!-- Main Content -->
@@ -178,9 +384,27 @@
     </main>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <!-- Chart.js (MIT) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Morris Charts (MIT) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <!-- Flot Charts (MIT) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.time.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.pie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.stack.min.js"></script>
+    <!-- D3.js v3.x (required for Rickshaw) - must load before Rickshaw -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <!-- Rickshaw (MIT) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rickshaw/1.6.6/rickshaw.min.js"></script>
+    <!-- jQuery Animate Number (MIT) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-animateNumber/0.0.14/jquery.animateNumber.min.js"></script>
+    <!-- FullCalendar (MIT) -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
     
     {% block scripts %}{% endblock %}
 </body>

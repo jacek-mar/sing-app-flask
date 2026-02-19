@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Visual - <span class="fw-semi-bold">Flot Charts</span></h3>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Flot <span class="fw-semi-bold">Line Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Flot is a pure JavaScript plotting library for jQuery. This is a line chart example.
+                </p>
+                <div id="flot-line-chart" style="height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Flot <span class="fw-semi-bold">Area Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Area chart showing data trends with filled regions.
+                </p>
+                <div id="flot-area-chart" style="height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Flot <span class="fw-semi-bold">Bar Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Vertical bar chart for comparing values across categories.
+                </p>
+                <div id="flot-bar-chart" style="height: 250px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Flot <span class="fw-semi-bold">Pie Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Pie chart showing data distribution.
+                </p>
+                <div id="flot-pie-chart" style="height: 250px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Flot <span class="fw-semi-bold">Stacked Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Stacked chart showing cumulative values across categories.
+                </p>
+                <div id="flot-stacked-chart" style="height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Flot <span class="fw-semi-bold">Real-time Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Live updating chart simulating real-time data.
+                </p>
+                <div id="flot-realtime-chart" style="height: 200px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Flot Line Chart
+    var lineData = [
+        [[0, 10], [1, 25], [2, 20], [3, 35], [4, 30], [5, 45], [6, 50], [7, 35], [8, 60], [9, 55]]
+    ];
+    var lineOptions = {
+        series: {
+            lines: { show: true, fill: false },
+            points: { show: true, radius: 4 }
+        },
+        colors: ['#007bff'],
+        grid: { borderColor: '#eee', backgroundColor: '#fff' },
+        xaxis: { ticks: 10 },
+        yaxis: { min: 0, max: 70 }
+    };
+    $.plot('#flot-line-chart', lineData, lineOptions);
+
+    // Flot Area Chart
+    var areaData = [
+        { label: "Series 1", data: [[0, 10], [1, 25], [2, 20], [3, 35], [4, 30], [5, 45], [6, 50], [7, 35], [8, 60], [9, 55]] }
+    ];
+    var areaOptions = {
+        series: {
+            lines: { show: true, fill: true, fillColor: 'rgba(0, 123, 255, 0.3)' },
+            points: { show: true, radius: 4 }
+        },
+        colors: ['#007bff'],
+        grid: { borderColor: '#eee', backgroundColor: '#fff' },
+        xaxis: { ticks: 10 },
+        yaxis: { min: 0, max: 70 }
+    };
+    $.plot('#flot-area-chart', areaData, areaOptions);
+
+    // Flot Bar Chart
+    var barData = [
+        { label: "Q1", data: 25, color: '#007bff' },
+        { label: "Q2", data: 40, color: '#28a745' },
+        { label: "Q3", data: 35, color: '#ffc107' },
+        { label: "Q4", data: 50, color: '#dc3545' }
+    ];
+    var barOptions = {
+        series: {
+            bars: { show: true, barWidth: 0.5, align: 'center' }
+        },
+        grid: { borderColor: '#eee', backgroundColor: '#fff' },
+        xaxis: { ticks: [[0, "Q1"], [1, "Q2"], [2, "Q3"], [3, "Q4"]] },
+        yaxis: { min: 0, max: 60 }
+    };
+    $.plot('#flot-bar-chart', barData, barOptions);
+
+    // Flot Pie Chart
+    var pieData = [
+        { label: "Direct", data: 35, color: '#007bff' },
+        { label: "Referral", data: 45, color: '#28a745' },
+        { label: "Social", data: 20, color: '#ffc107' }
+    ];
+    var pieOptions = {
+        series: {
+            pie: { show: true, radius: 1, label: { show: true, radius: 0.8 } }
+        },
+        legend: { show: true }
+    };
+    $.plot('#flot-pie-chart', pieData, pieOptions);
+
+    // Flot Stacked Chart
+    var stackedData = [
+        { label: "Series A", data: [[0, 10], [1, 20], [2, 15], [3, 25], [4, 30]] },
+        { label: "Series B", data: [[0, 5], [1, 15], [2, 10], [3, 20], [4, 25]] }
+    ];
+    var stackedOptions = {
+        series: {
+            stack: true,
+            lines: { show: true, fill: true },
+            points: { show: true }
+        },
+        colors: ['#007bff', '#28a745'],
+        grid: { borderColor: '#eee', backgroundColor: '#fff' },
+        xaxis: { ticks: [[0, "Jan"], [1, "Feb"], [2, "Mar"], [3, "Apr"], [4, "May"]] },
+        yaxis: { min: 0, max: 60 }
+    };
+    $.plot('#flot-stacked-chart', stackedData, stackedOptions);
+
+    // Flot Real-time Chart
+    var realTimeData = [];
+    var realTimeData2 = [];
+    for (var i = 0; i < 20; i++) {
+        realTimeData.push([i, Math.random() * 50 + 20]);
+        realTimeData2.push([i, Math.random() * 40 + 10]);
+    }
+    var realTimeOptions = {
+        series: {
+            lines: { show: true, fill: true },
+            points: { show: false }
+        },
+        colors: ['#007bff', '#28a745'],
+        grid: { borderColor: '#eee', backgroundColor: '#fff' },
+        xaxis: { ticks: 20, min: 0, max: 20 },
+        yaxis: { min: 0, max: 100 }
+    };
+    $.plot('#flot-realtime-chart', [
+        { data: realTimeData, label: "Server 1" },
+        { data: realTimeData2, label: "Server 2" }
+    ], realTimeOptions);
+});
+</script>
+{% endblock %}

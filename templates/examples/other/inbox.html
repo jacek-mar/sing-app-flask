@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Inbox</h3>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget">
+            <div class="widget-body p-0">
+                <div class="row no-gutters">
+                    <!-- Sidebar -->
+                    <div class="col-md-3 border-right">
+                        <div class="p-3">
+                            <button class="btn btn-primary btn-block"><i class="fa fa-edit"></i> Compose</button>
+                        </div>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item active"><i class="fa fa-inbox"></i> Inbox <span class="badge badge-primary float-right">5</span></a>
+                            <a href="#" class="list-group-item"><i class="fa fa-paper-plane"></i> Sent</a>
+                            <a href="#" class="list-group-item"><i class="fa fa-trash"></i> Trash</a>
+                            <a href="#" class="list-group-item"><i class="fa fa-folder"></i> Drafts <span class="badge badge-secondary float-right">2</span></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Email List -->
+                    <div class="col-md-3 border-right">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <h5 class="mb-1">John Doe</h5>
+                                <p class="mb-1">Project Update</p>
+                                <small class="text-muted">2 hours ago</small>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h5 class="mb-1">Jane Smith</h5>
+                                <p class="mb-1">Meeting Request</p>
+                                <small class="text-muted">Yesterday</small>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h5 class="mb-1">Bob Johnson</h5>
+                                <p class="mb-1">Re: Feedback</p>
+                                <small class="text-muted">2 days ago</small>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Email Content -->
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            <h4>Project Update</h4>
+                            <p class="text-muted">From: John Doe <john@example.com></p>
+                            <p class="text-muted">To: You</p>
+                            <hr>
+                            <p>Hi,</p>
+                            <p>I wanted to give you an update on the project. We've made significant progress on the following items:</p>
+                            <ul>
+                                <li>Completed user authentication</li>
+                                <li>Implemented dashboard layout</li>
+                                <li>Started working on data visualization</li>
+                            </ul>
+                            <p>Let me know if you have any questions.</p>
+                            <p>Best regards,<br>John</p>
+                            <hr>
+                            <button class="btn btn-primary"><i class="fa fa-reply"></i> Reply</button>
+                            <button class="btn btn-secondary"><i class="fa fa-forward"></i> Forward</button>
+                            <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

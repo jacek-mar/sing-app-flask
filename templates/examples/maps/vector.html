@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Maps - <span class="fw-semi-bold">Regional Statistics</span></h3>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Regional <span class="fw-semi-bold">Visitor Distribution</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Interactive chart showing visitor distribution by region. This replaces the jVectorMap 
+                    which had CDN loading issues. Uses Chart.js for reliable rendering.
+                </p>
+                <div style="height: 400px;">
+                    <canvas id="regionChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Top <span class="fw-semi-bold">Countries</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Top countries by visitor count.
+                </p>
+                <div class="table-responsive mt-3">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Country</th>
+                                <th>Visitors</th>
+                                <th>Revenue</th>
+                                <th>Share</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="text-primary">●</span> United States</td>
+                                <td>45,230</td>
+                                <td>$125,400</td>
+                                <td>28.5%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="text-success">●</span> United Kingdom</td>
+                                <td>23,450</td>
+                                <td>$67,800</td>
+                                <td>14.8%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="text-info">●</span> Germany</td>
+                                <td>18,920</td>
+                                <td>$54,200</td>
+                                <td>11.9%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="text-warning">●</span> France</td>
+                                <td>15,680</td>
+                                <td>$42,100</td>
+                                <td>9.9%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="text-danger">●</span> Japan</td>
+                                <td>12,340</td>
+                                <td>$38,900</td>
+                                <td>7.8%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="text-secondary">●</span> Others</td>
+                                <td>42,380</td>
+                                <td>$118,600</td>
+                                <td>27.1%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Revenue <span class="fw-semi-bold">Breakdown</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Revenue distribution by region.
+                </p>
+                <div style="height: 250px;">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <div class="mt-4">
+                    <div class="d-flex align-items-center mb-2">
+                        <div style="width: 30px; height: 20px; background: #007bff;"></div>
+                        <span class="ml-2">North America</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <div style="width: 30px; height: 20px; background: #28a745;"></div>
+                        <span class="ml-2">Europe</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <div style="width: 30px; height: 20px; background: #ffc107;"></div>
+                        <span class="ml-2">Asia Pacific</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div style="width: 30px; height: 20px; background: #dc3545;"></div>
+                        <span class="ml-2">Other Regions</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Monthly <span class="fw-semi-bold">Traffic Trends</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Visitor trends over the past 12 months by region.
+                </p>
+                <div style="height: 300px;">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Regional Bar Chart
+    const regionCtx = document.getElementById('regionChart').getContext('2d');
+    new Chart(regionCtx, {
+        type: 'bar',
+        data: {
+            labels: ['United States', 'United Kingdom', 'Germany', 'France', 'Japan', 'Canada', 'Australia', 'Brazil', 'India', 'China'],
+            datasets: [{
+                label: 'Visitors',
+                data: [45230, 23450, 18920, 15680, 12340, 9870, 8540, 7230, 6120, 5890],
+                backgroundColor: [
+                    '#007bff', '#28a745', '#17a2b8', '#ffc107', '#dc3545',
+                    '#6c757d', '#20c997', '#e0a800', '#6610f2', '#f82375'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.parsed.y.toLocaleString() + ' visitors';
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: '#f0f0f0' },
+                    ticks: {
+                        callback: function(value) {
+                            return value.toLocaleString();
+                        }
+                    }
+                },
+                x: {
+                    grid: { display: false }
+                }
+            }
+        }
+    });
+    
+    // Revenue Doughnut Chart
+    const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+    new Chart(revenueCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['North America', 'Europe', 'Asia Pacific', 'Other'],
+            datasets: [{
+                data: [125400, 164100, 123400, 43500],
+                backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return '$' + context.parsed.toLocaleString();
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    // Trend Line Chart
+    const trendCtx = document.getElementById('trendChart').getContext('2d');
+    new Chart(trendCtx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [
+                {
+                    label: 'North America',
+                    data: [32000, 35000, 38000, 42000, 45000, 48000, 52000, 50000, 47000, 44000, 41000, 45230],
+                    borderColor: '#007bff',
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                },
+                {
+                    label: 'Europe',
+                    data: [28000, 30000, 32000, 35000, 38000, 42000, 45000, 43000, 40000, 37000, 34000, 37050],
+                    borderColor: '#28a745',
+                    backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                },
+                {
+                    label: 'Asia Pacific',
+                    data: [15000, 17000, 19000, 22000, 25000, 28000, 32000, 35000, 33000, 30000, 27000, 29310],
+                    borderColor: '#ffc107',
+                    backgroundColor: 'rgba(255, 193, 7, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: { usePointStyle: true }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: '#f0f0f0' },
+                    ticks: {
+                        callback: function(value) {
+                            return (value / 1000) + 'K';
+                        }
+                    }
+                },
+                x: {
+                    grid: { display: false }
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

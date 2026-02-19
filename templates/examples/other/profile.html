@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Profile</h3>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="widget">
+            <div class="widget-body text-center">
+                <div style="width: 150px; height: 150px; border-radius: 50%; background-color: #e9ecef; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fa fa-user text-muted" style="font-size: 64px;"></i>
+                </div>
+                <h4>John Doe</h4>
+                <p class="text-muted">Software Developer</p>
+                <button class="btn btn-primary">Edit Profile</button>
+                <button class="btn btn-secondary">Follow</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="widget">
+            <header class="widget-header">
+                <h4 class="widget-title">Profile Information</h4>
+            </header>
+            <div class="widget-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>First Name</label>
+                            <input type="text" class="form-control" value="John">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Last Name</label>
+                            <input type="text" class="form-control" value="Doe">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" value="john.doe@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" class="form-control" value="+1 234 567 890">
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" class="form-control" value="123 Main Street, New York, NY">
+                    </div>
+                    <div class="form-group">
+                        <label>Bio</label>
+                        <textarea class="form-control" rows="3">Software developer passionate about creating elegant solutions.</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h4 class="widget-title">Activity</h4>
+            </header>
+            <div class="widget-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Login</td>
+                                <td>Today, 9:30 AM</td>
+                                <td><span class="badge badge-success">Success</span></td>
+                            </tr>
+                            <tr>
+                                <td>Profile Updated</td>
+                                <td>Yesterday, 2:15 PM</td>
+                                <td><span class="badge badge-success">Success</span></td>
+                            </tr>
+                            <tr>
+                                <td>Password Changed</td>
+                                <td>Jan 15, 2026</td>
+                                <td><span class="badge badge-success">Success</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

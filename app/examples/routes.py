@@ -405,3 +405,18 @@ def grid():
     return render_template('examples/other/grid.html',
         title='Grid',
         active_page='grid')
+
+
+@examples_bp.route('/other/landing')
+def landing():
+    """Landing page"""
+    return render_template('examples/other/landing.html',
+        title='Landing')
+
+
+@examples_bp.route('/other/package')
+def package():
+    """Package/Pricing page"""
+    return render_template('examples/other/package.html',
+        title='Pricing Package',
+        active_page='package')

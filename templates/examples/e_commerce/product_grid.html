@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Product Grid</h3>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h4 class="widget-title">Product Grid</h4>
+            </header>
+            <div class="widget-body">
+                <p>E-commerce product grid with filtering and sorting. Browse products with various categories and price ranges.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Product 1 -->
+    <div class="col-md-3">
+        <div class="widget">
+            <div class="widget-body p-0">
+                <div style="height: 200px; background-color: #e9ecef; display: flex; align-items: center; justify-content: center;">
+                    <i class="fa fa-image text-muted" style="font-size: 48px;"></i>
+                </div>
+                <div class="p-3">
+                    <h5>Product 1</h5>
+                    <p class="text-muted mb-2">Category</p>
+                    <h4 class="text-primary mb-2">$29.99</h4>
+                    <button class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Product 2 -->
+    <div class="col-md-3">
+        <div class="widget">
+            <div class="widget-body p-0">
+                <div style="height: 200px; background-color: #e9ecef; display: flex; align-items: center; justify-content: center;">
+                    <i class="fa fa-image text-muted" style="font-size: 48px;"></i>
+                </div>
+                <div class="p-3">
+                    <h5>Product 2</h5>
+                    <p class="text-muted mb-2">Category</p>
+                    <h4 class="text-primary mb-2">$49.99</h4>
+                    <button class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Product 3 -->
+    <div class="col-md-3">
+        <div class="widget">
+            <div class="widget-body p-0">
+                <div style="height: 200px; background-color: #e9ecef; display: flex; align-items: center; justify-content: center;">
+                    <i class="fa fa-image text-muted" style="font-size: 48px;"></i>
+                </div>
+                <div class="p-3">
+                    <h5>Product 3</h5>
+                    <p class="text-muted mb-2">Category</p>
+                    <h4 class="text-primary mb-2">$19.99</h4>
+                    <button class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Product 4 -->
+    <div class="col-md-3">
+        <div class="widget">
+            <div class="widget-body p-0">
+                <div style="height: 200px; background-color: #e9ecef; display: flex; align-items: center; justify-content: center;">
+                    <i class="fa fa-image text-muted" style="font-size: 48px;"></i>
+                </div>
+                <div class="p-3">
+                    <h5>Product 4</h5>
+                    <p class="text-muted mb-2">Category</p>
+                    <h4 class="text-primary mb-2">$99.99</h4>
+                    <button class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,354 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Visual - <span class="fw-semi-bold">Sparkline Charts</span></h3>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Sparkline <span class="fw-semi-bold">Charts</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Sparklines are compact, information-rich charts using Chart.js. These inline charts demonstrate data trends.
+                </p>
+                
+                <!-- Line Charts -->
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <div class="text-center mb-4">
+                            <canvas id="sparkline1" height="60"></canvas>
+                            <p class="mt-2 mb-0 text-muted fs-mini">Line Chart</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center mb-4">
+                            <canvas id="sparkline2" height="60"></canvas>
+                            <p class="mt-2 mb-0 text-muted fs-mini">Bar Chart</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center mb-4">
+                            <canvas id="sparkline3" height="60"></canvas>
+                            <p class="mt-2 mb-0 text-muted fs-mini">Doughnut Chart</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center mb-4">
+                            <canvas id="sparkline4" height="60"></canvas>
+                            <p class="mt-2 mb-0 text-muted fs-mini">Pie Chart</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- More Charts -->
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <div class="text-center mb-4">
+                            <canvas id="sparkline5" height="60"></canvas>
+                            <p class="mt-2 mb-0 text-muted fs-mini">Polar Area</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center mb-4">
+                            <canvas id="sparkline6" height="60"></canvas>
+                            <p class="mt-2 mb-0 text-muted fs-mini">Radar Chart</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center mb-4">
+                            <canvas id="sparkline7" height="60"></canvas>
+                            <p class="mt-2 mb-0 text-muted fs-mini">Horizontal Bar</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center mb-4">
+                            <canvas id="sparkline8" height="60"></canvas>
+                            <p class="mt-2 mb-0 text-muted fs-mini">Stacked Bar</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Inline Sparklines -->
+<div class="row">
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Inline <span class="fw-semi-bold">Sparklines</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Inline charts showing trends alongside data.
+                </p>
+                <div class="mt-3">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-muted">Sales</span>
+                        <canvas id="inline-sparkline1" style="width: 100px; height: 30px;"></canvas>
+                        <span class="badge badge-success">+25%</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-muted">Revenue</span>
+                        <canvas id="inline-sparkline2" style="width: 100px; height: 30px;"></canvas>
+                        <span class="badge badge-success">+15%</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-muted">Users</span>
+                        <canvas id="inline-sparkline3" style="width: 100px; height: 30px;"></canvas>
+                        <span class="badge badge-danger">-5%</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="text-muted">Orders</span>
+                        <canvas id="inline-sparkline4" style="width: 100px; height: 30px;"></canvas>
+                        <span class="badge badge-success">+30%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Statistics <span class="fw-semi-bold">Widgets</span></h5>
+            </header>
+            <div class="widget-body">
+                <div class="row text-center">
+                    <div class="col-6 mb-3">
+                        <h2 class="mb-1">1,234</h2>
+                        <p class="text-muted mb-2">Total Users</p>
+                        <canvas id="stat-sparkline1" style="width: 80px; height: 30px;"></canvas>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h2 class="mb-1">$45.2K</h2>
+                        <p class="text-muted mb-2">Revenue</p>
+                        <canvas id="stat-sparkline2" style="width: 80px; height: 30px;"></canvas>
+                    </div>
+                    <div class="col-6">
+                        <h2 class="mb-1">89%</h2>
+                        <p class="text-muted mb-2">Satisfaction</p>
+                        <canvas id="stat-sparkline3" style="width: 80px; height: 30px;"></canvas>
+                    </div>
+                    <div class="col-6">
+                        <h2 class="mb-1">567</h2>
+                        <p class="text-muted mb-2">Orders</p>
+                        <canvas id="stat-sparkline4" style="width: 80px; height: 30px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Common chart options for sparklines
+    const sparklineOptions = {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+        elements: { point: { radius: 0 }, line: { tension: 0.4 } },
+        scales: {
+            x: { display: false },
+            y: { display: false }
+        }
+    };
+    
+    // Sparkline 1 - Line Chart
+    new Chart(document.getElementById('sparkline1'), {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7,8,9,10,11,12],
+            datasets: [{
+                data: [10, 25, 20, 35, 30, 45, 40, 55, 50, 65, 60, 75],
+                borderColor: '#007bff',
+                backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                fill: true,
+                borderWidth: 2
+            }]
+        },
+        options: sparklineOptions
+    });
+    
+    // Sparkline 2 - Bar Chart
+    new Chart(document.getElementById('sparkline2'), {
+        type: 'bar',
+        data: {
+            labels: [1,2,3,4,5,6,7,8,9,10,11,12],
+            datasets: [{
+                data: [10, 25, 20, 35, 30, 45, 40, 35, 30, 45, 50, 35],
+                backgroundColor: '#28a745',
+                borderWidth: 0
+            }]
+        },
+        options: { ...sparklineOptions, scales: { x: { display: false }, y: { display: false, min: 0 } } }
+    });
+    
+    // Sparkline 3 - Doughnut Chart
+    new Chart(document.getElementById('sparkline3'), {
+        type: 'doughnut',
+        data: {
+            labels: ['A', 'B', 'C'],
+            datasets: [{
+                data: [35, 45, 20],
+                backgroundColor: ['#007bff', '#28a745', '#ffc107'],
+                borderWidth: 0
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } } }
+    });
+    
+    // Sparkline 4 - Pie Chart
+    new Chart(document.getElementById('sparkline4'), {
+        type: 'pie',
+        data: {
+            labels: ['A', 'B', 'C'],
+            datasets: [{
+                data: [35, 45, 20],
+                backgroundColor: ['#007bff', '#28a745', '#ffc107'],
+                borderWidth: 0
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } } }
+    });
+    
+    // Sparkline 5 - Polar Area
+    new Chart(document.getElementById('sparkline5'), {
+        type: 'polarArea',
+        data: {
+            labels: ['1', '2', '3', '4'],
+            datasets: [{
+                data: [10, 25, 20, 35],
+                backgroundColor: ['rgba(0,123,255,0.5)', 'rgba(40,167,69,0.5)', 'rgba(255,193,7,0.5)', 'rgba(23,162,184,0.5)']
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } } }
+    });
+    
+    // Sparkline 6 - Radar Chart
+    new Chart(document.getElementById('sparkline6'), {
+        type: 'radar',
+        data: {
+            labels: ['A', 'B', 'C', 'D', 'E'],
+            datasets: [{
+                data: [20, 40, 30, 50, 25],
+                borderColor: '#007bff',
+                backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                borderWidth: 2
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: true, scales: { r: { display: false } }, plugins: { legend: { display: false } } }
+    });
+    
+    // Sparkline 7 - Horizontal Bar
+    new Chart(document.getElementById('sparkline7'), {
+        type: 'bar',
+        data: {
+            labels: ['A', 'B', 'C'],
+            datasets: [{
+                data: [25, 40, 30],
+                backgroundColor: ['#17a2b8', '#28a745', '#ffc107'],
+                borderWidth: 0
+            }]
+        },
+        options: { indexAxis: 'y', responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { display: false } } }
+    });
+    
+    // Sparkline 8 - Stacked Bar
+    new Chart(document.getElementById('sparkline8'), {
+        type: 'bar',
+        data: {
+            labels: ['A', 'B', 'C'],
+            datasets: [
+                { data: [10, 15, 20], backgroundColor: '#007bff' },
+                { data: [15, 10, 10], backgroundColor: '#28a745' }
+            ]
+        },
+        options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } }, scales: { x: { display: false, stacked: true }, y: { display: false, stacked: true } } }
+    });
+    
+    // Inline Sparklines
+    new Chart(document.getElementById('inline-sparkline1'), {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7,8,9,10],
+            datasets: [{ data: [10, 25, 20, 35, 30, 45, 40, 55, 50, 65], borderColor: '#28a745', borderWidth: 2, fill: false, tension: 0.4 }]
+        },
+        options: sparklineOptions
+    });
+    
+    new Chart(document.getElementById('inline-sparkline2'), {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7,8],
+            datasets: [{ data: [15, 20, 18, 25, 22, 30, 28, 35], borderColor: '#007bff', borderWidth: 2, fill: false, tension: 0.4 }]
+        },
+        options: sparklineOptions
+    });
+    
+    new Chart(document.getElementById('inline-sparkline3'), {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7,8],
+            datasets: [{ data: [30, 25, 35, 20, 30, 25, 35, 20], borderColor: '#dc3545', borderWidth: 2, fill: false, tension: 0.4 }]
+        },
+        options: sparklineOptions
+    });
+    
+    new Chart(document.getElementById('inline-sparkline4'), {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7,8,9],
+            datasets: [{ data: [10, 20, 15, 25, 20, 30, 25, 35, 30], borderColor: '#17a2b8', borderWidth: 2, fill: false, tension: 0.4 }]
+        },
+        options: sparklineOptions
+    });
+    
+    // Statistics Sparklines
+    new Chart(document.getElementById('stat-sparkline1'), {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7,8,9],
+            datasets: [{ data: [10, 25, 20, 35, 30, 45, 40, 55, 50], borderColor: '#007bff', borderWidth: 2, fill: false }]
+        },
+        options: sparklineOptions
+    });
+    
+    new Chart(document.getElementById('stat-sparkline2'), {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7],
+            datasets: [{ data: [15, 20, 25, 30, 35, 40, 45], borderColor: '#28a745', borderWidth: 2, fill: false }]
+        },
+        options: sparklineOptions
+    });
+    
+    new Chart(document.getElementById('stat-sparkline3'), {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7,8,9],
+            datasets: [{ data: [60, 65, 70, 75, 80, 85, 90, 85, 80], borderColor: '#ffc107', borderWidth: 2, fill: false }]
+        },
+        options: sparklineOptions
+    });
+    
+    new Chart(document.getElementById('stat-sparkline4'), {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7,8,9],
+            datasets: [{ data: [20, 25, 30, 35, 40, 45, 50, 45, 40], borderColor: '#17a2b8', borderWidth: 2, fill: false }]
+        },
+        options: sparklineOptions
+    });
+});
+</script>
+{% endblock %}

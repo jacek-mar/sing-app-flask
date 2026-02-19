@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Form - <span class="fw-semi-bold">Validation</span></h3>
+</div>
+
+<div class="row">
+    <div class="col-lg-10 offset-lg-1">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>
+                    Dead simple validation
+                    <small>No JS needed to tune-up</small>
+                </h5>
+            </header>
+            <div class="widget-body">
+                <form id="validation-form" class="form-horizontal" method="post" novalidate>
+                    <fieldset>
+                        <legend>
+                            By default validation is started only after at least 3 characters have been input.
+                        </legend>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="basic">Simple required</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="basic" name="basic" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="basic-change">
+                                Min-length On Change
+                                <span class="help-block d-block text-muted">
+                                    At least 10
+                                </span>
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" id="basic-change" name="basic-change" class="form-control">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>
+                            <span class="badge badge-warning mr-2">
+                                HTML5
+                            </span>
+                            input types supported
+                        </legend>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="email">
+                                E-mail
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="email" id="email" name="email" class="form-control">
+                                <span class="help-block text-muted">
+                                    This one is triggered even when 1 character has been input
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="number">
+                                Number
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" id="number" name="number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="range">
+                                Range
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="range" name="range">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>
+                            More validation
+                        </legend>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="password">
+                                Password helpers
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="password" id="password" name="password" class="form-control mb-2">
+                                <input type="password" id="password-r" name="password-r" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="website">
+                                Website
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" id="website" name="website" class="form-control">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success float-right">Validate & Submit</button>
+                        <button type="button" class="btn btn-outline-secondary">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

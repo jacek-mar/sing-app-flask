@@ -1,0 +1,324 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Visual - <span class="fw-semi-bold">D3 Charts</span></h3>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>D3 <span class="fw-semi-bold">Bar Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    D3.js is a JavaScript library for manipulating documents based on data.
+                </p>
+                <div id="d3-bar-chart" style="height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>D3 <span class="fw-semi-bold">Line Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    D3 provides powerful primitives for data-driven visualization.
+                </p>
+                <div id="d3-line-chart" style="height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>D3 <span class="fw-semi-bold">Pie Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <div id="d3-pie-chart" style="height: 280px;"></div>
+                <p class="fs-mini text-muted mt-3">
+                    Pie charts show the proportion of categories in a dataset.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>D3 <span class="fw-semi-bold">Area Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <div id="d3-area-chart" style="height: 280px;"></div>
+                <p class="fs-mini text-muted mt-3">
+                    Area charts display quantitative data with filled regions.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>D3 <span class="fw-semi-bold">Multi-Line Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <div id="d3-multi-line-chart" style="height: 350px;"></div>
+                <p class="fs-mini text-muted mt-3">
+                    Multiple lines can be displayed to compare trends across different series.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // D3 Bar Chart
+    var barData = [
+        { label: 'Q1', value: 25 },
+        { label: 'Q2', value: 40 },
+        { label: 'Q3', value: 35 },
+        { label: 'Q4', value: 50 }
+    ];
+    
+    var barMargin = { top: 20, right: 20, bottom: 30, left: 40 };
+    var barWidth = $('#d3-bar-chart').width() - barMargin.left - barMargin.right;
+    var barHeight = 300 - barMargin.top - barMargin.bottom;
+    
+    var barSvg = d3.select('#d3-bar-chart')
+        .append('svg')
+        .attr('width', barWidth + barMargin.left + barMargin.right)
+        .attr('height', barHeight + barMargin.top + barMargin.bottom)
+        .append('g')
+        .attr('transform', 'translate(' + barMargin.left + ',' + barMargin.top + ')');
+    
+    var barX = d3.scaleBand()
+        .range([0, barWidth])
+        .padding(0.3)
+        .domain(barData.map(function(d) { return d.label; }));
+    
+    var barY = d3.scaleLinear()
+        .range([barHeight, 0])
+        .domain([0, d3.max(barData, function(d) { return d.value; })]);
+    
+    barSvg.selectAll('.bar')
+        .data(barData)
+        .enter()
+        .append('rect')
+        .attr('class', 'bar')
+        .attr('x', function(d) { return barX(d.label); })
+        .attr('width', barX.bandwidth())
+        .attr('y', function(d) { return barY(d.value); })
+        .attr('height', function(d) { return barHeight - barY(d.value); })
+        .attr('fill', '#007bff');
+    
+    barSvg.append('g')
+        .attr('transform', 'translate(0,' + barHeight + ')')
+        .call(d3.axisBottom(barX));
+    
+    barSvg.append('g')
+        .call(d3.axisLeft(barY));
+
+    // D3 Line Chart
+    var lineData = [
+        { x: 0, y: 20 }, { x: 1, y: 35 }, { x: 2, y: 25 }, { x: 3, y: 40 },
+        { x: 4, y: 30 }, { x: 5, y: 50 }, { x: 6, y: 45 }, { x: 7, y: 60 }
+    ];
+    
+    var lineMargin = { top: 20, right: 20, bottom: 30, left: 40 };
+    var lineWidth = $('#d3-line-chart').width() - lineMargin.left - lineMargin.right;
+    var lineHeight = 300 - lineMargin.top - lineMargin.bottom;
+    
+    var lineSvg = d3.select('#d3-line-chart')
+        .append('svg')
+        .attr('width', lineWidth + lineMargin.left + lineMargin.right)
+        .attr('height', lineHeight + lineMargin.top + lineMargin.bottom)
+        .append('g')
+        .attr('transform', 'translate(' + lineMargin.left + ',' + lineMargin.top + ')');
+    
+    var lineX = d3.scaleLinear()
+        .range([0, lineWidth])
+        .domain([0, d3.max(lineData, function(d) { return d.x; })]);
+    
+    var lineY = d3.scaleLinear()
+        .range([lineHeight, 0])
+        .domain([0, d3.max(lineData, function(d) { return d.y; })]);
+    
+    var line = d3.line()
+        .x(function(d) { return lineX(d.x); })
+        .y(function(d) { return lineY(d.y); });
+    
+    lineSvg.append('path')
+        .datum(lineData)
+        .attr('fill', 'none')
+        .attr('stroke', '#28a745')
+        .attr('stroke-width', 2)
+        .attr('d', line);
+    
+    lineSvg.selectAll('circle')
+        .data(lineData)
+        .enter()
+        .append('circle')
+        .attr('cx', function(d) { return lineX(d.x); })
+        .attr('cy', function(d) { return lineY(d.y); })
+        .attr('r', 4)
+        .attr('fill', '#28a745');
+    
+    lineSvg.append('g')
+        .attr('transform', 'translate(0,' + lineHeight + ')')
+        .call(d3.axisBottom(lineX).ticks(8));
+    
+    lineSvg.append('g')
+        .call(d3.axisLeft(lineY));
+
+    // D3 Pie Chart
+    var pieData = [
+        { label: 'Direct', value: 35 },
+        { label: 'Referral', value: 45 },
+        { label: 'Social', value: 20 }
+    ];
+    
+    var pieWidth = $('#d3-pie-chart').width();
+    var pieHeight = 280;
+    var pieRadius = Math.min(pieWidth, pieHeight) / 2 - 20;
+    
+    var pieSvg = d3.select('#d3-pie-chart')
+        .append('svg')
+        .attr('width', pieWidth)
+        .attr('height', pieHeight)
+        .append('g')
+        .attr('transform', 'translate(' + pieWidth / 2 + ',' + pieHeight / 2 + ')');
+    
+    var color = d3.scaleOrdinal()
+        .domain(pieData.map(function(d) { return d.label; }))
+        .range(['#007bff', '#28a745', '#ffc107']);
+    
+    var pie = d3.pie()
+        .value(function(d) { return d.value; });
+    
+    var arc = d3.arc()
+        .innerRadius(pieRadius * 0.5)
+        .outerRadius(pieRadius);
+    
+    pieSvg.selectAll('path')
+        .data(pie(pieData))
+        .enter()
+        .append('path')
+        .attr('d', arc)
+        .attr('fill', function(d) { return color(d.data.label); })
+        .attr('stroke', 'white')
+        .style('stroke-width', '2px');
+    
+    // D3 Area Chart
+    var areaData = [
+        { x: 0, y: 20 }, { x: 1, y: 35 }, { x: 2, y: 25 }, { x: 3, y: 40 },
+        { x: 4, y: 30 }, { x: 5, y: 50 }, { x: 6, y: 45 }, { x: 7, y: 60 }
+    ];
+    
+    var areaMargin = { top: 20, right: 20, bottom: 30, left: 40 };
+    var areaWidth = $('#d3-area-chart').width() - areaMargin.left - areaMargin.right;
+    var areaHeight = 280 - areaMargin.top - areaMargin.bottom;
+    
+    var areaSvg = d3.select('#d3-area-chart')
+        .append('svg')
+        .attr('width', areaWidth + areaMargin.left + areaMargin.right)
+        .attr('height', areaHeight + areaMargin.top + areaMargin.bottom)
+        .append('g')
+        .attr('transform', 'translate(' + areaMargin.left + ',' + areaMargin.top + ')');
+    
+    var areaX = d3.scaleLinear()
+        .range([0, areaWidth])
+        .domain([0, d3.max(areaData, function(d) { return d.x; })]);
+    
+    var areaY = d3.scaleLinear()
+        .range([areaHeight, 0])
+        .domain([0, d3.max(areaData, function(d) { return d.y; })]);
+    
+    var area = d3.area()
+        .x(function(d) { return areaX(d.x); })
+        .y0(areaHeight)
+        .y1(function(d) { return areaY(d.y); });
+    
+    areaSvg.append('path')
+        .datum(areaData)
+        .attr('fill', 'rgba(0, 123, 255, 0.5)')
+        .attr('d', area);
+    
+    areaSvg.append('path')
+        .datum(areaData)
+        .attr('fill', 'none')
+        .attr('stroke', '#007bff')
+        .attr('stroke-width', 2)
+        .attr('d', d3.line()
+            .x(function(d) { return areaX(d.x); })
+            .y(function(d) { return areaY(d.y); })
+        );
+    
+    areaSvg.append('g')
+        .attr('transform', 'translate(0,' + areaHeight + ')')
+        .call(d3.axisBottom(areaX).ticks(8));
+    
+    areaSvg.append('g')
+        .call(d3.axisLeft(areaY));
+
+    // D3 Multi-Line Chart
+    var multiLineData = [
+        { series: 'A', data: [{ x: 0, y: 20 }, { x: 1, y: 35 }, { x: 2, y: 25 }, { x: 3, y: 40 }, { x: 4, y: 55 }, { x: 5, y: 45 }] },
+        { series: 'B', data: [{ x: 0, y: 15 }, { x: 1, y: 25 }, { x: 2, y: 20 }, { x: 3, y: 30 }, { x: 4, y: 40 }, { x: 5, y: 35 }] },
+        { series: 'C', data: [{ x: 0, y: 10 }, { x: 1, y: 15 }, { x: 2, y: 30 }, { x: 3, y: 25 }, { x: 4, y: 35 }, { x: 5, y: 50 }] }
+    ];
+    
+    var multiMargin = { top: 20, right: 20, bottom: 30, left: 40 };
+    var multiWidth = $('#d3-multi-line-chart').width() - multiMargin.left - multiMargin.right;
+    var multiHeight = 350 - multiMargin.top - multiMargin.bottom;
+    
+    var multiSvg = d3.select('#d3-multi-line-chart')
+        .append('svg')
+        .attr('width', multiWidth + multiMargin.left + multiMargin.right)
+        .attr('height', multiHeight + multiMargin.top + multiMargin.bottom)
+        .append('g')
+        .attr('transform', 'translate(' + multiMargin.left + ',' + multiMargin.top + ')');
+    
+    var multiX = d3.scaleLinear()
+        .range([0, multiWidth])
+        .domain([0, 5]);
+    
+    var multiY = d3.scaleLinear()
+        .range([multiHeight, 0])
+        .domain([0, 60]);
+    
+    var colors = ['#007bff', '#28a745', '#ffc107'];
+    
+    multiLineData.forEach(function(series, index) {
+        multiSvg.append('path')
+            .datum(series.data)
+            .attr('fill', 'none')
+            .attr('stroke', colors[index])
+            .attr('stroke-width', 2)
+            .attr('d', d3.line()
+                .x(function(d) { return multiX(d.x); })
+                .y(function(d) { return multiY(d.y); })
+            );
+    });
+    
+    multiSvg.append('g')
+        .attr('transform', 'translate(0,' + multiHeight + ')')
+        .call(d3.axisBottom(multiX).ticks(6));
+    
+    multiSvg.append('g')
+        .call(d3.axisLeft(multiY));
+});
+</script>
+{% endblock %}

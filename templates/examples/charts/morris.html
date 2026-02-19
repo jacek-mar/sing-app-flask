@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Visual - <span class="fw-semi-bold">Morris Charts</span></h3>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Morris <span class="fw-semi-bold">Line Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Good-looking charts shouldn't be difficult. Morris.js provides a clean API for line charts.
+                </p>
+                <div id="morris1" style="height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Morris <span class="fw-semi-bold">Area Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Area charts are perfect for showing cumulative data trends over time.
+                </p>
+                <div id="morris2" style="height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-5 col-xl-5">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Morris <span class="fw-semi-bold">Bar Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <div id="morris4" style="height: 250px;"></div>
+                <p class="fs-mini text-muted mt-3">
+                    Bar charts are great for comparing values across categories.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-xl-3">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Morris <span class="fw-semi-bold">Donut Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <div id="morris3" style="height: 180px;"></div>
+                <p class="fs-mini text-muted mt-3">
+                    Donut charts are excellent for showing part-to-whole relationships.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-4">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Morris <span class="fw-semi-bold">Horizontal Bar</span></h5>
+            </header>
+            <div class="widget-body">
+                <div id="morris6" style="height: 180px;"></div>
+                <p class="fs-mini text-muted mt-3">
+                    Horizontal bars work well for category labels with long names.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Morris <span class="fw-semi-bold">Stacked Bar Chart</span></h5>
+            </header>
+            <div class="widget-body">
+                <div id="morris5" style="height: 250px;"></div>
+                <p class="fs-mini text-muted mt-3">
+                    Stacked bar charts are ideal for showing how different groups contribute to a total.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Morris Line Chart
+    Morris.Line({
+        element: 'morris1',
+        data: [
+            { year: '2019', value: 25 },
+            { year: '2020', value: 45 },
+            { year: '2021', value: 80 },
+            { year: '2022', value: 65 },
+            { year: '2023', value: 95 },
+            { year: '2024', value: 110 },
+            { year: '2025', value: 150 }
+        ],
+        xkey: 'year',
+        ykeys: ['value'],
+        labels: ['Sales'],
+        lineColors: ['#007bff'],
+        lineWidth: 2,
+        parseTime: false,
+        resize: true
+    });
+
+    // Morris Area Chart
+    Morris.Area({
+        element: 'morris2',
+        data: [
+            { year: '2019', a: 20, b: 15 },
+            { year: '2020', a: 40, b: 35 },
+            { year: '2021', a: 60, b: 55 },
+            { year: '2022', a: 45, b: 40 },
+            { year: '2023', a: 80, b: 70 },
+            { year: '2024', a: 100, b: 90 },
+            { year: '2025', a: 130, b: 120 }
+        ],
+        xkey: 'year',
+        ykeys: ['a', 'b'],
+        labels: ['Series A', 'Series B'],
+        lineColors: ['#007bff', '#28a745'],
+        fillOpacity: 0.5,
+        parseTime: false,
+        resize: true
+    });
+
+    // Morris Bar Chart
+    Morris.Bar({
+        element: 'morris4',
+        data: [
+            { label: 'Q1', value: 25 },
+            { label: 'Q2', value: 40 },
+            { label: 'Q3', value: 35 },
+            { label: 'Q4', value: 50 }
+        ],
+        xkey: 'label',
+        ykeys: ['value'],
+        labels: ['Revenue'],
+        barColors: ['#007bff'],
+        resize: true
+    });
+
+    // Morris Donut Chart
+    Morris.Donut({
+        element: 'morris3',
+        data: [
+            { label: 'Direct', value: 35 },
+            { label: 'Referral', value: 45 },
+            { label: 'Social', value: 20 }
+        ],
+        colors: ['#007bff', '#28a745', '#ffc107'],
+        resize: true
+    });
+
+    // Morris Horizontal Bar
+    Morris.Bar({
+        element: 'morris6',
+        data: [
+            { label: 'Product A', value: 30 },
+            { label: 'Product B', value: 45 },
+            { label: 'Product C', value: 25 }
+        ],
+        xkey: 'value',
+        ykeys: ['label'],
+        labels: ['Product'],
+        barColors: ['#28a745'],
+        horizontal: true,
+        resize: true
+    });
+
+    // Morris Stacked Bar
+    Morris.Bar({
+        element: 'morris5',
+        data: [
+            { label: 'Jan', a: 20, b: 15 },
+            { label: 'Feb', a: 35, b: 25 },
+            { label: 'Mar', a: 45, b: 30 },
+            { label: 'Apr', a: 30, b: 20 }
+        ],
+        xkey: 'label',
+        ykeys: ['a', 'b'],
+        labels: ['Series A', 'Series B'],
+        stacked: true,
+        barColors: ['#007bff', '#17a2b8'],
+        resize: true
+    });
+});
+</script>
+{% endblock %}

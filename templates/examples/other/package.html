@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Other - <span class="fw-semi-bold">Package</span></h3>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Package <span class="fw-semi-bold">Information</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted mb-4">
+                    This page shows information about the project package, dependencies, and version details.
+                </p>
+                
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td style="width: 200px;"><strong>Project Name</strong></td>
+                                <td>Sing App Flask</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Version</strong></td>
+                                <td>1.0.0</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Framework</strong></td>
+                                <td>Flask 3.x</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Template Engine</strong></td>
+                                <td>Jinja2</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Database</strong></td>
+                                <td>SQLite (default)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>License</strong></td>
+                                <td>MIT</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Package <span class="fw-semi-bold">Dependencies</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted mb-3">
+                    Python packages required for this project.
+                </p>
+                
+                <ul class="package-list">
+                    <li>
+                        <div class="d-flex justify-content-between">
+                            <span>Flask</span>
+                            <span class="badge badge-primary">3.0.0</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-flex justify-content-between">
+                            <span>Flask-SQLAlchemy</span>
+                            <span class="badge badge-primary">3.1.1</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-flex justify-content-between">
+                            <span>Flask-Migrate</span>
+                            <span class="badge badge-primary">4.0.5</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-flex justify-content-between">
+                            <span>Flask-Assets</span>
+                            <span class="badge badge-primary">2.0</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-flex justify-content-between">
+                            <span>python-dotenv</span>
+                            <span class="badge badge-primary">1.0.0</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Frontend <span class="fw-semi-bold">Dependencies</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted mb-3">
+                    Frontend libraries and resources used.
+                </p>
+                
+                <ul class="package-list">
+                    <li>
+                        <div class="d-flex justify-content-between">
+                            <span>Bootstrap</span>
+                            <span class="badge badge-info">5.3.x</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-flex justify-content-between">
+                            <span>jQuery</span>
+                            <span class="badge badge-info">3.7.x</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-flex justify-content-between">
+                            <span>Font Awesome</span>
+                            <span class="badge badge-info">6.4.x</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-flex justify-content-between">
+                            <span>Bootstrap Icons</span>
+                            <span class="badge badge-info">1.11.x</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-flex justify-content-between">
+                            <span>Chart.js</span>
+                            <span class="badge badge-info">4.4.x</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Project <span class="fw-semi-bold">Structure</span></h5>
+            </header>
+            <div class="widget-body">
+                <pre class="bg-light p-3" style="font-family: monospace; font-size: 12px;">
+sing-app-flask/
+├── app/
+│   ├── __init__.py          # Application factory
+│   ├── models.py            # Database models
+│   ├── config.py            # Configuration
+│   └── extensions.py        # Flask extensions
+├── blueprints/
+│   ├── __init__.py
+│   ├── main/
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   │   └── templates/
+│   └── examples/
+│       ├── __init__.py
+│       ├── routes.py
+│       └── templates/
+├── static/
+│   ├── css/
+│   ├── js/
+│   └── img/
+├── templates/
+│   ├── base.html
+│   └── ...
+├── requirements.txt
+└── run.py
+                </pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.package-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.package-list li {
+    padding: 10px 15px;
+    border-bottom: 1px solid #dee2e6;
+}
+.package-list li:last-child {
+    border-bottom: none;
+}
+</style>
+{% endblock %}

@@ -15,15 +15,473 @@
     </h1>
     
     <div class="row">
-        <div class="col-md-12">
-            <div class="widget">
-                <header><h5>Visit Statistics</h5></header>
+        <div class="col-lg-8 col-xl-7">
+            <div class="widget bg-transparent">
                 <div class="widget-body">
-                    <p class="lead">Example page - SCSS compilation needed for full styling</p>
-                    <p>Full Sing App styling will be available after Phase 6 (SCSS Compilation)</p>
+                    <div id="map" class="mapael">
+                        <div class="stats">
+                            <h6 class="mt-3">GEO-LOCATIONS</h6>
+                            <p class="h2 no-margin"><span id="geo-locations-number">1,656,843</span> <i class="fa fa-map-marker"></i></p>
+                        </div>
+                        <div class="map">
+                            <span>Interactive World Map</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 offset-xl-1">
+            <div class="widget">
+                <header>
+                    <h5>
+                        Map
+                        <span class="fw-semi-bold">Statistics</span>
+                    </h5>
+                </header>
+                <div class="widget-body">
+                    <p>Status: <strong>Live</strong></p>
+                    <p>
+                        <span class="circle bg-primary text-white"><i class="fa fa-map-marker"></i></span>
+                        146 Countries, 2759 Cities
+                    </p>
+                    <div class="row progress-stats">
+                        <div class="col-md-9">
+                            <h6 class="name mt-3">Foreign Visits</h6>
+                            <p class="description text-muted">Some Cool Text</p>
+                            <div class="bg-white progress progress-xs">
+                                <div class="progress-bar bg-primary js-progress-animate" style="width: 60%;" data-width="60%">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <span class="status square square-lg bg-light">
+                                <small><span id="percent-1">75</span>%</small>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row progress-stats">
+                        <div class="col-md-9">
+                            <h6 class="name mt-3">Local Visits</h6>
+                            <p class="description text-muted">P. to C. Conversion</p>
+                            <div class="bg-white progress progress-xs">
+                                <div class="progress-bar bg-danger js-progress-animate" style="width: 39%;" data-width="39%">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <span class="status square square-lg bg-light">
+                                <small><span id="percent-2">84</span>%</small>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row progress-stats">
+                        <div class="col-md-9">
+                            <h6 class="name mt-3">Sound Frequencies</h6>
+                            <p class="description text-muted">Average Bitrate</p>
+                            <div class="bg-white progress progress-xs">
+                                <div class="progress-bar bg-success js-progress-animate" style="width: 80%;" data-width="80%">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <span class="status square square-lg bg-light">
+                                <small><span id="percent-3">92</span>%</small>
+                            </span>
+                        </div>
+                    </div>
+                    <h6 class="fw-semi-bold mt">Map Distributions</h6>
+                    <p>Tracking: <strong>Active</strong></p>
+                    <p>
+                        <span class="circle bg-primary text-white"><i class="fa fa-cog"></i></span>
+                        391 elements installed, 84 sets
+                    </p>
+                    <div class="input-group mt-3">
+                        <input type="text" class="form-control" placeholder="Search Map">
+                        <span class="input-group-append">
+                            <button type="submit" class="btn btn-default">
+                                <i class="fa fa-search text-muted"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="widget">
+                <header>
+                    <h6>USERBASE GROWTH</h6>
+                </header>
+                <div class="widget-body">
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <h6 class="name fs-sm">Overall Growth</h6>
+                            <p class="value">76.38%</p>
+                        </div>
+                        <div class="stat-item">
+                            <h6 class="name fs-sm">Monthly</h6>
+                            <p class="value">10.38%</p>
+                        </div>
+                        <div class="stat-item">
+                            <h6 class="name fs-sm">24h</h6>
+                            <p class="value">3.38%</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-lighter progress progress-xs">
+                        <div class="progress-bar bg-success" style="width: 60%"></div>
+                    </div>
+                    <p>
+                        <span class="circle bg-primary text-white"><i class="fa fa-angle-up"></i></span>
+                        <span class="fw-semi-bold">17% higher</span>
+                        than last month
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="widget">
+                <header>
+                    <h6>TRAFFIC VALUES</h6>
+                </header>
+                <div class="widget-body">
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <h6 class="name fs-sm">Overall Values</h6>
+                            <p class="value">17,567,318</p>
+                        </div>
+                        <div class="stat-item">
+                            <h6 class="name fs-sm">Monthly</h6>
+                            <p class="value">55,120</p>
+                        </div>
+                        <div class="stat-item">
+                            <h6 class="name fs-sm">24h</h6>
+                            <p class="value">9,695</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-lighter progress progress-xs">
+                        <div class="progress-bar bg-danger" style="width: 60%"></div>
+                    </div>
+                    <p>
+                        <span class="circle bg-primary text-white"><i class="fa fa-angle-down"></i></span>
+                        <span class="fw-semi-bold">8% lower</span>
+                        than last month
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="widget">
+                <header>
+                    <h6>RANDOM VALUES</h6>
+                </header>
+                <div class="widget-body">
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <h6 class="name fs-sm">Overcome T.</h6>
+                            <p class="value">104.85%</p>
+                        </div>
+                        <div class="stat-item">
+                            <h6 class="name fs-sm">Takeoff Angle</h6>
+                            <p class="value">14.29&deg;</p>
+                        </div>
+                        <div class="stat-item">
+                            <h6 class="name fs-sm">World Pop.</h6>
+                            <p class="value">7,211M</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-lighter progress progress-xs">
+                        <div class="progress-bar bg-primary" style="width: 60%"></div>
+                    </div>
+                    <p>
+                        <span class="circle bg-primary text-white"><i class="fa fa-plus"></i></span>
+                        <span class="fw-semi-bold">8,734 higher</span>
+                        than last month
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="widget">
+                <header>
+                    <h6><span class="badge bg-danger">New</span> Messages</h6>
+                </header>
+                <div class="widget-body p-0">
+                    <div class="list-group list-group-lg">
+                        <a class="list-group-item" href="#">
+                            <span class="thumb-sm float-left mx-3">
+                                <img class="rounded-circle" src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/dist/img/avatar2.png" alt="...">
+                                <i class="status status-bottom bg-success"></i>
+                            </span>
+                            <h6 class="no-margin">Chris Gray</h6>
+                            <p class="help-block text-ellipsis no-margin">Hey! What's up? So many times since we</p>
+                        </a>
+                        <a class="list-group-item" href="#">
+                            <span class="thumb-sm float-left mx-3">
+                                <img class="rounded-circle" src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/dist/img/avatar3.png" alt="...">
+                                <i class="status status-bottom bg-success"></i>
+                            </span>
+                            <h6 class="no-margin">Jamey Brownlow</h6>
+                            <p class="help-block text-ellipsis no-margin">Good news coming tonight. Seems they agreed to proceed</p>
+                        </a>
+                        <a class="list-group-item" href="#">
+                            <span class="thumb-sm float-left mx-3">
+                                <img class="rounded-circle" src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/dist/img/avatar4.png" alt="...">
+                                <i class="status status-bottom bg-warning"></i>
+                            </span>
+                            <h6 class="no-margin">Livia Walsh</h6>
+                            <p class="help-block text-ellipsis no-margin">Check my latest email plz!</p>
+                        </a>
+                        <a class="list-group-item" href="#">
+                            <span class="thumb-sm float-left mx-3">
+                                <img class="rounded-circle" src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/dist/img/avatar5.png" alt="...">
+                                <i class="status status-bottom bg-danger"></i>
+                            </span>
+                            <h6 class="no-margin">Jaron Fitzroy</h6>
+                            <p class="help-block text-ellipsis no-margin">What about summer break?</p>
+                        </a>
+                    </div>
+                </div>
+                <footer class="bg-light mt">
+                    <input type="search" class="form-control form-control-sm" placeholder="Search">
+                </footer>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="widget">
+                <header>
+                    <h6>
+                        Market <span class="fw-semi-bold">Stats</span>
+                    </h6>
+                </header>
+                <div class="widget-body">
+                    <h3>$720 Earned</h3>
+                    <p class="text-muted mb mt-sm">
+                        Target <span class="fw-semi-bold">$820</span> day earnings
+                        is <span class="fw-semi-bold">96%</span> reached.
+                    </p>
+                </div>
+                <div id="rickshaw-chart" class="chart-overflow-bottom" style="height: 150px;"></div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="widget">
+                <header>
+                    <h6>Calendar</h6>
+                </header>
+                <div class="widget-body p-0">
+                    <div id="events-calendar" class="bg-light"></div>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item text-ellipsis">
+                            <span class="badge badge-pill bg-info float-right">6:45</span>
+                            Weed out the flower bed
+                        </a>
+                        <a href="#" class="list-group-item text-ellipsis">
+                            <span class="badge badge-pill bg-success float-right">9:41</span>
+                            Stop world water pollution
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.stats-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.stat-item {
+    text-align: center;
+}
+.stat-item .name {
+    font-size: 12px;
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+.stat-item .value {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+}
+.circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+}
+.status {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.status-bottom {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+.thumb-sm {
+    position: relative;
+    width: 40px;
+    display: inline-block;
+}
+.chart-overflow-bottom {
+    overflow: hidden;
+}
+.mapael .map {
+    height: 250px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.mapael .stats {
+    margin-bottom: 10px;
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Animate numbers
+    $('#geo-locations-number').animateNumber({
+        number: 1656843,
+        numberStep: function(now, tween) {
+            $(tween.elem).text(now.toLocaleString());
+        }
+    }, 2000);
+    
+    // Progress bar animation
+    $('.js-progress-animate').each(function() {
+        var width = $(this).data('width');
+        $(this).css('width', width);
+    });
+    
+    // Mapael World Map
+    $('.mapael .map').vectorMap({
+        map: 'world_mill_en',
+        backgroundColor: '#f8f9fa',
+        zoomOnScroll: true,
+        regionStyle: {
+            initial: {
+                fill: '#dee2e6',
+                stroke: '#adb5bd',
+                strokeWidth: 0.5
+            },
+            hover: {
+                fill: '#007bff',
+                stroke: '#adb5bd',
+                strokeWidth: 0.5
+            }
+        },
+        series: {
+            regions: [{
+                values: {
+                    'US': 45230,
+                    'GB': 23450,
+                    'DE': 18920,
+                    'FR': 15680,
+                    'JP': 12340,
+                    'CA': 9870,
+                    'AU': 8540,
+                    'BR': 7230,
+                    'IN': 6120,
+                    'CN': 5890
+                },
+                scale: ['#dee2e6', '#007bff'],
+                normalizeFunction: 'polynomial'
+            }]
+        }
+    });
+    
+    // Rickshaw Chart for Market Stats
+    var seriesData = [];
+    var random = new Rickshaw.Fixtures.RandomData(30);
+    random.addData(seriesData);
+    
+    var graph = new Rickshaw.Graph({
+        element: document.querySelector('#rickshaw-chart'),
+        renderer: 'area',
+        stroke: true,
+        series: [{
+            data: seriesData,
+            color: 'rgba(0, 123, 255, 0.5)',
+            stroke: '#007bff'
+        }]
+    });
+    
+    new Rickshaw.Graph.Axis.Y({
+        graph: graph,
+        orientation: 'left',
+        tickFormat: function(n) { return Math.floor(n); },
+        element: document.getElementById('y_axis')
+    }).render();
+    
+    graph.render();
+    
+    // Bootstrap Calendar
+    var calendar = new Calendar({
+        events_source: [
+            {
+                "start": new Date().setDate(1),
+                "end": new Date().setDate(1),
+                "title": "Event 1",
+                "classname": "event-danger"
+            },
+            {
+                "start": new Date().setDate(5),
+                "end": new Date().setDate(5),
+                "title": "Event 2",
+                "classname": "event-success"
+            }
+        ],
+        modal: '#events-modal'
+    });
+    
+    // Simple calendar display
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth();
+    var daysInMonth = new Date(year, month + 1, 0).getDate();
+    var firstDay = new Date(year, month, 1).getDay();
+    var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    
+    var calendarHtml = '<div class="calendar-header text-center mb-2">' +
+        '<strong>' + monthNames[month] + ' ' + year + '</strong>' +
+        '</div>' +
+        '<table class="table table-bordered table-sm mb-0">' +
+        '<thead><tr><th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th></tr></thead>' +
+        '<tbody><tr>';
+    
+    for (var i = 0; i < firstDay; i++) {
+        calendarHtml += '<td></td>';
+    }
+    
+    for (var day = 1; day <= daysInMonth; day++) {
+        if ((firstDay + day - 1) % 7 === 0 && day !== 1) {
+            calendarHtml += '</tr><tr>';
+        }
+        var isToday = (day === date.getDate()) ? 'bg-primary text-white' : '';
+        calendarHtml += '<td class="' + isToday + '">' + day + '</td>';
+    }
+    
+    calendarHtml += '</tr></tbody></table>';
+    $('#events-calendar').html(calendarHtml);
+});
+</script>
 {% endblock %}

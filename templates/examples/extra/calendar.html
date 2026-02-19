@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Extra - <span class="fw-semi-bold">Calendar</span></h3>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Full <span class="fw-semi-bold">Calendar</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted mb-4">
+                    FullCalendar is a jQuery plugin that provides a full-sized, drag & drop calendar.
+                </p>
+                
+                <div id="fullcalendar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Upcoming <span class="fw-semi-bold">Events</span></h5>
+            </header>
+            <div class="widget-body">
+                <div class="event-item">
+                    <div class="event-date bg-primary text-white">15 Feb</div>
+                    <div class="event-details">
+                        <h6 class="mb-1">Team Meeting</h6>
+                        <p class="text-muted fs-mini mb-0">10:00 AM - Conference Room A</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="event-item">
+                    <div class="event-date bg-success text-white">18 Feb</div>
+                    <div class="event-details">
+                        <h6 class="mb-1">Project Deadline</h6>
+                        <p class="text-muted fs-mini mb-0">Submit final deliverables</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="event-item">
+                    <div class="event-date bg-warning text-white">20 Feb</div>
+                    <div class="event-details">
+                        <h6 class="mb-1">Client Presentation</h6>
+                        <p class="text-muted fs-mini mb-0">2:00 PM - Client Office</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="event-item">
+                    <div class="event-date bg-danger text-white">25 Feb</div>
+                    <div class="event-details">
+                        <h6 class="mb-1">Training Session</h6>
+                        <p class="text-muted fs-mini mb-0">9:00 AM - Training Room</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Calendar <span class="fw-semi-bold">Options</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted mb-3">
+                    Interactive calendar features include drag-and-drop, event resizing, and multiple views.
+                </p>
+                
+                <div class="row mt-4">
+                    <div class="col-6 mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="event-date-sm bg-primary text-white mr-3">Jan</div>
+                            <div>
+                                <h6 class="mb-0">New Year</h6>
+                                <p class="text-muted fs-mini mb-0">All day event</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="event-date-sm bg-danger text-white mr-3">Feb</div>
+                            <div>
+                                <h6 class="mb-0">Valentine's Day</h6>
+                                <p class="text-muted fs-mini mb-0">All day event</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="event-date-sm bg-success text-white mr-3">Mar</div>
+                            <div>
+                                <h6 class="mb-0">Spring Break</h6>
+                                <p class="text-muted fs-mini mb-0">All day event</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="event-date-sm bg-info text-white mr-3">Apr</div>
+                            <div>
+                                <h6 class="mb-0">Tax Day</h6>
+                                <p class="text-muted fs-mini mb-0">All day event</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('fullcalendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        initialDate: '2026-02-19',
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: [
+            {
+                title: 'Team Meeting',
+                start: '2026-02-15T10:00:00',
+                end: '2026-02-15T11:00:00',
+                backgroundColor: '#007bff',
+                borderColor: '#007bff'
+            },
+            {
+                title: 'Project Deadline',
+                start: '2026-02-18',
+                backgroundColor: '#28a745',
+                borderColor: '#28a745'
+            },
+            {
+                title: 'Client Presentation',
+                start: '2026-02-20T14:00:00',
+                end: '2026-02-20T16:00:00',
+                backgroundColor: '#ffc107',
+                borderColor: '#ffc107'
+            },
+            {
+                title: 'Training Session',
+                start: '2026-02-25T09:00:00',
+                end: '2026-02-25T12:00:00',
+                backgroundColor: '#dc3545',
+                borderColor: '#dc3545'
+            },
+            {
+                title: 'All Day Event',
+                start: '2026-02-10',
+                backgroundColor: '#17a2b8',
+                borderColor: '#17a2b8'
+            },
+            {
+                title: 'Long Event',
+                start: '2026-02-05',
+                end: '2026-02-08',
+                backgroundColor: '#6c757d',
+                borderColor: '#6c757d'
+            }
+        ],
+        editable: true,
+        selectable: true,
+        dayMaxEvents: true
+    });
+    calendar.render();
+});
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.event-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+.event-date {
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 60px;
+    text-align: center;
+}
+.event-date-sm {
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    min-width: 45px;
+    text-align: center;
+}
+.event-details {
+    flex: 1;
+    padding-left: 15px;
+}
+#fullcalendar {
+    max-height: 600px;
+}
+.fc {
+    font-size: 14px;
+}
+.fc .fc-button-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.fc .fc-button-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+.fc-event {
+    cursor: pointer;
+}
+</style>
+{% endblock %}

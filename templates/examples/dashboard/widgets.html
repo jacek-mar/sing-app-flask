@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Dashboard Widgets</h3>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h4 class="widget-title">Widgets Dashboard</h4>
+            </header>
+            <div class="widget-body">
+                <p>This page displays various dashboard widgets with key metrics and data visualizations.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="widget bg-primary text-white">
+            <div class="widget-body">
+                <h3>Messages</h3>
+                <p class="mb-0">24 unread</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="widget bg-success text-white">
+            <div class="widget-body">
+                <h3>Orders</h3>
+                <p class="mb-0">12 pending</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="widget bg-warning text-white">
+            <div class="widget-body">
+                <h3>Alerts</h3>
+                <p class="mb-0">5 new</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

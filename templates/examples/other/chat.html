@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Chat <span class="fw-semi-bold">Messages</span></h3>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="widget">
+            <header class="widget-header">
+                <h4 class="widget-title">Contacts</h4>
+            </header>
+            <div class="widget-body p-0">
+                <div class="list-group chat-contacts">
+                    <a href="#" class="list-group-item contact-item active" data-contact="john">
+                        <div class="media">
+                            <div class="chat-avatar mr-3">
+                                <div class="circle-icon bg-primary text-white">JD</div>
+                            </div>
+                            <div class="media-body">
+                                <h5 class="mb-0">John Doe</h5>
+                                <p class="text-muted mb-0 text-truncate">Hey, how are you?</p>
+                                <small class="text-muted">Online</small>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item contact-item" data-contact="jane">
+                        <div class="media">
+                            <div class="chat-avatar mr-3">
+                                <div class="circle-icon bg-success text-white">JS</div>
+                            </div>
+                            <div class="media-body">
+                                <h5 class="mb-0">Jane Smith</h5>
+                                <p class="text-muted mb-0 text-truncate">Can we meet tomorrow?</p>
+                                <small class="text-muted">Away</small>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item contact-item" data-contact="bob">
+                        <div class="media">
+                            <div class="chat-avatar mr-3">
+                                <div class="circle-icon bg-info text-white">BJ</div>
+                            </div>
+                            <div class="media-body">
+                                <h5 class="mb-0">Bob Johnson</h5>
+                                <p class="text-muted mb-0 text-truncate">Thanks for the help!</p>
+                                <small class="text-muted">Offline</small>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item contact-item" data-contact="alice">
+                        <div class="media">
+                            <div class="chat-avatar mr-3">
+                                <div class="circle-icon bg-warning text-white">AW</div>
+                            </div>
+                            <div class="media-body">
+                                <h5 class="mb-0">Alice Williams</h5>
+                                <p class="text-muted mb-0 text-truncate">I'll send the files</p>
+                                <small class="text-muted">Online</small>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item contact-item" data-contact="mike">
+                        <div class="media">
+                            <div class="chat-avatar mr-3">
+                                <div class="circle-icon bg-danger text-white">MB</div>
+                            </div>
+                            <div class="media-body">
+                                <h5 class="mb-0">Mike Brown</h5>
+                                <p class="text-muted mb-0 text-truncate">See you soon!</p>
+                                <small class="text-muted">Offline</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="widget">
+            <header class="widget-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="widget-title mb-0">John Doe</h4>
+                    <span class="badge badge-success">Online</span>
+                </div>
+            </header>
+            <div class="widget-body chat-messages" style="height: 350px; overflow-y: auto;">
+                <div class="message received">
+                    <div class="message-content">
+                        <p class="mb-0">Hey there! How's it going?</p>
+                    </div>
+                    <small class="message-time text-muted">10:30 AM</small>
+                </div>
+                <div class="message sent">
+                    <div class="message-content">
+                        <p class="mb-0">Hi John! I'm doing great, thanks for asking. How about you?</p>
+                    </div>
+                    <small class="message-time text-muted">10:32 AM</small>
+                </div>
+                <div class="message received">
+                    <div class="message-content">
+                        <p class="mb-0">Pretty good! Working on that new project we discussed.</p>
+                    </div>
+                    <small class="message-time text-muted">10:33 AM</small>
+                </div>
+                <div class="message sent">
+                    <div class="message-content">
+                        <p class="mb-0">Ah, the dashboard project? How's it coming along?</p>
+                    </div>
+                    <small class="message-time text-muted">10:35 AM</small>
+                </div>
+                <div class="message received">
+                    <div class="message-content">
+                        <p class="mb-0">It's going well! Just finished the main layout. I'll share some screenshots soon.</p>
+                    </div>
+                    <small class="message-time text-muted">10:36 AM</small>
+                </div>
+                <div class="message received">
+                    <div class="message-content">
+                        <p class="mb-0">The client is really happy with the progress so far!</p>
+                    </div>
+                    <small class="message-time text-muted">10:36 AM</small>
+                </div>
+                <div class="message sent">
+                    <div class="message-content">
+                        <p class="mb-0">That's great news! Let me know if you need any help with the charts section.</p>
+                    </div>
+                    <small class="message-time text-muted">10:38 AM</small>
+                </div>
+                <div class="message received">
+                    <div class="message-content">
+                        <p class="mb-0">Will do! Talk to you later.</p>
+                    </div>
+                    <small class="message-time text-muted">10:40 AM</small>
+                </div>
+            </div>
+            <div class="widget-body pt-0">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Type a message...">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary"><i class="fa fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.circle-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+}
+.chat-contacts .contact-item {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+}
+.chat-contacts .contact-item:first-child {
+    border-top: none;
+}
+.chat-contacts .contact-item:hover {
+    background-color: #f8f9fa;
+}
+.chat-contacts .contact-item.active {
+    background-color: #e3f2fd;
+    border-left: 3px solid #007bff;
+}
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+}
+.message {
+    max-width: 75%;
+}
+.message.received {
+    align-self: flex-start;
+}
+.message.sent {
+    align-self: flex-end;
+}
+.message-content {
+    padding: 10px 15px;
+    border-radius: 15px;
+    background-color: #f8f9fa;
+}
+.message.received .message-content {
+    background-color: #e3f2fd;
+    border-bottom-left-radius: 2px;
+}
+.message.sent .message-content {
+    background-color: #007bff;
+    color: white;
+    border-bottom-right-radius: 2px;
+}
+.message-time {
+    font-size: 11px;
+    margin-top: 4px;
+    display: block;
+}
+.message.sent .message-time {
+    text-align: right;
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Contact click handler
+    $('.contact-item').on('click', function(e) {
+        e.preventDefault();
+        $('.contact-item').removeClass('active');
+        $(this).addClass('active');
+        
+        var contactName = $(this).find('h5').text();
+        var contactStatus = $(this).find('small').text();
+        
+        $('.chat-messages').closest('.widget').find('.widget-title').text(contactName);
+        
+        // Update status badge
+        var statusBadge = $('.chat-messages').closest('.widget').find('.badge');
+        if (contactStatus === 'Online') {
+            statusBadge.removeClass('badge-warning badge-secondary').addClass('badge-success').text('Online');
+        } else if (contactStatus === 'Away') {
+            statusBadge.removeClass('badge-success badge-secondary').addClass('badge-warning').text('Away');
+        } else {
+            statusBadge.removeClass('badge-success badge-warning').addClass('badge-secondary').text('Offline');
+        }
+    });
+    
+    // Send message on button click
+    $('.input-group-append button').on('click', function() {
+        var input = $(this).closest('.input-group').find('input');
+        var message = input.val().trim();
+        
+        if (message) {
+            var now = new Date();
+            var time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+            
+            var messageHtml = '<div class="message sent">' +
+                '<div class="message-content">' +
+                '<p class="mb-0">' + message + '</p>' +
+                '</div>' +
+                '<small class="message-time text-muted">' + time + '</small>' +
+                '</div>';
+            
+            $('.chat-messages').append(messageHtml);
+            input.val('');
+            $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
+        }
+    });
+    
+    // Send message on Enter key
+    $('.input-group input').on('keypress', function(e) {
+        if (e.which === 13) {
+            $(this).closest('.input-group').find('button').click();
+        }
+    });
+});
+</script>
+{% endblock %}

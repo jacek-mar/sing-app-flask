@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Extra - <span class="fw-semi-bold">Timeline</span></h3>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Vertical <span class="fw-semi-bold">Timeline</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted mb-4">
+                    A vertical timeline to display chronological events or activities.
+                </p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-icon bg-primary text-white">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="widget">
+                                <div class="widget-body p-3">
+                                    <span class="text-muted fs-mini">February 19, 2026</span>
+                                    <h6 class="mt-1 mb-2">Project Completed</h6>
+                                    <p class="text-muted mb-0">The project has been successfully completed and deployed to production.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon bg-success text-white">
+                            <i class="fa fa-code"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="widget">
+                                <div class="widget-body p-3">
+                                    <span class="text-muted fs-mini">February 15, 2026</span>
+                                    <h6 class="mt-1 mb-2">Code Review</h6>
+                                    <p class="text-muted mb-0">All code changes have been reviewed and approved by the team lead.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon bg-warning text-white">
+                            <i class="fa fa-bug"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="widget">
+                                <div class="widget-body p-3">
+                                    <span class="text-muted fs-mini">February 10, 2026</span>
+                                    <h6 class="mt-1 mb-2">Bug Fixed</h6>
+                                    <p class="text-muted mb-0">Fixed critical bug in the authentication module.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon bg-info text-white">
+                            <i class="fa fa-plus"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="widget">
+                                <div class="widget-body p-3">
+                                    <span class="text-muted fs-mini">February 5, 2026</span>
+                                    <h6 class="mt-1 mb-2">Feature Added</h6>
+                                    <p class="text-muted mb-0">New dashboard widgets have been implemented with real-time data.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon bg-secondary text-white">
+                            <i class="fa fa-flag"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="widget">
+                                <div class="widget-body p-3">
+                                    <span class="text-muted fs-mini">February 1, 2026</span>
+                                    <h6 class="mt-1 mb-2">Project Started</h6>
+                                    <p class="text-muted mb-0">Initial project setup and planning phase completed.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Activity <span class="fw-semi-bold">Feed</span></h5>
+            </header>
+            <div class="widget-body">
+                <div class="activity-feed">
+                    <div class="feed-item">
+                        <div class="feed-icon bg-primary text-white">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <div class="feed-content">
+                            <p class="mb-0"><strong>John Doe</strong> updated the profile</p>
+                            <span class="text-muted fs-mini">2 minutes ago</span>
+                        </div>
+                    </div>
+                    <div class="feed-item">
+                        <div class="feed-icon bg-success text-white">
+                            <i class="fa fa-upload"></i>
+                        </div>
+                        <div class="feed-content">
+                            <p class="mb-0"><strong>Jane Smith</strong> uploaded new files</p>
+                            <span class="text-muted fs-mini">15 minutes ago</span>
+                        </div>
+                    </div>
+                    <div class="feed-item">
+                        <div class="feed-icon bg-warning text-white">
+                            <i class="fa fa-comment"></i>
+                        </div>
+                        <div class="feed-content">
+                            <p class="mb-0"><strong>Bob Wilson</strong> commented on task</p>
+                            <span class="text-muted fs-mini">1 hour ago</span>
+                        </div>
+                    </div>
+                    <div class="feed-item">
+                        <div class="feed-icon bg-info text-white">
+                            <i class="fa fa-tasks"></i>
+                        </div>
+                        <div class="feed-content">
+                            <p class="mb-0"><strong>Alice Brown</strong> completed a task</p>
+                            <span class="text-muted fs-mini">3 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Recent <span class="fw-semi-bold">Updates</span></h5>
+            </header>
+            <div class="widget-body">
+                <div class="updates-timeline">
+                    <div class="update-item">
+                        <span class="update-date badge badge-primary">Today</span>
+                        <p class="mb-1">System maintenance completed</p>
+                        <span class="text-muted fs-mini">9:00 AM</span>
+                    </div>
+                    <div class="update-item">
+                        <span class="update-date badge badge-secondary">Yesterday</span>
+                        <p class="mb-1">Database backup created</p>
+                        <span class="text-muted fs-mini">6:30 PM</span>
+                    </div>
+                    <div class="update-item">
+                        <span class="update-date badge badge-secondary">Feb 17</span>
+                        <p class="mb-1">Security patches applied</p>
+                        <span class="text-muted fs-mini">3:15 PM</span>
+                    </div>
+                    <div class="update-item">
+                        <span class="update-date badge badge-secondary">Feb 16</span>
+                        <p class="mb-1">New version released</p>
+                        <span class="text-muted fs-mini">11:00 AM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
