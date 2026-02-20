@@ -1,0 +1,283 @@
+/* Sing App Flask — Custom Layout Styles
+   These are additive to application.min.css.
+   Dark mode overrides go in a [data-theme="dark"] block at the bottom. */
+
+body {
+    padding-top: 56px;
+    background-color: #f5f7fa;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 48px 0 0;
+    box-shadow: 1px 0 5px rgba(0,0,0,0.1);
+    background-color: #22262e;
+    width: 240px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: left 0.25s ease;
+}
+.sidebar a {
+    color: #aab2bd;
+    padding: 10px 20px;
+    display: block;
+    font-size: 14px;
+    text-decoration: none;
+}
+.sidebar a:hover, .sidebar a.active {
+    background-color: #2c3139;
+    color: #fff;
+}
+.sidebar .nav-header {
+    color: #6c757d;
+    font-size: 11px;
+    text-transform: uppercase;
+    padding: 15px 20px 5px;
+    font-weight: 600;
+}
+.sidebar .nav-item {
+    margin-bottom: 0;
+}
+.sidebar .nav-item a {
+    padding-left: 30px;
+}
+.sidebar .nav-item .nav-item a {
+    padding-left: 45px;
+}
+.sidebar .collapse {
+    display: none;
+}
+.sidebar .collapse.show {
+    display: block;
+}
+.sidebar .nav-item a[data-toggle="collapse"] {
+    position: relative;
+}
+.sidebar .nav-item a[data-toggle="collapse"]::after {
+    position: absolute;
+    right: 15px;
+    content: '\f107';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+}
+.sidebar .nav-item a[data-toggle="collapse"][aria-expanded="true"]::after {
+    content: '\f106';
+}
+.sidebar .icon {
+    width: 24px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+/* Main content */
+.main-content {
+    margin-left: 240px;
+    padding: 20px;
+}
+
+/* Top navbar */
+.top-navbar {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Widgets */
+.widget {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    margin-bottom: 20px;
+}
+.widget header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+.widget-body {
+    padding: 20px;
+}
+
+/* Page title */
+.page-title {
+    margin-bottom: 20px;
+}
+.page-title h3 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+/* Mobile responsive sidebar */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+}
+
+@media (max-width: 767.98px) {
+    .sidebar {
+        left: -240px;
+        z-index: 100;
+    }
+    .sidebar.sidebar-open {
+        left: 0;
+    }
+    .sidebar-overlay.show {
+        display: block;
+    }
+    .main-content {
+        margin-left: 0;
+    }
+    .sidebar-toggler {
+        display: inline-block !important;
+    }
+}
+
+.sidebar-toggler {
+    display: none;
+}
+
+/* Flash messages */
+.flash-messages {
+    margin-bottom: 0;
+}
+
+/* Dark mode overrides */
+[data-theme="dark"] body {
+    background-color: #1a1d23;
+    color: #c8cdd5;
+}
+[data-theme="dark"] .widget {
+    background: #22262e;
+    border-color: #2c3139;
+    box-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+[data-theme="dark"] .widget header {
+    border-color: #2c3139;
+}
+[data-theme="dark"] .top-navbar {
+    background-color: #1e2228;
+    border-bottom: 1px solid #2c3139;
+}
+[data-theme="dark"] .top-navbar .navbar-brand,
+[data-theme="dark"] .top-navbar .nav-link {
+    color: #c8cdd5 !important;
+}
+[data-theme="dark"] .breadcrumb {
+    background-color: #22262e;
+}
+[data-theme="dark"] .breadcrumb-item.active {
+    color: #8f9bab;
+}
+[data-theme="dark"] .card {
+    background: #22262e;
+    border-color: #2c3139;
+    color: #c8cdd5;
+}
+[data-theme="dark"] .table {
+    color: #c8cdd5;
+}
+[data-theme="dark"] .table thead th {
+    border-color: #2c3139;
+}
+[data-theme="dark"] .table td {
+    border-color: #2c3139;
+}
+[data-theme="dark"] .sidebar {
+    background-color: #1a1d23;
+    box-shadow: 1px 0 5px rgba(0,0,0,0.3);
+}
+[data-theme="dark"] .sidebar a {
+    color: #aab2bd;
+}
+[data-theme="dark"] .sidebar a:hover,
+[data-theme="dark"] .sidebar a.active {
+    background-color: #2c3139;
+    color: #fff;
+}
+[data-theme="dark"] .main-content {
+    background-color: #1a1d23;
+}
+[data-theme="dark"] .page-title h3 {
+    color: #c8cdd5;
+}
+[data-theme="dark"] .form-control {
+    background-color: #2c3139;
+    border-color: #3d434b;
+    color: #c8cdd5;
+}
+[data-theme="dark"] .form-control:focus {
+    background-color: #2c3139;
+    border-color: #4a9eff;
+    color: #c8cdd5;
+}
+[data-theme="dark"] .input-group-text {
+    background-color: #2c3139;
+    border-color: #3d434b;
+    color: #aab2bd;
+}
+[data-theme="dark"] .custom-select {
+    background-color: #2c3139;
+    border-color: #3d434b;
+    color: #c8cdd5;
+}
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3,
+[data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6 {
+    color: #c8cdd5;
+}
+[data-theme="dark"] .text-muted {
+    color: #8f9bab !important;
+}
+[data-theme="dark"] .alert-success {
+    background-color: #1e3a2f;
+    border-color: #2d5a45;
+    color: #75c9a8;
+}
+[data-theme="dark"] .alert-danger {
+    background-color: #3d1f1f;
+    border-color: #5d2d2d;
+    color: #f8a4a4;
+}
+[data-theme="dark"] .alert-warning {
+    background-color: #3d3518;
+    border-color: #5d4f28;
+    color: #f0d875;
+}
+[data-theme="dark"] .alert-info {
+    background-color: #1f2d3d;
+    border-color: #2d4559;
+    color: #75b9f0;
+}
+[data-theme="dark"] .dropdown-menu {
+    background-color: #22262e;
+    border-color: #2c3139;
+}
+[data-theme="dark"] .dropdown-item {
+    color: #c8cdd5;
+}
+[data-theme="dark"] .dropdown-item:hover {
+    background-color: #2c3139;
+    color: #fff;
+}
+[data-theme="dark"] .modal-content {
+    background-color: #22262e;
+    border-color: #2c3139;
+}
+[data-theme="dark"] .modal-header {
+    border-color: #2c3139;
+}
+[data-theme="dark"] .modal-footer {
+    border-color: #2c3139;
+}
+[data-theme="dark"] .close {
+    color: #c8cdd5;
+}
