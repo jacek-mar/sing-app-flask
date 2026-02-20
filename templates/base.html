@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rickshaw/1.6.6/rickshaw.min.css">
     <!-- FullCalendar CSS (MIT) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css">
+    <!-- Leaflet CSS (MIT - OpenStreetMap) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     
     <style>
         body {
@@ -284,17 +286,20 @@
                 </li>
                 
                 <!-- Maps -->
-                <li class="nav-item {% if active_page in ['maps_google', 'maps_vector'] %}active{% endif %}">
-                    <a class="nav-link {% if active_page in ['maps_google', 'maps_vector'] %}active{% endif %}" href="#sidebar-maps" data-toggle="collapse" aria-expanded="{% if active_page in ['maps_google', 'maps_vector'] %}true{% else %}false{% endif %}">
+                <li class="nav-item {% if active_page in ['maps_google', 'maps_vector', 'maps_leaflet'] %}active{% endif %}">
+                    <a class="nav-link {% if active_page in ['maps_google', 'maps_vector', 'maps_leaflet'] %}active{% endif %}" href="#sidebar-maps" data-toggle="collapse" aria-expanded="{% if active_page in ['maps_google', 'maps_vector', 'maps_leaflet'] %}true{% else %}false{% endif %}">
                         <span class="icon"><i class="fa fa-map"></i></span>
                         Maps
                     </a>
-                    <ul id="sidebar-maps" class="collapse {% if active_page in ['maps_google', 'maps_vector'] %}show{% endif %} nav flex-column">
+                    <ul id="sidebar-maps" class="collapse {% if active_page in ['maps_google', 'maps_vector', 'maps_leaflet'] %}show{% endif %} nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link {% if active_page == 'maps_google' %}active{% endif %}" href="/examples/maps/google">Google Maps</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {% if active_page == 'maps_vector' %}active{% endif %}" href="/examples/maps/vector">Vector Maps</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'maps_leaflet' %}active{% endif %}" href="/examples/maps/leaflet">Leaflet Maps</a>
                         </li>
                     </ul>
                 </li>
@@ -405,6 +410,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-animateNumber/0.0.14/jquery.animateNumber.min.js"></script>
     <!-- FullCalendar (MIT) -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <!-- Leaflet JS (MIT - OpenStreetMap) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     {% block scripts %}{% endblock %}
 </body>

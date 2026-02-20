@@ -268,6 +268,14 @@ def maps_vector():
         active_page='maps_vector')
 
 
+@examples_bp.route('/maps/leaflet')
+def maps_leaflet():
+    """Leaflet Maps page - OpenStreetMap"""
+    return render_template('examples/maps/leaflet.html',
+        title='Leaflet Maps',
+        active_page='maps_leaflet')
+
+
 # =============================================================================
 # E-commerce
 # =============================================================================

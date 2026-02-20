@@ -1,0 +1,342 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block extra_css %}
+<style>
+    .leaflet-container {
+        height: 400px;
+        width: 100%;
+        border-radius: 4px;
+    }
+    .map-container {
+        height: 300px;
+        width: 100%;
+        border-radius: 4px;
+    }
+    .custom-popup .leaflet-popup-content-wrapper {
+        border-radius: 4px;
+    }
+    .marker-cluster {
+        background-color: rgba(110, 204, 57, 0.6);
+    }
+    .marker-cluster div {
+        background-color: rgba(110, 204, 57, 0.8);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h3>Maps - <span class="fw-semi-bold">Leaflet / OpenStreetMap</span></h3>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Interactive <span class="fw-semi-bold">World Map</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Leaflet is a free, open-source JavaScript library for mobile-friendly interactive maps.
+                    This map uses OpenStreetMap tiles. Drag to pan, scroll to zoom, click markers for details.
+                </p>
+                <div id="world-map" class="leaflet-container"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Marker <span class="fw-semi-bold">Locations</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Interactive markers with popups showing location information.
+                </p>
+                <div id="marker-map" class="map-container"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Route <span class="fw-semi-bold">Polyline</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Draw routes between locations using polylines.
+                </p>
+                <div id="route-map" class="map-container"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Custom <span class="fw-semi-bold">Icons</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Custom marker icons for different location types.
+                </p>
+                <div id="custom-icon-map" class="map-container"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Choropleth <span class="fw-semi-bold">Map</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Interactive map with region coloring based on data.
+                </p>
+                <div id="choropleth-map" class="map-container"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget">
+            <header class="widget-header">
+                <h5>Location <span class="fw-semi-bold">Statistics</span></h5>
+            </header>
+            <div class="widget-body">
+                <p class="fs-mini text-muted">
+                    Statistics from mapped locations.
+                </p>
+                <div class="table-responsive mt-3">
+                    <table class="table table-sm table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Location</th>
+                                <th>Coordinates</th>
+                                <th>Type</th>
+                                <th>Visitors/Month</th>
+                                <th>Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><i class="fa fa-building text-primary"></i> New York HQ</td>
+                                <td>40.7128° N, 74.0060° W</td>
+                                <td>Office</td>
+                                <td>45,230</td>
+                                <td>$125,400</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-industry text-success"></i> London Office</td>
+                                <td>51.5074° N, 0.1278° W</td>
+                                <td>Office</td>
+                                <td>23,450</td>
+                                <td>$67,800</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-store text-warning"></i> Tokyo Store</td>
+                                <td>35.6762° N, 139.6503° E</td>
+                                <td>Retail</td>
+                                <td>18,920</td>
+                                <td>$54,200</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-warehouse text-info"></i> Berlin Warehouse</td>
+                                <td>52.5200° N, 13.4050° E</td>
+                                <td>Warehouse</td>
+                                <td>12,340</td>
+                                <td>$38,900</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-hotel text-danger"></i> Paris Hotel</td>
+                                <td>48.8566° N, 2.3522° E</td>
+                                <td>Retail</td>
+                                <td>15,680</td>
+                                <td>$42,100</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Dummy data for maps
+    const locations = [
+        { name: 'New York HQ', lat: 40.7128, lng: -74.0060, type: 'office', visitors: 45230, revenue: '$125,400' },
+        { name: 'London Office', lat: 51.5074, lng: -0.1278, type: 'office', visitors: 23450, revenue: '$67,800' },
+        { name: 'Tokyo Store', lat: 35.6762, lng: 139.6503, type: 'retail', visitors: 18920, revenue: '$54,200' },
+        { name: 'Berlin Warehouse', lat: 52.5200, lng: 13.4050, type: 'warehouse', visitors: 12340, revenue: '$38,900' },
+        { name: 'Paris Hotel', lat: 48.8566, lng: 2.3522, type: 'retail', visitors: 15680, revenue: '$42,100' },
+        { name: 'Sydney Office', lat: -33.8688, lng: 151.2093, type: 'office', visitors: 9870, revenue: '$28,500' },
+        { name: 'Toronto Hub', lat: 43.6532, lng: -79.3832, type: 'office', visitors: 8540, revenue: '$24,200' },
+        { name: 'Singapore Branch', lat: 1.3521, lng: 103.8198, type: 'office', visitors: 7230, revenue: '$21,800' },
+        { name: 'Dubai Outlet', lat: 25.2048, lng: 55.2708, type: 'retail', visitors: 6120, revenue: '$18,500' },
+        { name: 'Mumbai Center', lat: 19.0760, lng: 72.8777, type: 'office', visitors: 5890, revenue: '$15,300' }
+    ];
+    
+    // Custom icons
+    const icons = {
+        office: L.divIcon({
+            className: 'custom-div-icon',
+            html: '<div style="background-color: #007bff; width: 24px; height: 24px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+        }),
+        retail: L.divIcon({
+            className: 'custom-div-icon',
+            html: '<div style="background-color: #28a745; width: 24px; height: 24px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+        }),
+        warehouse: L.divIcon({
+            className: 'custom-div-icon',
+            html: '<div style="background-color: #ffc107; width: 24px; height: 24px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+        })
+    };
+    
+    // 1. World Map with markers
+    const worldMap = L.map('world-map').setView([20, 0], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18
+    }).addTo(worldMap);
+    
+    locations.forEach(loc => {
+        L.marker([loc.lat, loc.lng])
+            .addTo(worldMap)
+            .bindPopup(`<b>${loc.name}</b><br>Type: ${loc.type}<br>Visitors: ${loc.visitors.toLocaleString()}`);
+    });
+    
+    // 2. Marker Map with popup details
+    const markerMap = L.map('marker-map').setView([40, -40], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap',
+        maxZoom: 18
+    }).addTo(markerMap);
+    
+    locations.slice(0, 5).forEach(loc => {
+        L.marker([loc.lat, loc.lng], { icon: icons[loc.type] })
+            .addTo(markerMap)
+            .bindPopup(`
+                <div class="text-center">
+                    <h6>${loc.name}</h6>
+                    <p class="mb-1"><strong>Visitors:</strong> ${loc.visitors.toLocaleString()}/month</p>
+                    <p class="mb-0"><strong>Revenue:</strong> ${loc.revenue}</p>
+                </div>
+            `);
+    });
+    
+    // 3. Route Polyline Map
+    const routeMap = L.map('route-map').setView([50, -30], 3);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap',
+        maxZoom: 18
+    }).addTo(routeMap);
+    
+    // Draw route between offices
+    const routeCoords = locations.slice(0, 4).map(loc => [loc.lat, loc.lng]);
+    const polyline = L.polyline(routeCoords, {
+        color: '#007bff',
+        weight: 3,
+        opacity: 0.8,
+        dashArray: '10, 10'
+    }).addTo(routeMap);
+    
+    routeMap.fitBounds(polyline.getBounds());
+    
+    // Add markers for route points
+    routeCoords.forEach((coord, idx) => {
+        L.circleMarker(coord, {
+            radius: 8,
+            fillColor: '#007bff',
+            color: '#fff',
+            weight: 2,
+            fillOpacity: 1
+        }).addTo(routeMap).bindPopup(`Stop ${idx + 1}: ${locations[idx].name}`);
+    });
+    
+    // 4. Custom Icons Map
+    const customMap = L.map('custom-icon-map').setView([30, 10], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap',
+        maxZoom: 18
+    }).addTo(customMap);
+    
+    locations.forEach(loc => {
+        L.marker([loc.lat, loc.lng], { icon: icons[loc.type] })
+            .addTo(customMap)
+            .bindPopup(`<b>${loc.name}</b><br>Type: ${loc.type}`);
+    });
+    
+    // 5. Choropleth-style Map (using circle markers for data visualization)
+    const choroplethMap = L.map('choropleth-map').setView([40, -20], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap',
+        maxZoom: 18
+    }).addTo(choroplethMap);
+    
+    // Color scale based on visitor count
+    function getColor(visitors) {
+        return visitors > 40000 ? '#800026' :
+               visitors > 30000 ? '#BD0026' :
+               visitors > 20000 ? '#E31A1C' :
+               visitors > 10000 ? '#FC4E2A' :
+               visitors > 5000  ? '#FD8D3C' :
+                                   '#FEB24C';
+    }
+    
+    locations.forEach(loc => {
+        const radius = Math.max(8, Math.min(25, loc.visitors / 2000));
+        L.circleMarker([loc.lat, loc.lng], {
+            radius: radius,
+            fillColor: getColor(loc.visitors),
+            color: '#fff',
+            weight: 1,
+            fillOpacity: 0.7
+        }).addTo(choroplethMap).bindPopup(`
+            <b>${loc.name}</b><br>
+            Visitors: ${loc.visitors.toLocaleString()}<br>
+            <small>Circle size indicates visitor volume</small>
+        `);
+    });
+    
+    // Add legend
+    const legend = L.control({ position: 'bottomright' });
+    legend.onAdd = function(map) {
+        const div = L.DomUtil.create('div', 'info legend');
+        div.style.backgroundColor = 'white';
+        div.style.padding = '10px';
+        div.style.borderRadius = '4px';
+        div.style.boxShadow = '0 0 15px rgba(0,0,0,0.2)';
+        const grades = [0, 5000, 10000, 20000, 30000, 40000];
+        const labels = [];
+        for (let i = 0; i < grades.length; i++) {
+            labels.push(
+                '<i style="display:inline-block;width:18px;height:18px;background:' + getColor(grades[i] + 1) + ';margin-right:5px;border-radius:50%;"></i> ' +
+                (grades[i] ? grades[i] + (grades[i + 1] ? ' - ' + grades[i + 1] : '+') : '< ' + grades[1])
+            );
+        }
+        div.innerHTML = '<h6>Visitors/Month</h6>' + labels.join('<br>');
+        return div;
+    };
+    choroplethMap.addControl(legend);
+});
+</script>
+{% endblock %}

@@ -18,15 +18,7 @@
         <div class="col-lg-8 col-xl-7">
             <div class="widget bg-transparent">
                 <div class="widget-body">
-                    <div id="map" class="mapael">
-                        <div class="stats">
-                            <h6 class="mt-3">GEO-LOCATIONS</h6>
-                            <p class="h2 no-margin"><span id="geo-locations-number">1,656,843</span> <i class="fa fa-map-marker"></i></p>
-                        </div>
-                        <div class="map">
-                            <span>Interactive World Map</span>
-                        </div>
-                    </div>
+                    <div id="world-map-visits" style="height: 350px; margin-top: 10px;"></div>
                 </div>
             </div>
         </div>
@@ -340,17 +332,9 @@
 .chart-overflow-bottom {
     overflow: hidden;
 }
-.mapael .map {
-    height: 250px;
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-}
-.mapael .stats {
-    margin-bottom: 10px;
+.leaflet-container {
+    border-radius: 4px;
+    z-index: 1;
 }
 </style>
 {% endblock %}
@@ -372,42 +356,95 @@ $(document).ready(function() {
         $(this).css('width', width);
     });
     
-    // Mapael World Map
-    $('.mapael .map').vectorMap({
-        map: 'world_mill_en',
-        backgroundColor: '#f8f9fa',
-        zoomOnScroll: true,
-        regionStyle: {
-            initial: {
-                fill: '#dee2e6',
-                stroke: '#adb5bd',
-                strokeWidth: 0.5
-            },
-            hover: {
-                fill: '#007bff',
-                stroke: '#adb5bd',
-                strokeWidth: 0.5
-            }
-        },
-        series: {
-            regions: [{
-                values: {
-                    'US': 45230,
-                    'GB': 23450,
-                    'DE': 18920,
-                    'FR': 15680,
-                    'JP': 12340,
-                    'CA': 9870,
-                    'AU': 8540,
-                    'BR': 7230,
-                    'IN': 6120,
-                    'CN': 5890
-                },
-                scale: ['#dee2e6', '#007bff'],
-                normalizeFunction: 'polynomial'
-            }]
+    // Leaflet World Map - Interactive visitor map
+    var map = L.map('world-map-visits').setView([20, 0], 2);
+    
+    // Use OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+    }).addTo(map);
+    
+    // Visitor data by country
+    var visitorData = {
+        'US': { visitors: 45230, revenue: '$125,400' },
+        'GB': { visitors: 23450, revenue: '$67,800' },
+        'DE': { visitors: 18920, revenue: '$54,200' },
+        'FR': { visitors: 15680, revenue: '$42,100' },
+        'JP': { visitors: 12340, revenue: '$38,900' },
+        'CA': { visitors: 9870, revenue: '$28,500' },
+        'AU': { visitors: 8540, revenue: '$24,200' },
+        'BR': { visitors: 7230, revenue: '$21,800' },
+        'IN': { visitors: 6120, revenue: '$18,500' },
+        'CN': { visitors: 5890, revenue: '$15,300' }
+    };
+    
+    // Country coordinates for markers
+    var countryCoords = {
+        'US': [37.0902, -95.7129],
+        'GB': [55.3781, -3.4360],
+        'DE': [51.1657, 10.4515],
+        'FR': [46.2276, 2.2137],
+        'JP': [36.2048, 138.2529],
+        'CA': [56.1304, -106.3468],
+        'AU': [-25.2744, 133.7751],
+        'BR': [-14.2350, -51.9253],
+        'IN': [20.5937, 78.9629],
+        'CN': [35.8617, 104.1954]
+    };
+    
+    // Get color based on visitor count
+    function getColor(visitors) {
+        return visitors > 40000 ? '#800026' :
+               visitors > 30000 ? '#BD0026' :
+               visitors > 20000 ? '#E31A1C' :
+               visitors > 10000 ? '#FC4E2A' :
+               visitors > 5000  ? '#FD8D3C' :
+                                   '#FEB24C';
+    }
+    
+    // Add circle markers for each country
+    for (var country in countryCoords) {
+        var data = visitorData[country];
+        var coords = countryCoords[country];
+        var radius = Math.max(8, Math.min(25, data.visitors / 2000));
+        
+        L.circleMarker(coords, {
+            radius: radius,
+            fillColor: getColor(data.visitors),
+            color: '#fff',
+            weight: 1,
+            fillOpacity: 0.7
+        }).addTo(map).bindPopup(
+            '<div class="text-center">' +
+            '<h6>' + country + '</h6>' +
+            '<p class="mb-1"><strong>Visitors:</strong> ' + data.visitors.toLocaleString() + '</p>' +
+            '<p class="mb-0"><strong>Revenue:</strong> ' + data.revenue + '</p>' +
+            '</div>'
+        );
+    }
+    
+    // Add legend
+    var legend = L.control({ position: 'bottomright' });
+    legend.onAdd = function(map) {
+        var div = L.DomUtil.create('div', 'info legend');
+        div.style.backgroundColor = 'white';
+        div.style.padding = '10px';
+        div.style.borderRadius = '4px';
+        div.style.boxShadow = '0 0 15px rgba(0,0,0,0.2)';
+        div.style.fontSize = '12px';
+        var grades = [0, 5000, 10000, 20000, 30000, 40000];
+        var labels = [];
+        for (var i = 0; i < grades.length; i++) {
+            labels.push(
+                '<i style="display:inline-block;width:16px;height:16px;background:' + getColor(grades[i] + 1) + ';margin-right:5px;border-radius:50%;"></i> ' +
+                (grades[i] ? grades[i] + '+' : '< 5K')
+            );
         }
-    });
+        div.innerHTML = '<h6 class="mb-2">Visitors</h6>' + labels.join('<br>');
+        return div;
+    };
+    map.addControl(legend);
     
     // Rickshaw Chart for Market Stats
     var seriesData = [];
@@ -433,25 +470,6 @@ $(document).ready(function() {
     }).render();
     
     graph.render();
-    
-    // Bootstrap Calendar
-    var calendar = new Calendar({
-        events_source: [
-            {
-                "start": new Date().setDate(1),
-                "end": new Date().setDate(1),
-                "title": "Event 1",
-                "classname": "event-danger"
-            },
-            {
-                "start": new Date().setDate(5),
-                "end": new Date().setDate(5),
-                "title": "Event 2",
-                "classname": "event-success"
-            }
-        ],
-        modal: '#events-modal'
-    });
     
     // Simple calendar display
     var date = new Date();
