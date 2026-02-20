@@ -13,6 +13,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/application-dark.min.css') }}">
     {% endif %}
     
+    <!-- Theme toggle - apply saved preference before page renders to prevent flash -->
+    <script>
+        (function () {
+            var t = localStorage.getItem('singapp-theme');
+            if (t === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); }
+        })();
+    </script>
+    
     <!-- Font Awesome (CDN - TODO: stage locally for offline use) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Morris Charts CSS (MIT) -->
@@ -138,6 +146,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fa fa-bell"></i></a>
                 </li>
+                <li class="nav-item">
+                    <button id="themeToggle" class="btn btn-link nav-link" title="Toggle theme">
+                        <i id="themeIcon" class="fa-solid fa-moon"></i>
+                    </button>
+                </li>
                 {% if current_user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
@@ -182,6 +195,17 @@
                         </li>
                     </ul>
                 </li>
+                
+                {% if current_user.is_authenticated and current_user.is_admin or not config.get('REQUIRE_LOGIN') %}
+                <!-- Administration -->
+                <li class="nav-header">Administration</li>
+                <li class="nav-item {% if active_page == 'admin_users' %}active{% endif %}">
+                    <a class="nav-link {% if active_page == 'admin_users' %}active{% endif %}" href="{{ url_for('admin.users_list') }}">
+                        <span class="icon"><i class="fa-solid fa-users-gear"></i></span>
+                        User Management
+                    </a>
+                </li>
+                {% endif %}
                 
                 {% if config.get('ENABLE_EXAMPLES', True) %}
                 <!-- E-commerce -->
@@ -433,6 +457,41 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
     <!-- Leaflet JS (MIT - OpenStreetMap) -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Theme Toggle Script -->
+    <script>
+    (function () {
+        var btn = document.getElementById('themeToggle');
+        var icon = document.getElementById('themeIcon');
+        var darkCssId = 'dark-theme-css';
+
+        function applyTheme(theme) {
+            var existing = document.getElementById(darkCssId);
+            if (theme === 'dark') {
+                if (!existing) {
+                    var link = document.createElement('link');
+                    link.id = darkCssId;
+                    link.rel = 'stylesheet';
+                    link.href = '{{ url_for("static", filename="css/application-dark.min.css") }}';
+                    document.head.appendChild(link);
+                }
+                icon.className = 'fa-solid fa-sun';
+            } else {
+                if (existing) { existing.remove(); }
+                icon.className = 'fa-solid fa-moon';
+            }
+            localStorage.setItem('singapp-theme', theme);
+        }
+
+        // Apply saved preference on load
+        applyTheme(localStorage.getItem('singapp-theme') || 'light');
+
+        btn.addEventListener('click', function () {
+            var current = localStorage.getItem('singapp-theme') || 'light';
+            applyTheme(current === 'dark' ? 'light' : 'dark');
+        });
+    })();
+    </script>
     
     {% block scripts %}{% endblock %}
 </body>

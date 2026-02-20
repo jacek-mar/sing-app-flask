@@ -19,6 +19,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(256))
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc).replace(tzinfo=None))
     is_active = db.Column(db.Boolean, default=True)
+    is_admin = db.Column(db.Boolean, default=False)
     
     def set_password(self, password):
         """
@@ -52,8 +53,9 @@ class User(UserMixin, db.Model):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'is_admin': self.is_admin,
             'is_active': self.is_active,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
         }
     
     def __repr__(self):

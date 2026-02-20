@@ -4,7 +4,7 @@ Flask Sing App - Application Factory
 This module creates and configures the Flask application.
 """
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 
 
 def create_app(config_name='development'):
@@ -57,15 +57,20 @@ def create_app(config_name='development'):
     @app.context_processor
     def inject_globals():
         """Inject global variables into template context"""
+        from flask_wtf.csrf import generate_csrf
         return {
             'app_name': 'Sing App',
-            'app_version': '1.0.0'
+            'app_version': '1.0.0',
+            'form_csrf': lambda: f'<input type="hidden" name="csrf_token" value="{generate_csrf()}">',
         }
     
     # Register error handlers
     @app.errorhandler(404)
     def page_not_found(e):
         """Handle 404 errors"""
+        # Return JSON for API endpoints
+        if request.path.startswith('/api/'):
+            return jsonify(error='Not Found'), 404
         return render_template('errors/404.html'), 404
     
     @app.errorhandler(500)
@@ -115,6 +120,10 @@ def _register_blueprints(app):
     # Register API blueprint
     app.register_blueprint(api_bp, url_prefix='/api')
     
+    # Register admin blueprint (user management)
+    from app.admin import admin_bp
+    app.register_blueprint(admin_bp, url_prefix='/admin')
+    
     # Register examples blueprint (conditionally)
     if app.config.get('ENABLE_EXAMPLES'):
         from app.examples import examples_bp
@@ -146,11 +155,11 @@ def _register_cli(app):
         from app.models import User
         
         if User.query.count() == 0:
-            u = User(username='admin', email='admin@example.com')
+            u = User(username='admin', email='admin@example.com', is_admin=True)
             u.set_password('admin')
             db.session.add(u)
             db.session.commit()
-            print('Sample user created: admin / admin')
+            print('Sample user created: admin / admin (is_admin=True)')
         else:
             print('Database already has users — skipping seed.')
     
