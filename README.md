@@ -70,7 +70,7 @@ This project uses the following open-source JavaScript libraries (all MIT licens
 
 All libraries are pre-staged locally and bundled with this application.
 
-*Link will be added after Render.com deployment — see [Session 13](../_revision_and_changes/session_13_render_deployment.md).*
+**The live version of the application can be found here -> [app demo](https://sing-app-flask.onrender.com/).**
 
 ---
 
