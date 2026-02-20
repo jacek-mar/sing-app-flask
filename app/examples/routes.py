@@ -368,7 +368,9 @@ def login():
 def error_page():
     """Error page"""
     return render_template('examples/standalone/error.html',
-        title='Error Page')
+        title='Error Page',
+        error_code=404,
+        error_message='Page Not Found')
 
 
 # =============================================================================

@@ -63,7 +63,7 @@
                     <h5>Daily Performance</h5>
                 </header>
                 <div class="widget-body">
-                    <p>Chart placeholder - SCSS compilation coming in Phase 6</p>
+                    <canvas id="dailyPerformanceChart" height="100"></canvas>
                 </div>
             </div>
         </div>
@@ -109,7 +109,25 @@
 {% endblock %}
 
 {% block scripts %}
+{{ super() }}
 <script>
-    console.log('Dashboard loaded');
+    // Daily Performance chart placeholder (simple bar chart)
+    var ctx = document.getElementById('dailyPerformanceChart');
+    if (ctx) {
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Daily Visits',
+                    data: [3200, 4100, 2900, 4332, 3800, 2100, 1500],
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { display: false } } }
+        });
+    }
 </script>
 {% endblock %}

@@ -50,7 +50,7 @@ def get_notifications():
         },
         {
             'type': 'system',
-            'icon': 'glyphicon-upload',
+            'icon': 'fa-solid fa-upload',
             'text': '2.1.0-pre-alpha just released.',
             'time': '5h ago'
         },
