@@ -5,6 +5,7 @@ A reusable Flask admin dashboard built on the
 (Bootstrap 4, MIT licence). Zero Node.js required — assets are pre-staged.
 
 This project was created to simplify the work of Python developers by providing a ready-to-use Flask admin dashboard framework. It transforms the popular Sing App HTML5 admin template into a production-ready Flask application, eliminating the need for complex setup or Node.js dependencies.
+<img width="1450" height="801" alt="Dashboard-Visits-Sing-App-Flask" src="https://github.com/user-attachments/assets/78b42587-ad11-43ee-a17e-e1dad0bb5417" />
 
 ---
 
