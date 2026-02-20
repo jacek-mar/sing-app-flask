@@ -7,100 +7,169 @@
     <!-- Breadcrumb -->
     <ol class="breadcrumb">
         <li class="breadcrumb-item">YOU ARE HERE</li>
-        <li class="breadcrumb-item active">Analytics</li>
+        <li class="breadcrumb-item active">{{ page_title }}</li>
     </ol>
-    
+
     <!-- Page Title -->
     <h1 class="page-title">
         {{ page_title }}
-        <small>
-            <small>{{ page_subtitle }}</small>
-        </small>
+        <small><small>{{ page_subtitle }}</small></small>
     </h1>
-    
-    <!-- Dashboard Content -->
+
+    <!-- Stat Cards Row -->
     <div class="row">
-        <!-- Stats Cards -->
         <div class="col-xl-3 col-md-6">
             <div class="widget">
-                <div class="widget-body">
-                    <h2>4,332</h2>
-                    <p class="text-muted mb-0">Visits Today</p>
+                <div class="widget-body d-flex align-items-center">
+                    <i class="fa-solid fa-eye fa-2x text-primary mr-3"></i>
+                    <div>
+                        <h2 class="mb-0">4,332</h2>
+                        <p class="text-muted mb-0">Visits Today</p>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-xl-3 col-md-6">
             <div class="widget">
-                <div class="widget-body">
-                    <h2>$12,450</h2>
-                    <p class="text-muted mb-0">Revenue</p>
+                <div class="widget-body d-flex align-items-center">
+                    <i class="fa-solid fa-dollar-sign fa-2x text-success mr-3"></i>
+                    <div>
+                        <h2 class="mb-0">$12,450</h2>
+                        <p class="text-muted mb-0">Revenue</p>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-xl-3 col-md-6">
             <div class="widget">
-                <div class="widget-body">
-                    <h2>892</h2>
-                    <p class="text-muted mb-0">New Users</p>
+                <div class="widget-body d-flex align-items-center">
+                    <i class="fa-solid fa-users fa-2x text-info mr-3"></i>
+                    <div>
+                        <h2 class="mb-0">892</h2>
+                        <p class="text-muted mb-0">New Users</p>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-xl-3 col-md-6">
             <div class="widget">
-                <div class="widget-body">
-                    <h2>98%</h2>
-                    <p class="text-muted mb-0">Uptime</p>
+                <div class="widget-body d-flex align-items-center">
+                    <i class="fa-solid fa-server fa-2x text-warning mr-3"></i>
+                    <div>
+                        <h2 class="mb-0">98%</h2>
+                        <p class="text-muted mb-0">Uptime</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Main Chart Section -->
+
+    <!-- Main Chart -->
     <div class="row">
         <div class="col-12">
             <div class="widget">
-                <header>
-                    <h5>Daily Performance</h5>
+                <header class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Daily Performance</h5>
+                    <span class="text-muted small">Last 7 days</span>
                 </header>
                 <div class="widget-body">
-                    <canvas id="dailyPerformanceChart" height="100"></canvas>
+                    <canvas id="dailyPerformanceChart" height="80"></canvas>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Additional Stats -->
+
+    <!-- Secondary Stats Row -->
     <div class="row">
-        <div class="col-sm-12 col-lg-6 col-xl-4">
+        <div class="col-sm-12 col-lg-4">
             <div class="widget">
-                <header>
-                    <h4>Statistics <span class="fw-normal">Light Blue</span></h4>
-                </header>
+                <header><h4>Statistics <span class="fw-normal text-muted">Visits</span></h4></header>
                 <div class="widget-body">
-                    <h4 class="fw-semi-bold">4,232</h4>
-                    <p class="text-muted">Total Users</p>
+                    <h3 class="fw-semi-bold">4,232 <small class="text-success"><i class="fa-solid fa-arrow-up"></i> 12%</small></h3>
+                    <p class="text-muted mb-0">Total Users This Month</p>
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-lg-6 col-xl-4">
+        <div class="col-sm-12 col-lg-4">
             <div class="widget">
-                <header>
-                    <h4>Statistics <span class="fw-normal">Sing App</span></h4>
-                </header>
+                <header><h4>Statistics <span class="fw-normal text-muted">Sessions</span></h4></header>
                 <div class="widget-body">
-                    <h4 class="fw-semi-bold">754</h4>
-                    <p class="text-muted">Active Sessions</p>
+                    <h3 class="fw-semi-bold">754 <small class="text-danger"><i class="fa-solid fa-arrow-down"></i> 3%</small></h3>
+                    <p class="text-muted mb-0">Active Sessions</p>
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-lg-6 col-xl-4">
+        <div class="col-sm-12 col-lg-4">
             <div class="widget">
-                <header>
-                    <h4>Statistics <span class="fw-normal">RNS</span></h4>
-                </header>
+                <header><h4>Statistics <span class="fw-normal text-muted">Orders</span></h4></header>
                 <div class="widget-body">
-                    <h4 class="fw-semi-bold">1,025</h4>
-                    <p class="text-muted">Orders Today</p>
+                    <h3 class="fw-semi-bold">1,025 <small class="text-success"><i class="fa-solid fa-arrow-up"></i> 8%</small></h3>
+                    <p class="text-muted mb-0">Orders Today</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="widget">
+                <header><h5>Recent Activity</h5></header>
+                <div class="widget-body p-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex align-items-center">
+                            <img src="{{ url_for('static', filename='demo/img/people/a3.jpg') }}" class="rounded-circle mr-3" width="36" height="36" alt="User">
+                            <div>
+                                <strong>New user registered</strong>
+                                <p class="text-muted small mb-0">2 minutes ago</p>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="fa-solid fa-upload fa-lg text-info mr-3" style="width:36px; text-align:center;"></i>
+                            <div>
+                                <strong>2.1.0-pre-alpha released</strong>
+                                <p class="text-muted small mb-0">5 hours ago</p>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="fa-solid fa-bolt fa-lg text-warning mr-3" style="width:36px; text-align:center;"></i>
+                            <div>
+                                <strong>Server load limited</strong>
+                                <p class="text-muted small mb-0">7 hours ago</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="widget">
+                <header><h5>Quick Stats</h5></header>
+                <div class="widget-body">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Server Load</span><span>65%</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-primary" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Memory Usage</span><span>42%</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-success" style="width: 42%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-0">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Disk Space</span><span>81%</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-warning" style="width: 81%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -111,23 +180,38 @@
 {% block scripts %}
 {{ super() }}
 <script>
-    // Daily Performance chart placeholder (simple bar chart)
+(function() {
     var ctx = document.getElementById('dailyPerformanceChart');
-    if (ctx) {
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                datasets: [{
-                    label: 'Daily Visits',
+    if (!ctx) return;
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [
+                {
+                    label: 'Visits',
                     data: [3200, 4100, 2900, 4332, 3800, 2100, 1500],
-                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: { responsive: true, plugins: { legend: { display: false } } }
-        });
-    }
+                    borderColor: '#4D8EFF',
+                    backgroundColor: 'rgba(77, 142, 255, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                },
+                {
+                    label: 'Revenue ($)',
+                    data: [8500, 11200, 7800, 12450, 10300, 5600, 4100],
+                    borderColor: '#FF5733',
+                    backgroundColor: 'rgba(255, 87, 51, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { position: 'top' } },
+            scales: { y: { beginAtZero: true } }
+        }
+    });
+})();
 </script>
 {% endblock %}
