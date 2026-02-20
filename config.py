@@ -30,6 +30,24 @@ class Config:
     # production = basic + secure headers (HSTS, X-Frame-Options, CSP)
     SECURITY_LEVEL = os.environ.get('SECURITY_LEVEL', 'demo')
 
+    # --- NEW: Cache configuration (Flask-Caching) ---
+    # In development: SimpleCache (in-process, no dependency)
+    # In production: override with CACHE_TYPE=RedisCache and CACHE_REDIS_URL=redis://...
+    CACHE_TYPE = os.environ.get('CACHE_TYPE', 'SimpleCache')
+    CACHE_DEFAULT_TIMEOUT = int(os.environ.get('CACHE_DEFAULT_TIMEOUT', 300))  # seconds
+    CACHE_REDIS_URL = os.environ.get('CACHE_REDIS_URL', '')
+
+    # --- NEW: Compression ---
+    COMPRESS_MIMETYPES = [
+        'text/html',
+        'text/css',
+        'text/javascript',
+        'application/javascript',
+        'application/json',
+    ]
+    COMPRESS_LEVEL = 6       # gzip compression level (1=fast, 9=best)
+    COMPRESS_MIN_SIZE = 500  # bytes — skip compression for tiny responses
+
     # CSRF always enabled (Flask-WTF); only disabling in tests
     WTF_CSRF_ENABLED = True
 

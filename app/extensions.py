@@ -4,6 +4,8 @@ Flask Sing App - Extensions
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from flask_caching import Cache
+from flask_compress import Compress
 
 # Initialize SQLAlchemy
 db = SQLAlchemy()
@@ -13,6 +15,12 @@ login_manager = LoginManager()
 
 # Initialize Flask-Migrate
 migrate = Migrate()
+
+# Initialize Flask-Caching
+cache = Cache()
+
+# Initialize Flask-Compress
+compress = Compress()
 
 
 def init_extensions(app):
@@ -28,6 +36,12 @@ def init_extensions(app):
     login_manager.login_view = 'auth.login'
     login_manager.login_message = 'Please log in to access this page.'
     login_manager.login_message_category = 'warning'
+
+    # Initialize Flask-Caching
+    cache.init_app(app)
+
+    # Initialize Flask-Compress
+    compress.init_app(app)
 
     # Apply security middleware based on SECURITY_LEVEL
     _apply_security(app)

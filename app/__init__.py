@@ -4,7 +4,7 @@ Flask Sing App - Application Factory
 This module creates and configures the Flask application.
 """
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 
 def create_app(config_name='development'):
@@ -75,6 +75,21 @@ def create_app(config_name='development'):
     
     # Configure logging
     _configure_logging(app)
+    
+    # Add cache headers for static assets in production
+    @app.after_request
+    def add_cache_headers(response):
+        """
+        Add long-lived Cache-Control headers to static assets in production.
+        In development (app.debug=True), do nothing so hot-reload works normally.
+        """
+        if app.debug:
+            return response
+        if response.content_type and request.path.startswith('/static/'):
+            response.cache_control.max_age = 31_536_000   # 1 year
+            response.cache_control.immutable = True
+            response.cache_control.public = True
+        return response
     
     app.logger.info(f'Flask Sing App initialized in {config_name} mode.')
     
@@ -161,6 +176,13 @@ def _register_cli(app):
             print(f'Bundle not found: {e}. Check app/assets.py bundle registration.')
         except Exception as e:
             print(f'Error compiling assets: {e}')
+    
+    @app.cli.command('clear-cache')
+    def clear_cache():
+        """Clear all Flask-Caching entries."""
+        from app.extensions import cache
+        cache.clear()
+        print('Cache cleared.')
 
 
 def _configure_logging(app):

@@ -12,6 +12,10 @@ Flask-WTF>=1.2.1
 Flask-Migrate>=4.0.7
 Flask-Limiter>=3.5.0
 
+# Performance Optimization
+Flask-Caching>=2.3.0
+Flask-Compress>=1.14
+
 # Optional: Production secure headers
 # flask-talisman>=1.1.0
 
