@@ -1,232 +1,106 @@
-# Sing App Flask
+# Flask Sing App
 
-A reusable Flask + Sing App HTML5 admin dashboard foundation - **50+ pages migrated from HTML5 to Jinja2 templates**.
+A reusable Flask admin dashboard built on the
+[Sing App HTML5](https://github.com/flatlogic/sing-app-html5) template
+(Bootstrap 4, MIT licence). Zero Node.js required — assets are pre-staged.
+
+---
+
+## Live Demo
+
+*Link will be added after Render.com deployment — see [Session 13](../_revision_and_changes/session_13_render_deployment.md).*
+
+---
 
 ## Features
 
-- **No Node.js required** - Pure Python Flask application
-- **Application Factory Pattern** - Modular Flask architecture with Blueprints
-- **SQLAlchemy** - SQLite database with User model
-- **Feature Toggles** - Enable/disable example pages and features
-- **MIT License Compatible** - Using Bootstrap, Font Awesome, jQuery (all MIT licensed)
-- **50+ Example Pages** - Fully migrated from original Sing App HTML5 template
+- Flask 3.x application factory + Blueprint architecture
+- 50+ demo pages (charts, tables, forms, maps, UI components)
+- Pre-built CSS — no npm, gulp, or webpack required
+- SQLite by default; swap to PostgreSQL via `DATABASE_URL`
+- Demo-first: all pages accessible without login by default
+- Optional login enforcement: set `REQUIRE_LOGIN=true` in `.env`
+- `DEMO_MODE` toggle — disables admin write actions for public demos
+- Dark/light theme toggle
+- Admin user management panel
+- RESTful JSON API (`/api/users`, `/api/settings`, `/api/notifications`)
+
+---
 
 ## Quick Start
 
-```cmd
-# Clone and navigate to project
-cd sing-app-flask
+### 1. Clone
 
-# Create virtual environment
-python -m venv .venv
+    git clone <repository-url>
+    cd sing-app-flask-admin/sing-app-flask
 
-# Activate and install dependencies
-.venv\Scripts\pip install -r requirements.txt
+### 2. Create virtual environment
 
-# Run the application
-.venv\Scripts\python run.py
-```
+    python -m venv .venv
+    # Windows:
+    .venv\Scripts\activate
+    # macOS / Linux:
+    source .venv/bin/activate
 
-Open http://localhost:49251 in your browser.
+### 3. Install dependencies
 
-## Configuration
+    pip install -r requirements.txt
 
-### Environment Variables
+### 4. Create environment file
 
-Create a `.env` file in `sing-app-flask/` directory:
+    cp .env.example .env
+    # Open .env and set a unique SECRET_KEY
 
-```env
-FLASK_APP=run.py
-FLASK_ENV=development
-SECRET_KEY=your-secret-key
-SQLALCHEMY_DATABASE_URI=sqlite:///app.db
-ENABLE_EXAMPLES=True
-ENABLE_DARK_THEME=True
-```
+### 5. Initialise the database
 
-### Feature Toggles
+    flask init-db
+    flask seed-db
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `ENABLE_EXAMPLES` | True | Enable example/demo pages |
-| `ENABLE_DARK_THEME` | False | Enable dark theme support |
+### 6. Run
 
-## Commands
+    python run.py
 
-```cmd
-# Initialize database
-.venv\Scripts\flask init-db
+Open **http://localhost:49251** — no login required in the default demo mode.
 
-# Seed database with sample data
-.venv\Scripts\flask seed-db
+Default admin credentials (after `flask seed-db`): `admin` / `admin`
 
-# Compile SCSS assets
-.venv\Scripts\flask compile-assets
-```
+---
 
-## Example Pages (50+ Templates)
+## Key Configuration
 
-### Dashboard
-- Main Dashboard
-- Dashboard - Visits
-- Dashboard - Widgets
-- Dashboard - Dark Theme
+| Variable | Default | Effect |
+|----------|---------|--------|
+| `REQUIRE_LOGIN` | `false` | `true` = login required on all pages |
+| `DEMO_MODE` | `true` | `true` = admin write actions disabled |
+| `SECURITY_LEVEL` | `demo` | `demo` / `basic` / `production` |
+| `DATABASE_URL` | `sqlite:///dev.db` | Swap to a PostgreSQL/MySQL connection string |
+| `FLASK_CONFIG` | `development` | `development` / `production` / `testing` |
 
-### UI Components
-- Alerts
-- Badges
-- Buttons
-- Cards
-- Modal
-- Tabs
-- Progress
-- Icons (Font Awesome + Bootstrap Icons)
+Full configuration reference: see `CONFIGURATION.md` (created in Session 15).
 
-### Core
-- Typography
-- Colors
-- Grid System
+---
 
-### Forms
-- Form Elements
-- Form Validation
-- Form Wizard
+## Project Layout
 
-### Tables
-- Basic Tables
-- Dynamic Tables (DataTables)
+    sing-app-flask/
+    ├── app/
+    │   ├── __init__.py       # create_app() factory
+    │   ├── extensions.py     # db, login_manager, cache
+    │   ├── models.py         # User model
+    │   ├── main/             # Dashboard blueprint
+    │   ├── auth/             # Login / logout / register
+    │   ├── admin/            # User CRUD (admin-only)
+    │   ├── examples/         # 50+ demo pages
+    │   └── api/              # REST API
+    ├── templates/
+    ├── static/               # Pre-staged CSS, JS, images
+    ├── config.py
+    ├── run.py
+    └── requirements.txt
 
-### Charts
-- Chart Overview
-- Flot Charts
-- Morris Charts
-- Rickshaw Charts
-- Sparkline Charts
-- Easy Pie Charts
-- D3.js Visualizations
+---
 
-### Maps
-- Google Maps (requires API key)
-- Vector Maps
+## Licence
 
-### Extra Pages
-- Calendar
-- Gallery
-- Timeline
-- Invoice
-- Search
-- Pricing
-- Login
-
-### E-commerce
-- Product Detail
-- Product Grid
-- Orders
-- Cart
-
-### Other
-- Profile
-- Inbox
-- Grid System Showcase
-- Package Info
-- Landing Page
-
-## Technology Stack
-
-### Backend
-- Flask 3.x
-- Flask-SQLAlchemy
-- Flask-Migrate
-- Flask-Assets
-- Python 3.x
-
-### Frontend (CDN)
-- Bootstrap 5.3.x (MIT)
-- jQuery 3.7.x (MIT)
-- Font Awesome 6.4.x (MIT - Free)
-- Bootstrap Icons 1.11.x (MIT)
-- Chart.js 4.4.x (MIT)
-
-## Project Structure
-
-```
-sing-app-flask/
-├── app/
-│   ├── __init__.py      # Application factory
-│   ├── assets.py        # Flask-Assets configuration
-│   ├── extensions.py    # Flask extensions
-│   ├── models.py       # SQLAlchemy models
-│   ├── config.py       # Configuration
-│   ├── main/           # Main dashboard blueprint
-│   ├── api/            # API blueprint
-│   └── examples/       # Example pages blueprint
-├── static/              # Static assets (CSS, JS, images)
-├── templates/           # Jinja2 templates
-│   ├── base.html       # Base template with sidebar
-│   └── examples/       # Example page templates
-├── design_docs/         # Design documentation
-├── scripts/            # Utility scripts
-├── config.py           # Configuration classes
-└── run.py             # Entry point
-```
-
-## Development
-
-```cmd
-# Development server with auto-reload
-.venv\Scripts\flask run --reload
-
-# Specify port
-.venv\Scripts\flask run --port 5000
-```
-
-## Credits & License
-
-### MIT License
-
-This project is licensed under the **MIT License**. See LICENSE file for details.
-
-### Open Source Libraries
-
-This project uses the following MIT-licensed libraries:
-
-| Library | Version | License | Purpose |
-|---------|---------|---------|---------|
-| **Flask** | 3.x | MIT | Python web framework |
-| **Flask-SQLAlchemy** | 3.x | MIT | ORM integration |
-| **Flask-Migrate** | 4.x | MIT | Database migrations |
-| **Flask-Assets** | 2.x | MIT | Asset compilation |
-| **Bootstrap** | 5.3.x | MIT | CSS framework |
-| **jQuery** | 3.7.x | MIT | JavaScript library |
-| **Font Awesome** | 6.4.x | MIT (Free) | Icon library |
-| **Bootstrap Icons** | 1.11.x | MIT | Icon library |
-| **Chart.js** | 4.4.x | MIT | Charting library |
-| **DataTables** | 2.x | MIT | Table plugin |
-| **Popper.js** | 2.x | MIT | Tooltip/popover library |
-| **Morris.js** | 0.5.x | MIT | Charting library |
-| **Flot** | 0.8.x | MIT | Charting library |
-| **jQuery Sparkline** | 2.1.x | MIT | Sparkline charts |
-| **jVectorMap** | 2.0.x | MIT | Vector maps |
-| **D3.js** | 7.x | ISC | Data visualization |
-| **FullCalendar** | 6.1.x | MIT | Calendar widget |
-
-### Third-Party Resources
-
-- **Google Maps** - Requires API key (free tier available). See [Google Cloud Console](https://console.cloud.google.com/) for setup.
-
-### Original Template
-
-This project is based on [Sing App HTML5](https://github.com/flatlogic/sing-app-html5) by Flatlogic (MIT License).
-
-## Design Documentation
-
-See [`design_docs/`](design_docs/) directory for:
-- [`complete_migration_plan.md`](design_docs/complete_migration_plan.md) - Full migration overview
-- [`implementation_roadmap.md`](design_docs/implementation_roadmap.md) - Detailed implementation plan
-- [`migration_checklist.md`](design_docs/migration_checklist.md) - Progress tracking
-- [`component_mapping.md`](design_docs/component_mapping.md) - Handlebars to Jinja2 guide
-- [`technical_specification.md`](design_docs/technical_specification.md) - Technical requirements
-
-## Status: Complete ✅
-
-All 50+ templates have been migrated from HTML5 Handlebars to Jinja2. The project is ready for production use.
+MIT — see [LICENSE](LICENSE).
+Sing App HTML5 template: MIT, [Flatlogic LLC](https://flatlogic.com).

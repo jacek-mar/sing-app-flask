@@ -21,10 +21,16 @@ __pycache__/
 *.db
 *.sqlite
 *.sqlite3
+instance/
 
 # Logs
 *.log
 logs/
+
+# Testing
+htmlcov/
+.coverage
+.pytest_cache/
 
 # OS
 .DS_Store
