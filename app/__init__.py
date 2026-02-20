@@ -96,6 +96,11 @@ def create_app(config_name='development'):
             response.cache_control.public = True
         return response
     
+    # Health check endpoint — must respond 200 quickly for Render / load balancers
+    @app.route('/health')
+    def health_check():
+        return 'OK', 200
+
     # Serve node_modules for offline assets (used by application.min.css)
     @app.route('/node_modules/<path:filename>')
     def serve_node_modules(filename):

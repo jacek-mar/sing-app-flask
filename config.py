@@ -65,6 +65,23 @@ class DevelopmentConfig(Config):
     ASSETS_DEBUG = True
 
 
+class DemoConfig(Config):
+    """
+    Demo / staging configuration.
+
+    Like production (DEBUG=False, no file-based log handler) but tolerates
+    missing DATABASE_URL / SECRET_KEY so the app can be deployed to Render
+    or any similar platform without a full database setup.
+
+    Use FLASK_CONFIG=demo in the environment for public demo deployments.
+    """
+    DEBUG = False
+    # Fall back to a local SQLite file when no DATABASE_URL is supplied
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///demo.db')
+    # Allow a fallback secret in demo mode (set SECRET_KEY in env for better security)
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'demo-secret-please-change')
+
+
 class ProductionConfig(Config):
     """Production configuration"""
     DEBUG = False
@@ -82,6 +99,7 @@ class TestingConfig(Config):
 # Configuration dictionary
 config = {
     'development': DevelopmentConfig,
+    'demo': DemoConfig,
     'production': ProductionConfig,
     'testing': TestingConfig,
     'default': DevelopmentConfig,
