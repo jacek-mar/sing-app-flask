@@ -4,12 +4,7 @@ Flask Sing App - Application Factory
 This module creates and configures the Flask application.
 """
 import os
-from pathlib import Path
 from flask import Flask, render_template
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv(Path(__file__).parent.parent / '.env')
 
 
 def create_app(config_name='development'):
@@ -32,6 +27,17 @@ def create_app(config_name='development'):
         template_folder='../templates'   # Project root templates/
     )
     app.config.from_object(config[config_name])
+    
+    # Validate production configuration
+    if config_name == 'production':
+        if not app.config.get('SQLALCHEMY_DATABASE_URI'):
+            raise RuntimeError(
+                'DATABASE_URL must be set in the environment for production mode.'
+            )
+        if app.config.get('SECRET_KEY') in ('', 'change-me-in-development'):
+            raise RuntimeError(
+                'A strong SECRET_KEY must be set in the environment for production mode.'
+            )
     
     # Initialize extensions
     from app.extensions import init_extensions
@@ -129,19 +135,22 @@ def _register_cli(app):
     @app.cli.command('compile-assets')
     def compile_assets():
         """Compile SCSS to CSS using Flask-Assets."""
-        from app.assets import init_assets
-        assets = init_assets(app)
+        from flask_assets import Environment
+        
+        # Get existing Environment instance from app.extensions
+        assets = app.extensions.get('assets')
+        if assets is None:
+            # Create new if not found (e.g., when running CLI directly)
+            assets = Environment(app)
         
         print('Compiling SCSS assets...')
         try:
-            # Build main CSS
             assets['main_css'].build()
             print('  Created: static/css/application.css')
-            
-            # Build dark CSS
             assets['dark_css'].build()
             print('  Created: static/css/application-dark.css')
-            
             print('SCSS compilation complete!')
+        except KeyError as e:
+            print(f'Bundle not found: {e}. Check app/assets.py bundle registration.')
         except Exception as e:
             print(f'Error compiling assets: {e}')
