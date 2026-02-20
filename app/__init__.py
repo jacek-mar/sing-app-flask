@@ -47,15 +47,16 @@ def create_app(config_name='development'):
     from app.assets import init_assets
     init_assets(app)
 
+    # Register blueprints
+    _register_blueprints(app)
+
     # Auto-create DB tables for demo and development (production uses flask db upgrade)
+    # Must run AFTER _register_blueprints so all models are imported and visible to SQLAlchemy
     if config_name in ('demo', 'development'):
         from app.extensions import db
         with app.app_context():
             db.create_all()
 
-    # Register blueprints
-    _register_blueprints(app)
-    
     # Register CLI commands
     _register_cli(app)
     
