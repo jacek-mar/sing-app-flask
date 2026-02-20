@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Sing App{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">YOU ARE HERE</li>
+        <li class="breadcrumb-item active">{{ page_title }}</li>
+    </ol>
+
+    <!-- Page Title -->
+    <h1 class="page-title">
+        {{ page_title }}
+        <small><small>{{ page_subtitle }}</small></small>
+    </h1>
+
+    <!-- Demo Mode Warning -->
+    {% if config.get('DEMO_MODE') %}
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <i class="fa-solid fa-circle-info mr-2"></i>
+        <strong>Demo Mode Active:</strong> This is a demonstration instance. Some features may be restricted.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+
+    <!-- Configuration Sections -->
+    {% for section, items in config_items.items() %}
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="widget">
+                <header>
+                    <h5><i class="fa-solid fa-cog mr-2"></i>{{ section }}</h5>
+                </header>
+                <div class="widget-body">
+                    <table class="table table-borderless table-hover">
+                        <tbody>
+                            {% for key, value in items.items() %}
+                            <tr>
+                                <td class="text-muted" style="width: 40%;">{{ key }}</td>
+                                <td class="font-weight-semibold">
+                                    {% if value == 'Enabled' or value == 'Yes' %}
+                                    <span class="badge badge-success">{{ value }}</span>
+                                    {% elif value == 'Disabled' or value == 'No (Demo Mode)' %}
+                                    <span class="badge badge-secondary">{{ value }}</span>
+                                    {% elif value == 'demo' %}
+                                    <span class="badge badge-info">{{ value }}</span>
+                                    {% elif value == 'production' %}
+                                    <span class="badge badge-warning">{{ value }}</span>
+                                    {% elif value == 'basic' %}
+                                    <span class="badge badge-primary">{{ value }}</span>
+                                    {% else %}
+                                    <span class="text-body">{{ value }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Environment Variables Info -->
+    <div class="row">
+        <div class="col-12">
+            <div class="widget">
+                <header>
+                    <h5><i class="fa-solid fa-file-code mr-2"></i>Environment Variables</h5>
+                </header>
+                <div class="widget-body">
+                    <p class="text-muted mb-3">
+                        This application uses environment variables for configuration. 
+                        Copy <code>.env.example</code> to <code>.env</code> and customize as needed.
+                    </p>
+                    <div class="bg-light p-3 rounded">
+                        <code class="text-primary">FLASK_APP=run.py</code><br>
+                        <code class="text-primary">FLASK_CONFIG=development</code><br>
+                        <code class="text-primary">SECRET_KEY=your-secret-key</code><br>
+                        <code class="text-primary">DEMO_MODE=true</code><br>
+                        <code class="text-primary">REQUIRE_LOGIN=false</code><br>
+                        <code class="text-muted">DATABASE_URL=sqlite:///dev.db</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}

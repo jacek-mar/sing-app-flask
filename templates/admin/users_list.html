@@ -6,12 +6,32 @@
         <li class="breadcrumb-item">YOU ARE HERE</li>
         <li class="breadcrumb-item active">User Management</li>
     </ol>
+
+    {% if config.get('DEMO_MODE') %}
+    <div class="alert alert-info d-flex align-items-center" role="alert">
+        <i class="fa-solid fa-circle-info mr-2"></i>
+        <div>
+            <strong>Demo Mode is active.</strong>
+            User management is displayed but CRUD actions are disabled.
+            Set <code>DEMO_MODE=false</code> in your <code>.env</code> to enable editing.
+        </div>
+    </div>
+    {% endif %}
+
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 class="page-title mb-0">Users</h3>
+        {% if config.get('DEMO_MODE') %}
+        <button class="btn btn-primary btn-sm" disabled
+                title="Disabled in demo mode — set DEMO_MODE=false to enable">
+            <i class="fa-solid fa-plus"></i> New User
+        </button>
+        {% else %}
         <a href="{{ url_for('admin.user_create') }}" class="btn btn-primary btn-sm">
             <i class="fa-solid fa-plus"></i> New User
         </a>
+        {% endif %}
     </div>
+
     <div class="widget">
         <div class="widget-body p-0">
             <table class="table table-hover mb-0">
@@ -32,6 +52,12 @@
                         {% else %}<span class="badge badge-secondary">Inactive</span>{% endif %}</td>
                     <td>{{ user.created_at.strftime('%Y-%m-%d') if user.created_at else '—' }}</td>
                     <td>
+                        {% if config.get('DEMO_MODE') %}
+                        <button class="btn btn-sm btn-outline-primary" disabled
+                                title="Disabled in demo mode">Edit</button>
+                        <button class="btn btn-sm btn-outline-danger" disabled
+                                title="Disabled in demo mode">Delete</button>
+                        {% else %}
                         <a href="{{ url_for('admin.user_edit', user_id=user.id) }}"
                            class="btn btn-sm btn-outline-primary">Edit</a>
                         <form method="POST"
@@ -41,6 +67,7 @@
                             {{ form_csrf() | safe }}
                             <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                         </form>
+                        {% endif %}
                     </td>
                 </tr>
                 {% else %}

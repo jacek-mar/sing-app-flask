@@ -1,12 +1,22 @@
 {% extends "base.html" %}
-{% block title %}{{ title }} — Sing App{% endblock %}
+{% block title %}{{ action }} User — Sing App{% endblock %}
 {% block content %}
 <div class="container-fluid">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ url_for('admin.users_list') }}">Users</a></li>
-        <li class="breadcrumb-item active">{{ action }}</li>
+        <li class="breadcrumb-item">YOU ARE HERE</li>
+        <li class="breadcrumb-item"><a href="{{ url_for('admin.users_list') }}">User Management</a></li>
+        <li class="breadcrumb-item active">{{ action }} User</li>
     </ol>
-    <h3 class="page-title">{{ title }}</h3>
+
+    {% if config.get('DEMO_MODE') %}
+    <div class="alert alert-warning">
+        <i class="fa-solid fa-triangle-exclamation mr-2"></i>
+        <strong>Demo Mode:</strong> This form is read-only.
+        Set <code>DEMO_MODE=false</code> in your <code>.env</code> to enable saving.
+    </div>
+    {% endif %}
+
+    <h3 class="page-title">{{ action }} User</h3>
     <div class="row">
         <div class="col-md-6">
             <div class="widget">
@@ -15,14 +25,14 @@
                         {{ form.hidden_tag() }}
                         <div class="form-group">
                             {{ form.username.label(class="form-label") }}
-                            {{ form.username(class="form-control" + (" is-invalid" if form.username.errors else "")) }}
+                            {{ form.username(class="form-control" + (" is-invalid" if form.username.errors else ""), disabled=config.get('DEMO_MODE')) }}
                             {% for e in form.username.errors %}
                             <div class="invalid-feedback">{{ e }}</div>
                             {% endfor %}
                         </div>
                         <div class="form-group">
                             {{ form.email.label(class="form-label") }}
-                            {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else "")) }}
+                            {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""), disabled=config.get('DEMO_MODE')) }}
                             {% for e in form.email.errors %}
                             <div class="invalid-feedback">{{ e }}</div>
                             {% endfor %}
@@ -30,17 +40,24 @@
                         <div class="form-group">
                             {{ form.password.label(class="form-label") }}
                             <small class="text-muted d-block">{{ form.password.description }}</small>
-                            {{ form.password(class="form-control") }}
+                            {{ form.password(class="form-control", disabled=config.get('DEMO_MODE')) }}
                         </div>
                         <div class="form-group form-check">
-                            {{ form.is_admin(class="form-check-input") }}
+                            {{ form.is_admin(class="form-check-input", disabled=config.get('DEMO_MODE')) }}
                             {{ form.is_admin.label(class="form-check-label") }}
                         </div>
                         <div class="form-group form-check">
-                            {{ form.is_active(class="form-check-input") }}
+                            {{ form.is_active(class="form-check-input", disabled=config.get('DEMO_MODE')) }}
                             {{ form.is_active.label(class="form-check-label") }}
                         </div>
-                        <button type="submit" class="btn btn-primary">{{ action }}</button>
+                        {% if config.get('DEMO_MODE') %}
+                        <button type="submit" class="btn btn-primary" disabled
+                                title="Disabled in demo mode">
+                            {{ action }} User
+                        </button>
+                        {% else %}
+                        <button type="submit" class="btn btn-primary">{{ action }} User</button>
+                        {% endif %}
                         <a href="{{ url_for('admin.users_list') }}" class="btn btn-secondary ml-2">Cancel</a>
                     </form>
                 </div>

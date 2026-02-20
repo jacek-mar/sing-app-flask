@@ -10,10 +10,16 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///dev.db')
 
+    # Application version
+    APP_VERSION = os.environ.get('APP_VERSION', '1.0.0')
+
     # Feature toggles
     ENABLE_EXAMPLES = os.environ.get('ENABLE_EXAMPLES', 'true').lower() == 'true'
     ENABLE_DARK_THEME = os.environ.get('ENABLE_DARK_THEME', 'false').lower() == 'true'
     GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY', '')
+
+    # Demo mode: true = admin CRUD disabled, demo banners visible (default for public demos)
+    DEMO_MODE = os.environ.get('DEMO_MODE', 'true').lower() == 'true'
 
     # Asset configuration
     ASSETS_DEBUG = False
