@@ -447,28 +447,26 @@ $(document).ready(function() {
     map.addControl(legend);
     
     // Rickshaw Chart for Market Stats
-    var seriesData = [];
-    var random = new Rickshaw.Fixtures.RandomData(30);
-    random.addData(seriesData);
-    
+    var rickshawData = (function() {
+        var data = [];
+        var t = Math.floor(new Date().getTime() / 1000);
+        for (var i = 0; i < 30; i++) {
+            data.push({ x: t + (i * 3600), y: Math.floor(Math.random() * 100) + 20 });
+        }
+        return data;
+    })();
+
     var graph = new Rickshaw.Graph({
         element: document.querySelector('#rickshaw-chart'),
         renderer: 'area',
         stroke: true,
         series: [{
-            data: seriesData,
+            data: rickshawData,
             color: 'rgba(0, 123, 255, 0.5)',
             stroke: '#007bff'
         }]
     });
-    
-    new Rickshaw.Graph.Axis.Y({
-        graph: graph,
-        orientation: 'left',
-        tickFormat: function(n) { return Math.floor(n); },
-        element: document.getElementById('y_axis')
-    }).render();
-    
+
     graph.render();
     
     // Simple calendar display

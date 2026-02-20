@@ -183,6 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
 {% endblock %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/fullcalendar.main.min.css') }}">
 <style>
 .event-item {
     display: flex;

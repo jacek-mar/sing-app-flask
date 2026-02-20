@@ -1,96 +1,114 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page - Sing App</title>
-    
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        body {
-            background-color: #22262e;
-        }
-        .landing-header {
-            padding: 20px 0;
-            background: transparent;
-        }
-        .hero {
-            padding: 100px 0;
-            text-align: center;
-            color: #fff;
-        }
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-        .hero p {
-            font-size: 20px;
-            color: #aab2bd;
-            margin-bottom: 40px;
-        }
-        .features {
-            padding: 80px 0;
-            background: #fff;
-        }
-        .feature-item {
-            text-align: center;
-            padding: 30px;
-        }
-        .feature-icon {
-            font-size: 48px;
-            color: #20c997;
-            margin-bottom: 20px;
-        }
-        .cta {
-            padding: 80px 0;
-            text-align: center;
-            color: #fff;
-        }
-        .cta h2 {
-            margin-bottom: 20px;
-        }
-        .footer {
-            padding: 40px 0;
-            text-align: center;
-            color: #aab2bd;
-            border-top: 1px solid #3a3f47;
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-dark landing-header">
-        <div class="container">
-            <a class="navbar-brand" href="#"><i class="fa fa-cube"></i> Sing App</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary ml-3" href="/examples/extra/login">Login</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+{% extends "base.html" %}
 
+{% block title %}Landing Page - Sing App{% endblock %}
+
+{% block extra_css %}
+<style>
+    .landing-hero {
+        padding: 100px 0;
+        text-align: center;
+        color: #fff;
+        background: linear-gradient(135deg, #1a1f24 0%, #2d333b 100%);
+    }
+    .landing-hero h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+    }
+    .landing-hero p {
+        font-size: 20px;
+        color: #aab2bd;
+        margin-bottom: 40px;
+    }
+    .features {
+        padding: 80px 0;
+        background: #fff;
+    }
+    .feature-item {
+        text-align: center;
+        padding: 30px;
+    }
+    .feature-icon {
+        font-size: 48px;
+        color: #20c997;
+        margin-bottom: 20px;
+    }
+    .cta {
+        padding: 80px 0;
+        text-align: center;
+        color: #fff;
+        background: linear-gradient(135deg, #1a1f24 0%, #2d333b 100%);
+    }
+    .cta h2 {
+        margin-bottom: 20px;
+    }
+    .landing-footer {
+        padding: 40px 0;
+        text-align: center;
+        color: #aab2bd;
+        background: #1a1f24;
+        border-top: 1px solid #3a3f47;
+    }
+    .landing-nav {
+        padding: 20px 0;
+        background: transparent;
+    }
+    .landing-nav .navbar-brand {
+        color: #fff;
+    }
+    .landing-nav .nav-link {
+        color: rgba(255,255,255,0.8);
+    }
+    .landing-nav .nav-link:hover {
+        color: #fff;
+    }
+    .landing-nav .btn-primary {
+        background-color: #20c997;
+        border-color: #20c997;
+    }
+    .landing-nav .btn-primary:hover {
+        background-color: #1baa80;
+        border-color: #1baa80;
+    }
+    .landing-section {
+        padding: 60px 0;
+    }
+    .landing-section:nth-child(even) {
+        background: #f9fbfd;
+    }
+    .landing-section:nth-child(odd) {
+        background: #fff;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="landing-hero">
         <div class="container">
+            <nav class="navbar navbar-expand-lg landing-nav">
+                <div class="container">
+                    <a class="navbar-brand" href="#"><i class="fa fa-cube"></i> Sing App</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#landingNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="landingNav">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#features">Features</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Pricing</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-primary ml-3" href="{{ url_for('examples.login') }}">Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
             <h1>Build Something Amazing</h1>
             <p>Sing App is a Bootstrap 4 admin dashboard template with pre-built pages and components.</p>
             <div>
@@ -101,7 +119,7 @@
     </section>
 
     <!-- Features Section -->
-    <section class="features">
+    <section id="features" class="landing-section">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -139,10 +157,9 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="landing-footer">
         <div class="container">
             <p>&copy; 2026 Sing App. All rights reserved.</p>
         </div>
     </footer>
-</body>
-</html>
+{% endblock %}

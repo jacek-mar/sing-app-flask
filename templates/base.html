@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Sing App{% endblock %}</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
+    
     <!-- Sing App Pre-built CSS (includes Bootstrap 4.3.1 internals) -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/application.min.css') }}">
     
@@ -19,16 +22,12 @@
         })();
     </script>
     
-    <!-- Font Awesome (CDN - TODO: stage locally for offline use) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Morris Charts CSS (MIT) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/morris.css') }}">
     <!-- Rickshaw CSS (MIT) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rickshaw/1.6.6/rickshaw.min.css">
-    <!-- FullCalendar CSS (MIT) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/rickshaw.min.css') }}">
     <!-- Leaflet CSS (MIT - OpenStreetMap) -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/leaflet.css') }}">
     
     {% block extra_css %}{% endblock %}
 </head>
@@ -362,25 +361,25 @@
     <script src="{{ url_for('static', filename='js/vendor/popper.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/vendor/bootstrap.min.js') }}"></script>
     <!-- Chart.js (MIT) -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="{{ url_for('static', filename='js/vendor/chart.umd.min.js') }}"></script>
     <!-- Morris Charts (MIT) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script src="{{ url_for('static', filename='js/vendor/raphael.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/vendor/morris.min.js') }}"></script>
     <!-- Flot Charts (MIT) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.time.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.pie.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.stack.min.js"></script>
-    <!-- D3.js v3.x (required for Rickshaw) - must load before Rickshaw -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script src="{{ url_for('static', filename='js/vendor/jquery.flot.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/vendor/jquery.flot.time.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/vendor/jquery.flot.pie.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/vendor/jquery.flot.stack.min.js') }}"></script>
+    <!-- D3.js v3.x (required for Rickshaw) -->
+    <script src="{{ url_for('static', filename='js/vendor/d3.min.js') }}"></script>
     <!-- Rickshaw (MIT) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/rickshaw/1.6.6/rickshaw.min.js"></script>
+    <script src="{{ url_for('static', filename='js/vendor/rickshaw.min.js') }}"></script>
     <!-- jQuery Animate Number (MIT) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-animateNumber/0.0.14/jquery.animateNumber.min.js"></script>
+    <script src="{{ url_for('static', filename='js/vendor/jquery.animateNumber.min.js') }}"></script>
     <!-- FullCalendar (MIT) -->
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src="{{ url_for('static', filename='js/vendor/fullcalendar.global.min.js') }}"></script>
     <!-- Leaflet JS (MIT - OpenStreetMap) -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{{ url_for('static', filename='js/vendor/leaflet.js') }}"></script>
     
     <!-- Theme Toggle and Sidebar Scripts -->
     <script>

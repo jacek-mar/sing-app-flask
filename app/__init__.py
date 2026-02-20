@@ -96,6 +96,15 @@ def create_app(config_name='development'):
             response.cache_control.public = True
         return response
     
+    # Serve node_modules for offline assets (used by application.min.css)
+    @app.route('/node_modules/<path:filename>')
+    def serve_node_modules(filename):
+        """Serve files from static/node_modules folder."""
+        from flask import send_from_directory
+        import os
+        node_modules_path = os.path.join(app.root_path, '..', 'static', 'node_modules')
+        return send_from_directory(node_modules_path, filename)
+    
     app.logger.info(f'Flask Sing App initialized in {config_name} mode.')
     
     return app

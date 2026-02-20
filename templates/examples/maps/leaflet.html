@@ -219,7 +219,7 @@ $(document).ready(function() {
     }).addTo(worldMap);
     
     locations.forEach(loc => {
-        L.marker([loc.lat, loc.lng])
+        L.marker([loc.lat, loc.lng], { icon: icons[loc.type] })
             .addTo(worldMap)
             .bindPopup(`<b>${loc.name}</b><br>Type: ${loc.type}<br>Visitors: ${loc.visitors.toLocaleString()}`);
     });
