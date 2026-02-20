@@ -138,9 +138,24 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fa fa-bell"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-cog"></i></a>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                        <i class="fa-solid fa-circle-user"></i> {{ current_user.username }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="{{ url_for('auth.logout') }}">
+                            <i class="fa-solid fa-right-from-bracket"></i> Log Out
+                        </a>
+                    </div>
                 </li>
+                {% elif config.get('REQUIRE_LOGIN') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.login') }}">
+                        <i class="fa-solid fa-right-to-bracket"></i> Sign In
+                    </a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </nav>

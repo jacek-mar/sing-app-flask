@@ -18,6 +18,21 @@ class Config:
     # Asset configuration
     ASSETS_DEBUG = False
 
+    # --- NEW: Authentication toggles ---
+    # false = demo mode (no login required); true = enforce login on all pages
+    REQUIRE_LOGIN = os.environ.get('REQUIRE_LOGIN', 'false').lower() == 'true'
+    # false = registration form hidden; true = /auth/register is accessible
+    ENABLE_REGISTRATION = os.environ.get('ENABLE_REGISTRATION', 'false').lower() == 'true'
+
+    # --- NEW: Security level ---
+    # demo     = CSRF on forms only (default — no friction for evaluators)
+    # basic    = demo + rate limiting on login (5 attempts/minute)
+    # production = basic + secure headers (HSTS, X-Frame-Options, CSP)
+    SECURITY_LEVEL = os.environ.get('SECURITY_LEVEL', 'demo')
+
+    # CSRF always enabled (Flask-WTF); only disabling in tests
+    WTF_CSRF_ENABLED = True
+
 
 class DevelopmentConfig(Config):
     """Development configuration"""

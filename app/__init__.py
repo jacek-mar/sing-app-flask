@@ -73,6 +73,9 @@ def create_app(config_name='development'):
         """Handle 500 errors"""
         return render_template('errors/500.html'), 500
     
+    # Configure logging
+    _configure_logging(app)
+    
     app.logger.info(f'Flask Sing App initialized in {config_name} mode.')
     
     return app
@@ -86,6 +89,10 @@ def _register_blueprints(app):
     """
     from app.main import main_bp
     from app.api import api_bp
+    
+    # Register auth blueprint — ALWAYS registered (login/logout routes must exist even in demo mode)
+    from app.auth import auth_bp
+    app.register_blueprint(auth_bp, url_prefix='/auth')
     
     # Register main blueprint (core dashboard - always enabled)
     app.register_blueprint(main_bp)
@@ -154,3 +161,26 @@ def _register_cli(app):
             print(f'Bundle not found: {e}. Check app/assets.py bundle registration.')
         except Exception as e:
             print(f'Error compiling assets: {e}')
+
+
+def _configure_logging(app):
+    """
+    Attach a rotating file handler in development mode.
+    """
+    import logging
+    from logging.handlers import RotatingFileHandler
+    import os
+
+    if not app.debug:
+        return  # production logging handled by WSGI server / syslog
+
+    log_dir = os.path.join(os.path.dirname(app.root_path), 'logs')
+    os.makedirs(log_dir, exist_ok=True)
+    handler = RotatingFileHandler(
+        os.path.join(log_dir, 'app.log'), maxBytes=1_000_000, backupCount=3
+    )
+    handler.setFormatter(logging.Formatter('[%(asctime)s] %(levelname)s %(module)s: %(message)s'))
+    handler.setLevel(logging.INFO)
+    app.logger.addHandler(handler)
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('Logging initialized.')

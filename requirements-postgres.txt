@@ -1,0 +1,2 @@
+# PostgreSQL driver — install in addition to requirements.txt
+psycopg2-binary>=2.9.9

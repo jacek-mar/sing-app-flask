@@ -3,10 +3,11 @@ Flask Sing App - Database Models
 """
 from datetime import datetime, timezone
 from werkzeug.security import generate_password_hash, check_password_hash
-from app.extensions import db
+from flask_login import UserMixin
+from app.extensions import db, login_manager
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     """
     User model for authentication and user management.
     """
@@ -57,3 +58,9 @@ class User(db.Model):
     
     def __repr__(self):
         return f'<User {self.username}>'
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    """Load user by ID for Flask-Login."""
+    return User.query.get(int(user_id))
