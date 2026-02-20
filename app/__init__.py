@@ -46,7 +46,13 @@ def create_app(config_name='development'):
     # Initialize Flask-Assets (SCSS compilation)
     from app.assets import init_assets
     init_assets(app)
-    
+
+    # Auto-create DB tables for demo and development (production uses flask db upgrade)
+    if config_name in ('demo', 'development'):
+        from app.extensions import db
+        with app.app_context():
+            db.create_all()
+
     # Register blueprints
     _register_blueprints(app)
     
