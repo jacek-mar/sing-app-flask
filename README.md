@@ -70,8 +70,6 @@ This project uses the following open-source JavaScript libraries (all MIT licens
 
 All libraries are pre-staged locally and bundled with this application.
 
-> **Note:** For complete third-party license details, see [THIRD_PARTY_LICENSES.md](templates/THIRD_PARTY_LICENSES.md).
-
 **The live version of the application can be found here -> [app demo](https://sing-app-flask.onrender.com/).**
 
 ---
@@ -168,9 +166,3 @@ Full configuration reference: see `CONFIGURATION.md` (created in Session 15).
 
 MIT — see [LICENSE](LICENSE).
 Sing App HTML5 template: MIT, [Flatlogic LLC](https://flatlogic.com).
-
----
-
-## Third-Party Licenses
-
-For complete third-party license details, see [THIRD_PARTY_LICENSES.md](templates/THIRD_PARTY_LICENSES.md).
